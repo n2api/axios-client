@@ -9,9 +9,9 @@ All URIs are relative to *https://api.n2api.io*
 |[**authControllerGetCompanyToken8bpz6u**](#authcontrollergetcompanytoken8bpz6u) | **GET** /auth/company_token | |
 |[**authControllerGetHelloR0h1ua**](#authcontrollergethellor0h1ua) | **GET** /auth/user | |
 |[**authControllerGetSessionTokenRbwd43**](#authcontrollergetsessiontokenrbwd43) | **POST** /auth/session_token | |
-|[**authControllerLogin4otw64**](#authcontrollerlogin4otw64) | **POST** /auth/login | Login|
 |[**authControllerRefreshHq9r5i**](#authcontrollerrefreshhq9r5i) | **POST** /auth/refresh | |
 |[**authControllerVerifySessionTokenQkbht6**](#authcontrollerverifysessiontokenqkbht6) | **POST** /auth/session_token/verify | |
+|[**login**](#login) | **POST** /auth/login | Login|
 
 # **authControllerCreateCompanyTokenK3gngq**
 > authControllerCreateCompanyTokenK3gngq()
@@ -251,61 +251,6 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authControllerLogin4otw64**
-> object authControllerLogin4otw64(loginDto)
-
-Login with *username* and *password*. Returns an access token.
-
-### Example
-
-```typescript
-import {
-    Client,
-    Configuration,
-    LoginDto
-} from '@n2api/axios-client';
-
-const configuration = new Configuration({
-    accessToken: 'YOUR_ACCESS_TOKEN',
-});
-const client = new Client(configuration);
-
-
-let loginDto: LoginDto; // 
-
-const { status, data } = await client.authentication.authControllerLogin4otw64(
-    loginDto
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **loginDto** | **LoginDto**|  | |
-
-
-### Return type
-
-**object**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**201** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **authControllerRefreshHq9r5i**
 > object authControllerRefreshHq9r5i()
 
@@ -392,6 +337,61 @@ const { status, data } = await client.authentication.authControllerVerifySession
 ### Authorization
 
 [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **login**
+> object login(loginDto)
+
+Login with *username* and *password*. Returns an access token.
+
+### Example
+
+```typescript
+import {
+    Client,
+    Configuration,
+    LoginDto
+} from '@n2api/axios-client';
+
+const configuration = new Configuration({
+    accessToken: 'YOUR_ACCESS_TOKEN',
+});
+const client = new Client(configuration);
+
+
+let loginDto: LoginDto; // 
+
+const { status, data } = await client.authentication.login(
+    loginDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **loginDto** | **LoginDto**|  | |
+
+
+### Return type
+
+**object**
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 
