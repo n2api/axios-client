@@ -92,9 +92,9 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**authControllerGetCompanyToken8bpz6u**](docs/AuthenticationApi.md#authcontrollergetcompanytoken8bpz6u) | **GET** /auth/company_token | 
 *AuthenticationApi* | [**authControllerGetHelloR0h1ua**](docs/AuthenticationApi.md#authcontrollergethellor0h1ua) | **GET** /auth/user | 
 *AuthenticationApi* | [**authControllerGetSessionTokenRbwd43**](docs/AuthenticationApi.md#authcontrollergetsessiontokenrbwd43) | **POST** /auth/session_token | 
-*AuthenticationApi* | [**authControllerLogin4otw64**](docs/AuthenticationApi.md#authcontrollerlogin4otw64) | **POST** /auth/login | Login
 *AuthenticationApi* | [**authControllerRefreshHq9r5i**](docs/AuthenticationApi.md#authcontrollerrefreshhq9r5i) | **POST** /auth/refresh | 
 *AuthenticationApi* | [**authControllerVerifySessionTokenQkbht6**](docs/AuthenticationApi.md#authcontrollerverifysessiontokenqkbht6) | **POST** /auth/session_token/verify | 
+*AuthenticationApi* | [**login**](docs/AuthenticationApi.md#login) | **POST** /auth/login | Login
 *CampaignsApi* | [**campaignsControllerGetCampaigns2qcanu**](docs/CampaignsApi.md#campaignscontrollergetcampaigns2qcanu) | **GET** /campaigns | 
 *CompaniesApi* | [**companiesControllerGetCompany2lyej4**](docs/CompaniesApi.md#companiescontrollergetcompany2lyej4) | **GET** /companies | 
 *CompaniesApi* | [**companiesControllerGetRedirectUriF0i71s**](docs/CompaniesApi.md#companiescontrollergetredirecturif0i71s) | **GET** /companies/redirect_uri | 
