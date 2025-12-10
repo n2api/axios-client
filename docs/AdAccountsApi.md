@@ -4,10 +4,10 @@ All URIs are relative to *https://api.n2api.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**adAccountsControllerFindAll1f63wu**](#adaccountscontrollerfindall1f63wu) | **GET** /adaccounts | |
+|[**findAll**](#findall) | **GET** /adaccounts | |
 
-# **adAccountsControllerFindAll1f63wu**
-> Array<object> adAccountsControllerFindAll1f63wu()
+# **findAll**
+> findAll()
 
 
 ### Example
@@ -24,10 +24,10 @@ const configuration = new Configuration({
 const client = new Client(configuration);
 
 
-let platforms: Array<'ActiveAgent' | 'Facebook' | 'GoogleAds' | 'TheTradeDesk' | 'Pinterest'>; // List of platforms to include in the response. (optional) (default to undefined)
-let customers: Array<string>; // List of Customer IDs whose AdAccounts to include in the response. (optional) (default to undefined)
+let platforms: Array<PlatformName>; // List of platforms to include in the response. (default to undefined)
+let customers: Array<string>; // List of Customer IDs whose AdAccounts to include in the response. (default to undefined)
 
-const { status, data } = await client.adAccounts.adAccountsControllerFindAll1f63wu(
+const { status, data } = await client.adAccounts.findAll(
     platforms,
     customers
 );
@@ -37,13 +37,13 @@ const { status, data } = await client.adAccounts.adAccountsControllerFindAll1f63
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **platforms** | **Array<&#39;ActiveAgent&#39; &#124; &#39;Facebook&#39; &#124; &#39;GoogleAds&#39; &#124; &#39;TheTradeDesk&#39; &#124; &#39;Pinterest&#39;>** | List of platforms to include in the response. | (optional) defaults to undefined|
-| **customers** | **Array&lt;string&gt;** | List of Customer IDs whose AdAccounts to include in the response. | (optional) defaults to undefined|
+| **platforms** | **Array&lt;PlatformName&gt;** | List of platforms to include in the response. | defaults to undefined|
+| **customers** | **Array&lt;string&gt;** | List of Customer IDs whose AdAccounts to include in the response. | defaults to undefined|
 
 
 ### Return type
 
-**Array<object>**
+void (empty response body)
 
 ### Authorization
 
@@ -52,7 +52,7 @@ const { status, data } = await client.adAccounts.adAccountsControllerFindAll1f63
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: Not defined
 
 
 ### HTTP response details

@@ -4,466 +4,28 @@ All URIs are relative to *https://api.n2api.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**adAccountsControllerFindAll0549lm**](#adaccountscontrollerfindall0549lm) | **GET** /facebook/adaccounts | |
-|[**adAccountsControllerSyncCustomerKpkzo2**](#adaccountscontrollersynccustomerkpkzo2) | **PUT** /facebook/adaccounts/customer | |
-|[**adSetsControllerFindAllGeus8d**](#adsetscontrollerfindallgeus8d) | **GET** /facebook/adsets | |
-|[**adSetsControllerFindOne7d8j59**](#adsetscontrollerfindone7d8j59) | **GET** /facebook/adsets/{id} | |
-|[**adSetsControllerRemoveQpjoni**](#adsetscontrollerremoveqpjoni) | **DELETE** /facebook/adsets/{id} | |
-|[**adSetsControllerUpdate505b7c**](#adsetscontrollerupdate505b7c) | **PATCH** /facebook/adsets/{id} | |
-|[**authControllerGetAccessTokenT41rff**](#authcontrollergetaccesstokent41rff) | **POST** /facebook/auth | |
-|[**campaignsControllerFindAllZ5jbts**](#campaignscontrollerfindallz5jbts) | **GET** /facebook/campaigns | |
-|[**credentialsControllerCreateCustomerLqwsc5**](#credentialscontrollercreatecustomerlqwsc5) | **POST** /facebook/credentials/customer | |
-|[**credentialsControllerDeleteCustomerGkcpsz**](#credentialscontrollerdeletecustomergkcpsz) | **DELETE** /facebook/credentials/{customerId} | |
-|[**credentialsControllerFindAllUrmvrv**](#credentialscontrollerfindallurmvrv) | **GET** /facebook/credentials | |
-|[**credentialsControllerIsConnectedTfvw6f**](#credentialscontrollerisconnectedtfvw6f) | **GET** /facebook/credentials/isConnected | |
-|[**rawControllerRawRequest1fu5v3Put**](#rawcontrollerrawrequest1fu5v3put) | **PUT** /facebook/{customerId}/raw/{externalPath} | |
-|[**rawControllerRawRequest2tg1shGet**](#rawcontrollerrawrequest2tg1shget) | **GET** /facebook/{customerId}/raw/{externalPath} | |
-|[**rawControllerRawRequestF1g1cgPost**](#rawcontrollerrawrequestf1g1cgpost) | **POST** /facebook/{customerId}/raw/{externalPath} | |
-|[**rawControllerRawRequestG9ig2bPatch**](#rawcontrollerrawrequestg9ig2bpatch) | **PATCH** /facebook/{customerId}/raw/{externalPath} | |
-|[**rawControllerRawRequestHkcfxtDelete**](#rawcontrollerrawrequesthkcfxtdelete) | **DELETE** /facebook/{customerId}/raw/{externalPath} | |
-|[**rawControllerRawRequestU28fawOptions**](#rawcontrollerrawrequestu28fawoptions) | **OPTIONS** /facebook/{customerId}/raw/{externalPath} | |
-|[**rawControllerRawRequestUdhoymHead**](#rawcontrollerrawrequestudhoymhead) | **HEAD** /facebook/{customerId}/raw/{externalPath} | |
-
-# **adAccountsControllerFindAll0549lm**
-> Array<FacebookAdAccountWrapper> adAccountsControllerFindAll0549lm()
-
-
-### Example
-
-```typescript
-import {
-    Client,
-    Configuration
-} from '@n2api/axios-client';
-
-const configuration = new Configuration({
-    accessToken: 'YOUR_ACCESS_TOKEN',
-});
-const client = new Client(configuration);
-
-
-const { status, data } = await client.facebook.adAccountsControllerFindAll0549lm();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**Array<FacebookAdAccountWrapper>**
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **adAccountsControllerSyncCustomerKpkzo2**
-> adAccountsControllerSyncCustomerKpkzo2()
-
-
-### Example
-
-```typescript
-import {
-    Client,
-    Configuration
-} from '@n2api/axios-client';
-
-const configuration = new Configuration({
-    accessToken: 'YOUR_ACCESS_TOKEN',
-});
-const client = new Client(configuration);
-
-
-const { status, data } = await client.facebook.adAccountsControllerSyncCustomerKpkzo2();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **adSetsControllerFindAllGeus8d**
-> Array<AdSet> adSetsControllerFindAllGeus8d()
-
-
-### Example
-
-```typescript
-import {
-    Client,
-    Configuration
-} from '@n2api/axios-client';
-
-const configuration = new Configuration({
-    accessToken: 'YOUR_ACCESS_TOKEN',
-});
-const client = new Client(configuration);
-
-
-let childResources: Array<'Campaign' | 'AdSet' | 'Ad' | 'Targeting' | 'AdAccount'>; //  (optional) (default to undefined)
-let platforms: Array<'ActiveAgent' | 'Facebook' | 'GoogleAds' | 'TheTradeDesk' | 'Pinterest'>; // List of platforms to include in the response. (optional) (default to undefined)
-let customers: Array<string>; // List of Customer IDs whose AdSets to include in the response. (optional) (default to undefined)
-let ids: Array<string>; // List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value. (optional) (default to undefined)
-let status: 'ACTIVE' | 'RUNNING' | 'PAUSED' | 'UNKNOWN'; //  (optional) (default to undefined)
-
-const { status, data } = await client.facebook.adSetsControllerFindAllGeus8d(
-    childResources,
-    platforms,
-    customers,
-    ids,
-    status
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **childResources** | **Array<&#39;Campaign&#39; &#124; &#39;AdSet&#39; &#124; &#39;Ad&#39; &#124; &#39;Targeting&#39; &#124; &#39;AdAccount&#39;>** |  | (optional) defaults to undefined|
-| **platforms** | **Array<&#39;ActiveAgent&#39; &#124; &#39;Facebook&#39; &#124; &#39;GoogleAds&#39; &#124; &#39;TheTradeDesk&#39; &#124; &#39;Pinterest&#39;>** | List of platforms to include in the response. | (optional) defaults to undefined|
-| **customers** | **Array&lt;string&gt;** | List of Customer IDs whose AdSets to include in the response. | (optional) defaults to undefined|
-| **ids** | **Array&lt;string&gt;** | List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value. | (optional) defaults to undefined|
-| **status** | [**&#39;ACTIVE&#39; | &#39;RUNNING&#39; | &#39;PAUSED&#39; | &#39;UNKNOWN&#39;**]**Array<&#39;ACTIVE&#39; &#124; &#39;RUNNING&#39; &#124; &#39;PAUSED&#39; &#124; &#39;UNKNOWN&#39;>** |  | (optional) defaults to undefined|
-
-
-### Return type
-
-**Array<AdSet>**
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **adSetsControllerFindOne7d8j59**
-> string adSetsControllerFindOne7d8j59()
-
-
-### Example
-
-```typescript
-import {
-    Client,
-    Configuration
-} from '@n2api/axios-client';
-
-const configuration = new Configuration({
-    accessToken: 'YOUR_ACCESS_TOKEN',
-});
-const client = new Client(configuration);
-
-
-let id: string; //  (default to undefined)
-
-const { status, data } = await client.facebook.adSetsControllerFindOne7d8j59(
-    id
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] |  | defaults to undefined|
-
-
-### Return type
-
-**string**
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **adSetsControllerRemoveQpjoni**
-> string adSetsControllerRemoveQpjoni()
-
-
-### Example
-
-```typescript
-import {
-    Client,
-    Configuration
-} from '@n2api/axios-client';
-
-const configuration = new Configuration({
-    accessToken: 'YOUR_ACCESS_TOKEN',
-});
-const client = new Client(configuration);
-
-
-let id: string; //  (default to undefined)
-
-const { status, data } = await client.facebook.adSetsControllerRemoveQpjoni(
-    id
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] |  | defaults to undefined|
-
-
-### Return type
-
-**string**
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **adSetsControllerUpdate505b7c**
-> string adSetsControllerUpdate505b7c(body)
-
-
-### Example
-
-```typescript
-import {
-    Client,
-    Configuration
-} from '@n2api/axios-client';
-
-const configuration = new Configuration({
-    accessToken: 'YOUR_ACCESS_TOKEN',
-});
-const client = new Client(configuration);
-
-
-let id: string; //  (default to undefined)
-let body: object; // 
-
-const { status, data } = await client.facebook.adSetsControllerUpdate505b7c(
-    id,
-    body
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **body** | **object**|  | |
-| **id** | [**string**] |  | defaults to undefined|
-
-
-### Return type
-
-**string**
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **authControllerGetAccessTokenT41rff**
-> object authControllerGetAccessTokenT41rff(createFacebookAuthDto)
-
-
-### Example
-
-```typescript
-import {
-    Client,
-    Configuration,
-    CreateFacebookAuthDto
-} from '@n2api/axios-client';
-
-const configuration = new Configuration({
-    accessToken: 'YOUR_ACCESS_TOKEN',
-});
-const client = new Client(configuration);
-
-
-let createFacebookAuthDto: CreateFacebookAuthDto; // 
-
-const { status, data } = await client.facebook.authControllerGetAccessTokenT41rff(
-    createFacebookAuthDto
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **createFacebookAuthDto** | **CreateFacebookAuthDto**|  | |
-
-
-### Return type
-
-**object**
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**201** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **campaignsControllerFindAllZ5jbts**
-> Array<Campaign> campaignsControllerFindAllZ5jbts()
-
-
-### Example
-
-```typescript
-import {
-    Client,
-    Configuration
-} from '@n2api/axios-client';
-
-const configuration = new Configuration({
-    accessToken: 'YOUR_ACCESS_TOKEN',
-});
-const client = new Client(configuration);
-
-
-let childResources: Array<'Campaign' | 'AdSet' | 'Ad' | 'Targeting' | 'AdAccount'>; // List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings) (optional) (default to undefined)
-let status: 'ACTIVE' | 'RUNNING' | 'PAUSED' | 'UNKNOWN'; // Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns. (optional) (default to undefined)
-let platforms: Array<'ActiveAgent' | 'Facebook' | 'GoogleAds' | 'TheTradeDesk' | 'Pinterest'>; // List of platforms to include in the response. (optional) (default to undefined)
-let customers: Array<string>; // List of Customer IDs whose campaigns to include in the response. (optional) (default to undefined)
-let ids: Array<string>; // List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value. (optional) (default to undefined)
-
-const { status, data } = await client.facebook.campaignsControllerFindAllZ5jbts(
-    childResources,
-    status,
-    platforms,
-    customers,
-    ids
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **childResources** | **Array<&#39;Campaign&#39; &#124; &#39;AdSet&#39; &#124; &#39;Ad&#39; &#124; &#39;Targeting&#39; &#124; &#39;AdAccount&#39;>** | List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings) | (optional) defaults to undefined|
-| **status** | [**&#39;ACTIVE&#39; | &#39;RUNNING&#39; | &#39;PAUSED&#39; | &#39;UNKNOWN&#39;**]**Array<&#39;ACTIVE&#39; &#124; &#39;RUNNING&#39; &#124; &#39;PAUSED&#39; &#124; &#39;UNKNOWN&#39;>** | Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns. | (optional) defaults to undefined|
-| **platforms** | **Array<&#39;ActiveAgent&#39; &#124; &#39;Facebook&#39; &#124; &#39;GoogleAds&#39; &#124; &#39;TheTradeDesk&#39; &#124; &#39;Pinterest&#39;>** | List of platforms to include in the response. | (optional) defaults to undefined|
-| **customers** | **Array&lt;string&gt;** | List of Customer IDs whose campaigns to include in the response. | (optional) defaults to undefined|
-| **ids** | **Array&lt;string&gt;** | List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value. | (optional) defaults to undefined|
-
-
-### Return type
-
-**Array<Campaign>**
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **credentialsControllerCreateCustomerLqwsc5**
-> credentialsControllerCreateCustomerLqwsc5(facebookCreateCredentialDto)
+|[**createCustomer**](#createcustomer) | **POST** /facebook/credentials/customer | |
+|[**deleteCustomer**](#deletecustomer) | **DELETE** /facebook/credentials/{customerId} | |
+|[**findAll**](#findall) | **GET** /facebook/credentials | |
+|[**findAll_0**](#findall_0) | **GET** /facebook/campaigns | |
+|[**findAll_1**](#findall_1) | **GET** /facebook/adsets | |
+|[**findAll_2**](#findall_2) | **GET** /facebook/adaccounts | |
+|[**findOne**](#findone) | **GET** /facebook/adsets/{id} | |
+|[**getAccessToken**](#getaccesstoken) | **POST** /facebook/auth | |
+|[**isConnected**](#isconnected) | **GET** /facebook/credentials/isConnected | |
+|[**rawRequestDelete**](#rawrequestdelete) | **DELETE** /facebook/{customerId}/raw/{externalPath} | |
+|[**rawRequestGet**](#rawrequestget) | **GET** /facebook/{customerId}/raw/{externalPath} | |
+|[**rawRequestHead**](#rawrequesthead) | **HEAD** /facebook/{customerId}/raw/{externalPath} | |
+|[**rawRequestOptions**](#rawrequestoptions) | **OPTIONS** /facebook/{customerId}/raw/{externalPath} | |
+|[**rawRequestPatch**](#rawrequestpatch) | **PATCH** /facebook/{customerId}/raw/{externalPath} | |
+|[**rawRequestPost**](#rawrequestpost) | **POST** /facebook/{customerId}/raw/{externalPath} | |
+|[**rawRequestPut**](#rawrequestput) | **PUT** /facebook/{customerId}/raw/{externalPath} | |
+|[**remove**](#remove) | **DELETE** /facebook/adsets/{id} | |
+|[**syncCustomer**](#synccustomer) | **PUT** /facebook/adaccounts/customer | |
+|[**update**](#update) | **PATCH** /facebook/adsets/{id} | |
+
+# **createCustomer**
+> createCustomer(facebookCreateCredentialDto)
 
 
 ### Example
@@ -483,7 +45,7 @@ const client = new Client(configuration);
 
 let facebookCreateCredentialDto: FacebookCreateCredentialDto; // 
 
-const { status, data } = await client.facebook.credentialsControllerCreateCustomerLqwsc5(
+const { status, data } = await client.facebook.createCustomer(
     facebookCreateCredentialDto
 );
 ```
@@ -516,8 +78,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **credentialsControllerDeleteCustomerGkcpsz**
-> credentialsControllerDeleteCustomerGkcpsz()
+# **deleteCustomer**
+> deleteCustomer()
 
 
 ### Example
@@ -536,7 +98,7 @@ const client = new Client(configuration);
 
 let customerId: string; //  (default to undefined)
 
-const { status, data } = await client.facebook.credentialsControllerDeleteCustomerGkcpsz(
+const { status, data } = await client.facebook.deleteCustomer(
     customerId
 );
 ```
@@ -569,8 +131,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **credentialsControllerFindAllUrmvrv**
-> Array<object> credentialsControllerFindAllUrmvrv()
+# **findAll**
+> findAll()
 
 
 ### Example
@@ -587,53 +149,7 @@ const configuration = new Configuration({
 const client = new Client(configuration);
 
 
-const { status, data } = await client.facebook.credentialsControllerFindAllUrmvrv();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**Array<object>**
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **credentialsControllerIsConnectedTfvw6f**
-> credentialsControllerIsConnectedTfvw6f()
-
-
-### Example
-
-```typescript
-import {
-    Client,
-    Configuration
-} from '@n2api/axios-client';
-
-const configuration = new Configuration({
-    accessToken: 'YOUR_ACCESS_TOKEN',
-});
-const client = new Client(configuration);
-
-
-const { status, data } = await client.facebook.credentialsControllerIsConnectedTfvw6f();
+const { status, data } = await client.facebook.findAll();
 ```
 
 ### Parameters
@@ -661,8 +177,337 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **rawControllerRawRequest1fu5v3Put**
-> rawControllerRawRequest1fu5v3Put()
+# **findAll_0**
+> findAll_0()
+
+
+### Example
+
+```typescript
+import {
+    Client,
+    Configuration
+} from '@n2api/axios-client';
+
+const configuration = new Configuration({
+    accessToken: 'YOUR_ACCESS_TOKEN',
+});
+const client = new Client(configuration);
+
+
+let childResources: Array<ResourceKind>; // List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings) (default to undefined)
+let status: Status; // Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns. (default to undefined)
+let platforms: Array<PlatformName>; // List of platforms to include in the response. (default to undefined)
+let customers: Array<string>; // List of Customer IDs whose campaigns to include in the response. (default to undefined)
+let ids: Array<string>; // List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value. (default to undefined)
+
+const { status, data } = await client.facebook.findAll_0(
+    childResources,
+    status,
+    platforms,
+    customers,
+    ids
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **childResources** | **Array&lt;ResourceKind&gt;** | List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings) | defaults to undefined|
+| **status** | **Status** | Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns. | defaults to undefined|
+| **platforms** | **Array&lt;PlatformName&gt;** | List of platforms to include in the response. | defaults to undefined|
+| **customers** | **Array&lt;string&gt;** | List of Customer IDs whose campaigns to include in the response. | defaults to undefined|
+| **ids** | **Array&lt;string&gt;** | List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value. | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **findAll_1**
+> findAll_1()
+
+
+### Example
+
+```typescript
+import {
+    Client,
+    Configuration
+} from '@n2api/axios-client';
+
+const configuration = new Configuration({
+    accessToken: 'YOUR_ACCESS_TOKEN',
+});
+const client = new Client(configuration);
+
+
+let childResources: Array<ResourceKind>; //  (default to undefined)
+let status: Status; // Status of the AdSets to return. Example: set status to Running to get a list of running AdSets. (default to undefined)
+let platforms: Array<PlatformName>; // List of platforms to include in the response. (default to undefined)
+let customers: Array<string>; // List of Customer IDs whose AdSets to include in the response. (default to undefined)
+let ids: Array<string>; // List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value. (default to undefined)
+
+const { status, data } = await client.facebook.findAll_1(
+    childResources,
+    status,
+    platforms,
+    customers,
+    ids
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **childResources** | **Array&lt;ResourceKind&gt;** |  | defaults to undefined|
+| **status** | **Status** | Status of the AdSets to return. Example: set status to Running to get a list of running AdSets. | defaults to undefined|
+| **platforms** | **Array&lt;PlatformName&gt;** | List of platforms to include in the response. | defaults to undefined|
+| **customers** | **Array&lt;string&gt;** | List of Customer IDs whose AdSets to include in the response. | defaults to undefined|
+| **ids** | **Array&lt;string&gt;** | List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value. | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **findAll_2**
+> findAll_2()
+
+
+### Example
+
+```typescript
+import {
+    Client,
+    Configuration
+} from '@n2api/axios-client';
+
+const configuration = new Configuration({
+    accessToken: 'YOUR_ACCESS_TOKEN',
+});
+const client = new Client(configuration);
+
+
+const { status, data } = await client.facebook.findAll_2();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **findOne**
+> findOne()
+
+
+### Example
+
+```typescript
+import {
+    Client,
+    Configuration
+} from '@n2api/axios-client';
+
+const configuration = new Configuration({
+    accessToken: 'YOUR_ACCESS_TOKEN',
+});
+const client = new Client(configuration);
+
+
+let id: string; //  (default to undefined)
+
+const { status, data } = await client.facebook.findOne(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getAccessToken**
+> getAccessToken(createFacebookAuthDto)
+
+
+### Example
+
+```typescript
+import {
+    Client,
+    Configuration,
+    CreateFacebookAuthDto
+} from '@n2api/axios-client';
+
+const configuration = new Configuration({
+    accessToken: 'YOUR_ACCESS_TOKEN',
+});
+const client = new Client(configuration);
+
+
+let createFacebookAuthDto: CreateFacebookAuthDto; // 
+
+const { status, data } = await client.facebook.getAccessToken(
+    createFacebookAuthDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createFacebookAuthDto** | **CreateFacebookAuthDto**|  | |
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **isConnected**
+> isConnected()
+
+
+### Example
+
+```typescript
+import {
+    Client,
+    Configuration
+} from '@n2api/axios-client';
+
+const configuration = new Configuration({
+    accessToken: 'YOUR_ACCESS_TOKEN',
+});
+const client = new Client(configuration);
+
+
+const { status, data } = await client.facebook.isConnected();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rawRequestDelete**
+> rawRequestDelete()
 
 
 ### Example
@@ -682,7 +527,7 @@ const client = new Client(configuration);
 let customerId: string; // Customer UUID (default to undefined)
 let externalPath: string; // The external path for the Facebook Ads API request. (default to undefined)
 
-const { status, data } = await client.facebook.rawControllerRawRequest1fu5v3Put(
+const { status, data } = await client.facebook.rawRequestDelete(
     customerId,
     externalPath
 );
@@ -717,8 +562,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **rawControllerRawRequest2tg1shGet**
-> rawControllerRawRequest2tg1shGet()
+# **rawRequestGet**
+> rawRequestGet()
 
 
 ### Example
@@ -738,7 +583,7 @@ const client = new Client(configuration);
 let customerId: string; // Customer UUID (default to undefined)
 let externalPath: string; // The external path for the Facebook Ads API request. (default to undefined)
 
-const { status, data } = await client.facebook.rawControllerRawRequest2tg1shGet(
+const { status, data } = await client.facebook.rawRequestGet(
     customerId,
     externalPath
 );
@@ -773,8 +618,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **rawControllerRawRequestF1g1cgPost**
-> rawControllerRawRequestF1g1cgPost()
+# **rawRequestHead**
+> rawRequestHead()
 
 
 ### Example
@@ -794,7 +639,7 @@ const client = new Client(configuration);
 let customerId: string; // Customer UUID (default to undefined)
 let externalPath: string; // The external path for the Facebook Ads API request. (default to undefined)
 
-const { status, data } = await client.facebook.rawControllerRawRequestF1g1cgPost(
+const { status, data } = await client.facebook.rawRequestHead(
     customerId,
     externalPath
 );
@@ -829,8 +674,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **rawControllerRawRequestG9ig2bPatch**
-> rawControllerRawRequestG9ig2bPatch()
+# **rawRequestOptions**
+> rawRequestOptions()
 
 
 ### Example
@@ -850,7 +695,7 @@ const client = new Client(configuration);
 let customerId: string; // Customer UUID (default to undefined)
 let externalPath: string; // The external path for the Facebook Ads API request. (default to undefined)
 
-const { status, data } = await client.facebook.rawControllerRawRequestG9ig2bPatch(
+const { status, data } = await client.facebook.rawRequestOptions(
     customerId,
     externalPath
 );
@@ -885,8 +730,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **rawControllerRawRequestHkcfxtDelete**
-> rawControllerRawRequestHkcfxtDelete()
+# **rawRequestPatch**
+> rawRequestPatch()
 
 
 ### Example
@@ -906,7 +751,7 @@ const client = new Client(configuration);
 let customerId: string; // Customer UUID (default to undefined)
 let externalPath: string; // The external path for the Facebook Ads API request. (default to undefined)
 
-const { status, data } = await client.facebook.rawControllerRawRequestHkcfxtDelete(
+const { status, data } = await client.facebook.rawRequestPatch(
     customerId,
     externalPath
 );
@@ -941,8 +786,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **rawControllerRawRequestU28fawOptions**
-> rawControllerRawRequestU28fawOptions()
+# **rawRequestPost**
+> rawRequestPost()
 
 
 ### Example
@@ -962,7 +807,7 @@ const client = new Client(configuration);
 let customerId: string; // Customer UUID (default to undefined)
 let externalPath: string; // The external path for the Facebook Ads API request. (default to undefined)
 
-const { status, data } = await client.facebook.rawControllerRawRequestU28fawOptions(
+const { status, data } = await client.facebook.rawRequestPost(
     customerId,
     externalPath
 );
@@ -997,8 +842,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **rawControllerRawRequestUdhoymHead**
-> rawControllerRawRequestUdhoymHead()
+# **rawRequestPut**
+> rawRequestPut()
 
 
 ### Example
@@ -1018,7 +863,7 @@ const client = new Client(configuration);
 let customerId: string; // Customer UUID (default to undefined)
 let externalPath: string; // The external path for the Facebook Ads API request. (default to undefined)
 
-const { status, data } = await client.facebook.rawControllerRawRequestUdhoymHead(
+const { status, data } = await client.facebook.rawRequestPut(
     customerId,
     externalPath
 );
@@ -1043,6 +888,161 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **remove**
+> remove()
+
+
+### Example
+
+```typescript
+import {
+    Client,
+    Configuration
+} from '@n2api/axios-client';
+
+const configuration = new Configuration({
+    accessToken: 'YOUR_ACCESS_TOKEN',
+});
+const client = new Client(configuration);
+
+
+let id: string; //  (default to undefined)
+
+const { status, data } = await client.facebook.remove(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **syncCustomer**
+> syncCustomer()
+
+
+### Example
+
+```typescript
+import {
+    Client,
+    Configuration
+} from '@n2api/axios-client';
+
+const configuration = new Configuration({
+    accessToken: 'YOUR_ACCESS_TOKEN',
+});
+const client = new Client(configuration);
+
+
+const { status, data } = await client.facebook.syncCustomer();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update**
+> update(body)
+
+
+### Example
+
+```typescript
+import {
+    Client,
+    Configuration
+} from '@n2api/axios-client';
+
+const configuration = new Configuration({
+    accessToken: 'YOUR_ACCESS_TOKEN',
+});
+const client = new Client(configuration);
+
+
+let id: string; //  (default to undefined)
+let body: object; // 
+
+const { status, data } = await client.facebook.update(
+    id,
+    body
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **body** | **object**|  | |
+| **id** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: Not defined
 
 

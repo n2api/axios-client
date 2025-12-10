@@ -4,10 +4,10 @@ All URIs are relative to *https://api.n2api.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**adsetsControllerGetAdsetsJio5sh**](#adsetscontrollergetadsetsjio5sh) | **GET** /adsets | |
+|[**getAdsets**](#getadsets) | **GET** /adsets | |
 
-# **adsetsControllerGetAdsetsJio5sh**
-> Array<AdSet> adsetsControllerGetAdsetsJio5sh()
+# **getAdsets**
+> getAdsets()
 
 
 ### Example
@@ -24,18 +24,18 @@ const configuration = new Configuration({
 const client = new Client(configuration);
 
 
-let childResources: Array<'Campaign' | 'AdSet' | 'Ad' | 'Targeting' | 'AdAccount'>; //  (optional) (default to undefined)
-let platforms: Array<'ActiveAgent' | 'Facebook' | 'GoogleAds' | 'TheTradeDesk' | 'Pinterest'>; // List of platforms to include in the response. (optional) (default to undefined)
-let customers: Array<string>; // List of Customer IDs whose AdSets to include in the response. (optional) (default to undefined)
-let ids: Array<string>; // List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value. (optional) (default to undefined)
-let status: 'ACTIVE' | 'RUNNING' | 'PAUSED' | 'UNKNOWN'; //  (optional) (default to undefined)
+let childResources: Array<ResourceKind>; //  (default to undefined)
+let status: Status; // Status of the AdSets to return. Example: set status to Running to get a list of running AdSets. (default to undefined)
+let platforms: Array<PlatformName>; // List of platforms to include in the response. (default to undefined)
+let customers: Array<string>; // List of Customer IDs whose AdSets to include in the response. (default to undefined)
+let ids: Array<string>; // List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value. (default to undefined)
 
-const { status, data } = await client.adSets.adsetsControllerGetAdsetsJio5sh(
+const { status, data } = await client.adSets.getAdsets(
     childResources,
+    status,
     platforms,
     customers,
-    ids,
-    status
+    ids
 );
 ```
 
@@ -43,16 +43,16 @@ const { status, data } = await client.adSets.adsetsControllerGetAdsetsJio5sh(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **childResources** | **Array<&#39;Campaign&#39; &#124; &#39;AdSet&#39; &#124; &#39;Ad&#39; &#124; &#39;Targeting&#39; &#124; &#39;AdAccount&#39;>** |  | (optional) defaults to undefined|
-| **platforms** | **Array<&#39;ActiveAgent&#39; &#124; &#39;Facebook&#39; &#124; &#39;GoogleAds&#39; &#124; &#39;TheTradeDesk&#39; &#124; &#39;Pinterest&#39;>** | List of platforms to include in the response. | (optional) defaults to undefined|
-| **customers** | **Array&lt;string&gt;** | List of Customer IDs whose AdSets to include in the response. | (optional) defaults to undefined|
-| **ids** | **Array&lt;string&gt;** | List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value. | (optional) defaults to undefined|
-| **status** | [**&#39;ACTIVE&#39; | &#39;RUNNING&#39; | &#39;PAUSED&#39; | &#39;UNKNOWN&#39;**]**Array<&#39;ACTIVE&#39; &#124; &#39;RUNNING&#39; &#124; &#39;PAUSED&#39; &#124; &#39;UNKNOWN&#39;>** |  | (optional) defaults to undefined|
+| **childResources** | **Array&lt;ResourceKind&gt;** |  | defaults to undefined|
+| **status** | **Status** | Status of the AdSets to return. Example: set status to Running to get a list of running AdSets. | defaults to undefined|
+| **platforms** | **Array&lt;PlatformName&gt;** | List of platforms to include in the response. | defaults to undefined|
+| **customers** | **Array&lt;string&gt;** | List of Customer IDs whose AdSets to include in the response. | defaults to undefined|
+| **ids** | **Array&lt;string&gt;** | List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value. | defaults to undefined|
 
 
 ### Return type
 
-**Array<AdSet>**
+void (empty response body)
 
 ### Authorization
 
@@ -61,7 +61,7 @@ const { status, data } = await client.adSets.adsetsControllerGetAdsetsJio5sh(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: Not defined
 
 
 ### HTTP response details

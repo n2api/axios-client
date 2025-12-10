@@ -4,12 +4,12 @@ All URIs are relative to *https://api.n2api.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**companiesControllerGetCompany2lyej4**](#companiescontrollergetcompany2lyej4) | **GET** /companies | |
-|[**companiesControllerGetRedirectUriF0i71s**](#companiescontrollergetredirecturif0i71s) | **GET** /companies/redirect_uri | |
-|[**companiesControllerSetRedirectUriFcrzml**](#companiescontrollersetredirecturifcrzml) | **PUT** /companies/redirect_uri | |
+|[**getCompany**](#getcompany) | **GET** /companies | |
+|[**getRedirectUri**](#getredirecturi) | **GET** /companies/redirect_uri | |
+|[**setRedirectUri**](#setredirecturi) | **PUT** /companies/redirect_uri | |
 
-# **companiesControllerGetCompany2lyej4**
-> companiesControllerGetCompany2lyej4()
+# **getCompany**
+> getCompany()
 
 
 ### Example
@@ -26,7 +26,7 @@ const configuration = new Configuration({
 const client = new Client(configuration);
 
 
-const { status, data } = await client.companies.companiesControllerGetCompany2lyej4();
+const { status, data } = await client.companies.getCompany();
 ```
 
 ### Parameters
@@ -54,8 +54,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **companiesControllerGetRedirectUriF0i71s**
-> RedirectUriDTO companiesControllerGetRedirectUriF0i71s()
+# **getRedirectUri**
+> getRedirectUri()
 
 
 ### Example
@@ -72,7 +72,7 @@ const configuration = new Configuration({
 const client = new Client(configuration);
 
 
-const { status, data } = await client.companies.companiesControllerGetRedirectUriF0i71s();
+const { status, data } = await client.companies.getRedirectUri();
 ```
 
 ### Parameters
@@ -81,7 +81,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**RedirectUriDTO**
+void (empty response body)
 
 ### Authorization
 
@@ -90,7 +90,7 @@ This endpoint does not have any parameters.
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: Not defined
 
 
 ### HTTP response details
@@ -100,8 +100,8 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **companiesControllerSetRedirectUriFcrzml**
-> RedirectUriDTO companiesControllerSetRedirectUriFcrzml(redirectUriDTO)
+# **setRedirectUri**
+> setRedirectUri(redirectUriDTO)
 
 
 ### Example
@@ -121,7 +121,7 @@ const client = new Client(configuration);
 
 let redirectUriDTO: RedirectUriDTO; // 
 
-const { status, data } = await client.companies.companiesControllerSetRedirectUriFcrzml(
+const { status, data } = await client.companies.setRedirectUri(
     redirectUriDTO
 );
 ```
@@ -135,7 +135,7 @@ const { status, data } = await client.companies.companiesControllerSetRedirectUr
 
 ### Return type
 
-**RedirectUriDTO**
+void (empty response body)
 
 ### Authorization
 
@@ -144,7 +144,7 @@ const { status, data } = await client.companies.companiesControllerSetRedirectUr
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Accept**: Not defined
 
 
 ### HTTP response details

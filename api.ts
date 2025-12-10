@@ -32,135 +32,8 @@ export interface ActiveAgentCreateCredentialDto {
      */
     'password': string;
 }
-export interface ActiveAgentOrderDto {
-    'id': number;
-    'advertiserId': number;
-    'networkId': number;
-    'campaignIds': Array<number>;
-    'name': string;
-    'runtimeBudgets': Array<RuntimeBudget>;
-    'lastUpdate': number;
-    'deleted': boolean;
-    'advertiserMarginId'?: number;
-    'agencyId'?: number;
-    'calculatedDailyBudget'?: number;
-    'calculatedDailyImpressions'?: number;
-    'dailyBudget'?: number;
-    'dailyClicks'?: number;
-    'dailyImpressions'?: number;
-    'dailyPacing'?: boolean;
-    'footfallStoreConfigId'?: number;
-    'pace'?: number;
-    'runtimePacing'?: boolean;
-    'runtimePacingFactor'?: number;
-    'totalBudget'?: number;
-    'totalClicks'?: number;
-    'totalImpressions'?: number;
-}
-export interface Ad {
-    'platform': AdPlatformEnum;
-    'name': string;
-    'id': string;
-    'adAccount': string;
-    'channelKind': string;
-    'settings': Array<object>;
-    'targetings'?: Array<object>;
-    'kind': string;
-    'status': AdStatusEnum;
-}
 
-export const AdPlatformEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-
-export type AdPlatformEnum = typeof AdPlatformEnum[keyof typeof AdPlatformEnum];
-export const AdStatusEnum = {
-    Active: 'ACTIVE',
-    Running: 'RUNNING',
-    Paused: 'PAUSED',
-    Unknown: 'UNKNOWN'
-} as const;
-
-export type AdStatusEnum = typeof AdStatusEnum[keyof typeof AdStatusEnum];
-
-export interface AdSet {
-    'platform': AdSetPlatformEnum;
-    'name': string;
-    'id': string;
-    'adAccount': string;
-    'parentId': string;
-    'channelKind': string;
-    'settings': Array<object>;
-    'targetings'?: Array<object>;
-    'ads'?: Array<Ad>;
-    'kind': string;
-    'status': AdSetStatusEnum;
-}
-
-export const AdSetPlatformEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-
-export type AdSetPlatformEnum = typeof AdSetPlatformEnum[keyof typeof AdSetPlatformEnum];
-export const AdSetStatusEnum = {
-    Active: 'ACTIVE',
-    Running: 'RUNNING',
-    Paused: 'PAUSED',
-    Unknown: 'UNKNOWN'
-} as const;
-
-export type AdSetStatusEnum = typeof AdSetStatusEnum[keyof typeof AdSetStatusEnum];
-
-export interface Campaign {
-    'platform': CampaignPlatformEnum;
-    'id': string;
-    'adAccount': string;
-    'channelKind': string;
-    'name': string;
-    'advertiser': string;
-    'lastUpdate': number;
-    'status': CampaignStatusEnum;
-    'adSets'?: Array<AdSet>;
-    'settings': Array<object>;
-    'targetings'?: Array<object>;
-    'kind': string;
-}
-
-export const CampaignPlatformEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-
-export type CampaignPlatformEnum = typeof CampaignPlatformEnum[keyof typeof CampaignPlatformEnum];
-export const CampaignStatusEnum = {
-    Active: 'ACTIVE',
-    Running: 'RUNNING',
-    Paused: 'PAUSED',
-    Unknown: 'UNKNOWN'
-} as const;
-
-export type CampaignStatusEnum = typeof CampaignStatusEnum[keyof typeof CampaignStatusEnum];
-
-export interface CreateAdSetDto {
-    'targetings'?: Array<CreateAdSetDtoTargetingsInner>;
-    'settings'?: Array<CreateAdSetDtoSettingsInner>;
-    'channelKind': CreateAdSetDtoChannelKindEnum;
-    'name': string;
-    'ads'?: Array<object>;
-}
-
-export const CreateAdSetDtoChannelKindEnum = {
+export const ChannelKind = {
     Unknown: 'UNKNOWN',
     Mixed: 'MIXED',
     Dooh: 'DOOH',
@@ -171,75 +44,19 @@ export const CreateAdSetDtoChannelKindEnum = {
     Audio: 'AUDIO'
 } as const;
 
-export type CreateAdSetDtoChannelKindEnum = typeof CreateAdSetDtoChannelKindEnum[keyof typeof CreateAdSetDtoChannelKindEnum];
+export type ChannelKind = typeof ChannelKind[keyof typeof ChannelKind];
 
-export interface CreateAdSetDtoSettingsInner {
-    'settingType': CreateAdSetDtoSettingsInnerSettingTypeEnum;
-    'maximumCpm': number;
-    'realtimeBiddingStrategy': CreateAdSetDtoSettingsInnerRealtimeBiddingStrategyEnum;
-    'pacingType': CreateAdSetDtoSettingsInnerPacingTypeEnum;
-    'dailyBudget': number;
-    'maximumDailyImpressions': number;
+
+export interface CreateAuthDto {
+    /**
+     * The LinkedIn auth code returned from the redirect.
+     */
+    'code': string;
+    /**
+     * The LinkedIn redirect uri.
+     */
+    'redirect_uri': string;
 }
-
-export const CreateAdSetDtoSettingsInnerSettingTypeEnum = {
-    DailyBudget: 'DailyBudget',
-    TotalBudget: 'TotalBudget',
-    Unknown: 'Unknown',
-    Runtime: 'Runtime',
-    MaximumCpm: 'MaximumCPM',
-    MaximumDailyImpressions: 'MaximumDailyImpressions',
-    MaximumLifetimeImpressions: 'MaximumLifetimeImpressions',
-    MediaSize: 'MediaSize',
-    Pacing: 'Pacing',
-    RealtimeBiddingStrategy: 'RealtimeBiddingStrategy',
-    KpiOptimization: 'KPIOptimization',
-    BidCapping: 'BidCapping'
-} as const;
-
-export type CreateAdSetDtoSettingsInnerSettingTypeEnum = typeof CreateAdSetDtoSettingsInnerSettingTypeEnum[keyof typeof CreateAdSetDtoSettingsInnerSettingTypeEnum];
-export const CreateAdSetDtoSettingsInnerRealtimeBiddingStrategyEnum = {
-    Maxprice: 'Maxprice',
-    Floorprice: 'Floorprice',
-    IntervalBudgetOptimized: 'IntervalBudgetOptimized',
-    LowestCostUncapped: 'LowestCostUncapped',
-    LowestCostCapped: 'LowestCostCapped',
-    CostCapped: 'CostCapped',
-    Unknown: 'Unknown'
-} as const;
-
-export type CreateAdSetDtoSettingsInnerRealtimeBiddingStrategyEnum = typeof CreateAdSetDtoSettingsInnerRealtimeBiddingStrategyEnum[keyof typeof CreateAdSetDtoSettingsInnerRealtimeBiddingStrategyEnum];
-export const CreateAdSetDtoSettingsInnerPacingTypeEnum = {
-    Off: 'Off',
-    EvenlyOverDay: 'EvenlyOverDay',
-    EvenlyOverRuntime: 'EvenlyOverRuntime',
-    Ahead: 'Ahead',
-    DayParting: 'DayParting',
-    Unknown: 'Unknown'
-} as const;
-
-export type CreateAdSetDtoSettingsInnerPacingTypeEnum = typeof CreateAdSetDtoSettingsInnerPacingTypeEnum[keyof typeof CreateAdSetDtoSettingsInnerPacingTypeEnum];
-
-export interface CreateAdSetDtoTargetingsInner {
-    'targetingKind': CreateAdSetDtoTargetingsInnerTargetingKindEnum;
-    'zipcodes': Array<ZipcodeDto>;
-    'time': number;
-    'requests': number;
-}
-
-export const CreateAdSetDtoTargetingsInnerTargetingKindEnum = {
-    PostalCodeGeoTargeting: 'PostalCodeGeoTargeting',
-    CountryTargeting: 'CountryTargeting',
-    UserFrequencyCapping: 'UserFrequencyCapping',
-    SocioDemographicTargeting: 'SocioDemographicTargeting',
-    InterestsTargeting: 'InterestsTargeting',
-    SearchTermTargeting: 'SearchTermTargeting',
-    UrlTargeting: 'UrlTargeting',
-    UnknownTargeting: 'UnknownTargeting'
-} as const;
-
-export type CreateAdSetDtoTargetingsInnerTargetingKindEnum = typeof CreateAdSetDtoTargetingsInnerTargetingKindEnum[keyof typeof CreateAdSetDtoTargetingsInnerTargetingKindEnum];
-
 export interface CreateCustomerDto {
     /**
      * The name of the customer.
@@ -280,128 +97,69 @@ export interface CreateSettingDto {
     'settings': Array<CreateSettingDtoSettingsInner>;
 }
 export interface CreateSettingDtoSettingsInner {
-    'settingType': CreateSettingDtoSettingsInnerSettingTypeEnum;
-    'maximumCpm': number;
-    'realtimeBiddingStrategy': CreateSettingDtoSettingsInnerRealtimeBiddingStrategyEnum;
-    'pacingType': CreateSettingDtoSettingsInnerPacingTypeEnum;
-    'dailyBudget': number;
-    'maximumDailyImpressions': number;
 }
-
-export const CreateSettingDtoSettingsInnerSettingTypeEnum = {
-    DailyBudget: 'DailyBudget',
-    TotalBudget: 'TotalBudget',
-    Unknown: 'Unknown',
-    Runtime: 'Runtime',
-    MaximumCpm: 'MaximumCPM',
-    MaximumDailyImpressions: 'MaximumDailyImpressions',
-    MaximumLifetimeImpressions: 'MaximumLifetimeImpressions',
-    MediaSize: 'MediaSize',
-    Pacing: 'Pacing',
-    RealtimeBiddingStrategy: 'RealtimeBiddingStrategy',
-    KpiOptimization: 'KPIOptimization',
-    BidCapping: 'BidCapping'
-} as const;
-
-export type CreateSettingDtoSettingsInnerSettingTypeEnum = typeof CreateSettingDtoSettingsInnerSettingTypeEnum[keyof typeof CreateSettingDtoSettingsInnerSettingTypeEnum];
-export const CreateSettingDtoSettingsInnerRealtimeBiddingStrategyEnum = {
-    Maxprice: 'Maxprice',
-    Floorprice: 'Floorprice',
-    IntervalBudgetOptimized: 'IntervalBudgetOptimized',
-    LowestCostUncapped: 'LowestCostUncapped',
-    LowestCostCapped: 'LowestCostCapped',
-    CostCapped: 'CostCapped',
-    Unknown: 'Unknown'
-} as const;
-
-export type CreateSettingDtoSettingsInnerRealtimeBiddingStrategyEnum = typeof CreateSettingDtoSettingsInnerRealtimeBiddingStrategyEnum[keyof typeof CreateSettingDtoSettingsInnerRealtimeBiddingStrategyEnum];
-export const CreateSettingDtoSettingsInnerPacingTypeEnum = {
-    Off: 'Off',
-    EvenlyOverDay: 'EvenlyOverDay',
-    EvenlyOverRuntime: 'EvenlyOverRuntime',
-    Ahead: 'Ahead',
-    DayParting: 'DayParting',
-    Unknown: 'Unknown'
-} as const;
-
-export type CreateSettingDtoSettingsInnerPacingTypeEnum = typeof CreateSettingDtoSettingsInnerPacingTypeEnum[keyof typeof CreateSettingDtoSettingsInnerPacingTypeEnum];
-
 export interface CreateTargetingDto {
     'targetings': Array<CreateTargetingDtoTargetingsInner>;
 }
 export interface CreateTargetingDtoTargetingsInner {
-    'targetingKind': CreateTargetingDtoTargetingsInnerTargetingKindEnum;
-    'zipcodes': Array<ZipcodeDto>;
-    'time': number;
-    'requests': number;
-    'urls': Array<string>;
+}
+export interface CustomerDto {
+    /**
+     * The unique identifier (UUID) of the customer.
+     */
+    'id': string;
+    /**
+     * The name of the customer.
+     */
+    'name': string;
+    /**
+     * The company UUID the customer belongs to.
+     */
+    'company': string;
+    /**
+     * The timestamp when the customer was created.
+     */
+    'created_at': string;
+}
+export interface CustomerWithPlatformsDto {
+    /**
+     * The unique identifier (UUID) of the customer.
+     */
+    'id': string;
+    /**
+     * The name of the customer.
+     */
+    'name': string;
+    /**
+     * The company UUID the customer belongs to.
+     */
+    'company': string;
+    /**
+     * The timestamp when the customer was created.
+     */
+    'created_at': string;
+    /**
+     * List of connected platforms for this customer.
+     */
+    'platforms': Array<CustomerWithPlatformsDtoPlatformsEnum>;
 }
 
-export const CreateTargetingDtoTargetingsInnerTargetingKindEnum = {
-    PostalCodeGeoTargeting: 'PostalCodeGeoTargeting',
-    CountryTargeting: 'CountryTargeting',
-    UserFrequencyCapping: 'UserFrequencyCapping',
-    SocioDemographicTargeting: 'SocioDemographicTargeting',
-    InterestsTargeting: 'InterestsTargeting',
-    SearchTermTargeting: 'SearchTermTargeting',
-    UrlTargeting: 'UrlTargeting',
-    UnknownTargeting: 'UnknownTargeting'
+export const CustomerWithPlatformsDtoPlatformsEnum = {
+    ActiveAgent: 'ActiveAgent',
+    Facebook: 'Facebook',
+    GoogleAds: 'GoogleAds',
+    TheTradeDesk: 'TheTradeDesk',
+    Pinterest: 'Pinterest',
+    LinkedIn: 'LinkedIn'
 } as const;
 
-export type CreateTargetingDtoTargetingsInnerTargetingKindEnum = typeof CreateTargetingDtoTargetingsInnerTargetingKindEnum[keyof typeof CreateTargetingDtoTargetingsInnerTargetingKindEnum];
+export type CustomerWithPlatformsDtoPlatformsEnum = typeof CustomerWithPlatformsDtoPlatformsEnum[keyof typeof CustomerWithPlatformsDtoPlatformsEnum];
 
-export interface DailyBudgetDto {
-    'settingType': DailyBudgetDtoSettingTypeEnum;
-    'dailyBudget': number;
-}
-
-export const DailyBudgetDtoSettingTypeEnum = {
-    DailyBudget: 'DailyBudget',
-    TotalBudget: 'TotalBudget',
-    Unknown: 'Unknown',
-    Runtime: 'Runtime',
-    MaximumCpm: 'MaximumCPM',
-    MaximumDailyImpressions: 'MaximumDailyImpressions',
-    MaximumLifetimeImpressions: 'MaximumLifetimeImpressions',
-    MediaSize: 'MediaSize',
-    Pacing: 'Pacing',
-    RealtimeBiddingStrategy: 'RealtimeBiddingStrategy',
-    KpiOptimization: 'KPIOptimization',
-    BidCapping: 'BidCapping'
-} as const;
-
-export type DailyBudgetDtoSettingTypeEnum = typeof DailyBudgetDtoSettingTypeEnum[keyof typeof DailyBudgetDtoSettingTypeEnum];
-
-export interface FacebookAdAccountWrapper {
-    'customer': string;
-}
 export interface FacebookCreateCredentialDto {
     /**
      * The accessToken of the credential.
      */
     'accessToken': string;
-}
-export interface FrequencyCappingDto {
-    'targetingKind': FrequencyCappingDtoTargetingKindEnum;
-    'time': number;
-    'requests': number;
-}
-
-export const FrequencyCappingDtoTargetingKindEnum = {
-    PostalCodeGeoTargeting: 'PostalCodeGeoTargeting',
-    CountryTargeting: 'CountryTargeting',
-    UserFrequencyCapping: 'UserFrequencyCapping',
-    SocioDemographicTargeting: 'SocioDemographicTargeting',
-    InterestsTargeting: 'InterestsTargeting',
-    SearchTermTargeting: 'SearchTermTargeting',
-    UrlTargeting: 'UrlTargeting',
-    UnknownTargeting: 'UnknownTargeting'
-} as const;
-
-export type FrequencyCappingDtoTargetingKindEnum = typeof FrequencyCappingDtoTargetingKindEnum[keyof typeof FrequencyCappingDtoTargetingKindEnum];
-
-export interface GoogleAdsAdAccountWrapper {
-    'customer': string;
 }
 export interface GoogleAdsCreateCredentialDto {
     /**
@@ -417,6 +175,24 @@ export interface GoogleAdsCreateCredentialDto {
      */
     'expires_in': number;
 }
+export interface LinkedInCreateCredentialDto {
+    /**
+     * The accessToken of the credential.
+     */
+    'accessToken': string;
+    /**
+     * The number in seconds until the access token expires.
+     */
+    'expiresIn': number;
+    /**
+     * The refreshToken of the credential.
+     */
+    'refreshToken': string;
+    /**
+     * The number in seconds until the refresh token expires.
+     */
+    'refreshTokenExpiresIn': number;
+}
 export interface LoginDto {
     /**
      * The email of the user.
@@ -427,82 +203,6 @@ export interface LoginDto {
      */
     'password': string;
 }
-export interface MaximumCPMDto {
-    'settingType': MaximumCPMDtoSettingTypeEnum;
-    'maximumCpm': number;
-}
-
-export const MaximumCPMDtoSettingTypeEnum = {
-    DailyBudget: 'DailyBudget',
-    TotalBudget: 'TotalBudget',
-    Unknown: 'Unknown',
-    Runtime: 'Runtime',
-    MaximumCpm: 'MaximumCPM',
-    MaximumDailyImpressions: 'MaximumDailyImpressions',
-    MaximumLifetimeImpressions: 'MaximumLifetimeImpressions',
-    MediaSize: 'MediaSize',
-    Pacing: 'Pacing',
-    RealtimeBiddingStrategy: 'RealtimeBiddingStrategy',
-    KpiOptimization: 'KPIOptimization',
-    BidCapping: 'BidCapping'
-} as const;
-
-export type MaximumCPMDtoSettingTypeEnum = typeof MaximumCPMDtoSettingTypeEnum[keyof typeof MaximumCPMDtoSettingTypeEnum];
-
-export interface MaximumDailyImpressionsDto {
-    'settingType': MaximumDailyImpressionsDtoSettingTypeEnum;
-    'maximumDailyImpressions': number;
-}
-
-export const MaximumDailyImpressionsDtoSettingTypeEnum = {
-    DailyBudget: 'DailyBudget',
-    TotalBudget: 'TotalBudget',
-    Unknown: 'Unknown',
-    Runtime: 'Runtime',
-    MaximumCpm: 'MaximumCPM',
-    MaximumDailyImpressions: 'MaximumDailyImpressions',
-    MaximumLifetimeImpressions: 'MaximumLifetimeImpressions',
-    MediaSize: 'MediaSize',
-    Pacing: 'Pacing',
-    RealtimeBiddingStrategy: 'RealtimeBiddingStrategy',
-    KpiOptimization: 'KPIOptimization',
-    BidCapping: 'BidCapping'
-} as const;
-
-export type MaximumDailyImpressionsDtoSettingTypeEnum = typeof MaximumDailyImpressionsDtoSettingTypeEnum[keyof typeof MaximumDailyImpressionsDtoSettingTypeEnum];
-
-export interface PacingDto {
-    'settingType': PacingDtoSettingTypeEnum;
-    'pacingType': PacingDtoPacingTypeEnum;
-}
-
-export const PacingDtoSettingTypeEnum = {
-    DailyBudget: 'DailyBudget',
-    TotalBudget: 'TotalBudget',
-    Unknown: 'Unknown',
-    Runtime: 'Runtime',
-    MaximumCpm: 'MaximumCPM',
-    MaximumDailyImpressions: 'MaximumDailyImpressions',
-    MaximumLifetimeImpressions: 'MaximumLifetimeImpressions',
-    MediaSize: 'MediaSize',
-    Pacing: 'Pacing',
-    RealtimeBiddingStrategy: 'RealtimeBiddingStrategy',
-    KpiOptimization: 'KPIOptimization',
-    BidCapping: 'BidCapping'
-} as const;
-
-export type PacingDtoSettingTypeEnum = typeof PacingDtoSettingTypeEnum[keyof typeof PacingDtoSettingTypeEnum];
-export const PacingDtoPacingTypeEnum = {
-    Off: 'Off',
-    EvenlyOverDay: 'EvenlyOverDay',
-    EvenlyOverRuntime: 'EvenlyOverRuntime',
-    Ahead: 'Ahead',
-    DayParting: 'DayParting',
-    Unknown: 'Unknown'
-} as const;
-
-export type PacingDtoPacingTypeEnum = typeof PacingDtoPacingTypeEnum[keyof typeof PacingDtoPacingTypeEnum];
-
 export interface PinterestCreateCredentialDto {
     /**
      * The access token of the credential.
@@ -537,38 +237,18 @@ export interface PinterestCreateCredentialDto {
      */
     'scope': string;
 }
-export interface RealtimeBiddingStrategyDto {
-    'settingType': RealtimeBiddingStrategyDtoSettingTypeEnum;
-    'realtimeBiddingStrategy': RealtimeBiddingStrategyDtoRealtimeBiddingStrategyEnum;
-}
 
-export const RealtimeBiddingStrategyDtoSettingTypeEnum = {
-    DailyBudget: 'DailyBudget',
-    TotalBudget: 'TotalBudget',
-    Unknown: 'Unknown',
-    Runtime: 'Runtime',
-    MaximumCpm: 'MaximumCPM',
-    MaximumDailyImpressions: 'MaximumDailyImpressions',
-    MaximumLifetimeImpressions: 'MaximumLifetimeImpressions',
-    MediaSize: 'MediaSize',
-    Pacing: 'Pacing',
-    RealtimeBiddingStrategy: 'RealtimeBiddingStrategy',
-    KpiOptimization: 'KPIOptimization',
-    BidCapping: 'BidCapping'
+export const PlatformName = {
+    ActiveAgent: 'ActiveAgent',
+    Facebook: 'Facebook',
+    GoogleAds: 'GoogleAds',
+    TheTradeDesk: 'TheTradeDesk',
+    Pinterest: 'Pinterest',
+    LinkedIn: 'LinkedIn'
 } as const;
 
-export type RealtimeBiddingStrategyDtoSettingTypeEnum = typeof RealtimeBiddingStrategyDtoSettingTypeEnum[keyof typeof RealtimeBiddingStrategyDtoSettingTypeEnum];
-export const RealtimeBiddingStrategyDtoRealtimeBiddingStrategyEnum = {
-    Maxprice: 'Maxprice',
-    Floorprice: 'Floorprice',
-    IntervalBudgetOptimized: 'IntervalBudgetOptimized',
-    LowestCostUncapped: 'LowestCostUncapped',
-    LowestCostCapped: 'LowestCostCapped',
-    CostCapped: 'CostCapped',
-    Unknown: 'Unknown'
-} as const;
+export type PlatformName = typeof PlatformName[keyof typeof PlatformName];
 
-export type RealtimeBiddingStrategyDtoRealtimeBiddingStrategyEnum = typeof RealtimeBiddingStrategyDtoRealtimeBiddingStrategyEnum[keyof typeof RealtimeBiddingStrategyDtoRealtimeBiddingStrategyEnum];
 
 export interface RedirectUriDTO {
     /**
@@ -576,13 +256,18 @@ export interface RedirectUriDTO {
      */
     'redirect_uri': string;
 }
-export interface RuntimeBudget {
-    'startTime': string;
-    'endTime': string;
-    'budget': number;
-    'clicks': number;
-    'impressions': number;
-}
+
+export const ResourceKind = {
+    Campaign: 'Campaign',
+    AdSet: 'AdSet',
+    Ad: 'Ad',
+    Targeting: 'Targeting',
+    AdAccount: 'AdAccount'
+} as const;
+
+export type ResourceKind = typeof ResourceKind[keyof typeof ResourceKind];
+
+
 export interface SessionTokenDto {
     /**
      * The UUID of the customer.
@@ -595,6 +280,17 @@ export interface SessionTokenVerifyDto {
      */
     'sessionToken': string;
 }
+
+export const Status = {
+    Active: 'ACTIVE',
+    Running: 'RUNNING',
+    Paused: 'PAUSED',
+    Unknown: 'UNKNOWN'
+} as const;
+
+export type Status = typeof Status[keyof typeof Status];
+
+
 export interface TheTradeDeskCreateCredentialsDto {
     /**
      * The login for the credentials
@@ -605,46 +301,6 @@ export interface TheTradeDeskCreateCredentialsDto {
      */
     'password': string;
 }
-export interface UrlTargetingDto {
-    'targetingKind': UrlTargetingDtoTargetingKindEnum;
-    'urls': Array<string>;
-}
-
-export const UrlTargetingDtoTargetingKindEnum = {
-    PostalCodeGeoTargeting: 'PostalCodeGeoTargeting',
-    CountryTargeting: 'CountryTargeting',
-    UserFrequencyCapping: 'UserFrequencyCapping',
-    SocioDemographicTargeting: 'SocioDemographicTargeting',
-    InterestsTargeting: 'InterestsTargeting',
-    SearchTermTargeting: 'SearchTermTargeting',
-    UrlTargeting: 'UrlTargeting',
-    UnknownTargeting: 'UnknownTargeting'
-} as const;
-
-export type UrlTargetingDtoTargetingKindEnum = typeof UrlTargetingDtoTargetingKindEnum[keyof typeof UrlTargetingDtoTargetingKindEnum];
-
-export interface ZipcodeDto {
-    'countryCode': string;
-    'value': string;
-}
-export interface ZipcodeGeoTargetingDto {
-    'targetingKind': ZipcodeGeoTargetingDtoTargetingKindEnum;
-    'zipcodes': Array<ZipcodeDto>;
-}
-
-export const ZipcodeGeoTargetingDtoTargetingKindEnum = {
-    PostalCodeGeoTargeting: 'PostalCodeGeoTargeting',
-    CountryTargeting: 'CountryTargeting',
-    UserFrequencyCapping: 'UserFrequencyCapping',
-    SocioDemographicTargeting: 'SocioDemographicTargeting',
-    InterestsTargeting: 'InterestsTargeting',
-    SearchTermTargeting: 'SearchTermTargeting',
-    UrlTargeting: 'UrlTargeting',
-    UnknownTargeting: 'UnknownTargeting'
-} as const;
-
-export type ZipcodeGeoTargetingDtoTargetingKindEnum = typeof ZipcodeGeoTargetingDtoTargetingKindEnum[keyof typeof ZipcodeGeoTargetingDtoTargetingKindEnum];
-
 
 
 /**
@@ -654,11 +310,23 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
     return {
         /**
          * 
+         * @param {string} resource 
+         * @param {string} resourceId 
+         * @param {Array<string>} targetingKind 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adAccountsControllerSyncCustomerQ7yxiw: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/activeagent/adaccounts/customer`;
+        _delete: async (resource: string, resourceId: string, targetingKind: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'resource' is not null or undefined
+            assertParamExists('_delete', 'resource', resource)
+            // verify required parameter 'resourceId' is not null or undefined
+            assertParamExists('_delete', 'resourceId', resourceId)
+            // verify required parameter 'targetingKind' is not null or undefined
+            assertParamExists('_delete', 'targetingKind', targetingKind)
+            const localVarPath = `/activeagent/{resource}/{resourceId}/targeting/{targetingKind}`
+                .replace(`{${"resource"}}`, encodeURIComponent(String(resource)))
+                .replace(`{${"resourceId"}}`, encodeURIComponent(String(resourceId)))
+                .replace(`{${"targetingKind"}}`, encodeURIComponent(String(targetingKind)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -666,7 +334,7 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -690,8 +358,8 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adAccountsControllerSyncR5ln7z: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/activeagent/adaccounts`;
+        _delete_1: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/activeagent/credentials`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -699,7 +367,7 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -720,15 +388,370 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @param {Array<AdsControllerFindAllV0i00iChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
-         * @param {AdsControllerFindAllV0i00iStatusEnum} [status] Status of the Ads to return. Example: set status to Running to get a list of running Ads
-         * @param {Array<AdsControllerFindAllV0i00iPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose Ads to include in the response.
-         * @param {Array<string>} [ids] List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {object} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsControllerFindAllV0i00i: async (childResources?: Array<AdsControllerFindAllV0i00iChildResourcesEnum>, status?: AdsControllerFindAllV0i00iStatusEnum, platforms?: Array<AdsControllerFindAllV0i00iPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        create: async (body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('create', 'body', body)
+            const localVarPath = `/activeagent/campaigns`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {ActiveAgentCreateCredentialDto} activeAgentCreateCredentialDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createCustomer: async (activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'activeAgentCreateCredentialDto' is not null or undefined
+            assertParamExists('createCustomer', 'activeAgentCreateCredentialDto', activeAgentCreateCredentialDto)
+            const localVarPath = `/activeagent/credentials/customer`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(activeAgentCreateCredentialDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} resource 
+         * @param {string} resourceId 
+         * @param {CreateTargetingDto} createTargetingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create_2: async (resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'resource' is not null or undefined
+            assertParamExists('create_2', 'resource', resource)
+            // verify required parameter 'resourceId' is not null or undefined
+            assertParamExists('create_2', 'resourceId', resourceId)
+            // verify required parameter 'createTargetingDto' is not null or undefined
+            assertParamExists('create_2', 'createTargetingDto', createTargetingDto)
+            const localVarPath = `/activeagent/{resource}/{resourceId}/targeting`
+                .replace(`{${"resource"}}`, encodeURIComponent(String(resource)))
+                .replace(`{${"resourceId"}}`, encodeURIComponent(String(resourceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createTargetingDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create_3: async (body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('create_3', 'body', body)
+            const localVarPath = `/activeagent/adsets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} resource 
+         * @param {string} resourceId 
+         * @param {Array<string>} targetingKind 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        find: async (resource: string, resourceId: string, targetingKind: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'resource' is not null or undefined
+            assertParamExists('find', 'resource', resource)
+            // verify required parameter 'resourceId' is not null or undefined
+            assertParamExists('find', 'resourceId', resourceId)
+            // verify required parameter 'targetingKind' is not null or undefined
+            assertParamExists('find', 'targetingKind', targetingKind)
+            const localVarPath = `/activeagent/{resource}/{resourceId}/targeting/{targetingKind}`
+                .replace(`{${"resource"}}`, encodeURIComponent(String(resource)))
+                .replace(`{${"resourceId"}}`, encodeURIComponent(String(resourceId)))
+                .replace(`{${"targetingKind"}}`, encodeURIComponent(String(targetingKind)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll: async (childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'childResources' is not null or undefined
+            assertParamExists('findAll', 'childResources', childResources)
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('findAll', 'status', status)
+            // verify required parameter 'platforms' is not null or undefined
+            assertParamExists('findAll', 'platforms', platforms)
+            // verify required parameter 'customers' is not null or undefined
+            assertParamExists('findAll', 'customers', customers)
+            // verify required parameter 'ids' is not null or undefined
+            assertParamExists('findAll', 'ids', ids)
+            const localVarPath = `/activeagent/campaigns`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (childResources) {
+                localVarQueryParameter['childResources'] = childResources;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+            if (platforms) {
+                localVarQueryParameter['platforms'] = platforms;
+            }
+
+            if (customers) {
+                localVarQueryParameter['customers'] = customers;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources 
+         * @param {Status} status Status of the AdSets to return. Example: set status to Running to get a list of running AdSets.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose AdSets to include in the response.
+         * @param {Array<string>} ids List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_4: async (childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'childResources' is not null or undefined
+            assertParamExists('findAll_4', 'childResources', childResources)
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('findAll_4', 'status', status)
+            // verify required parameter 'platforms' is not null or undefined
+            assertParamExists('findAll_4', 'platforms', platforms)
+            // verify required parameter 'customers' is not null or undefined
+            assertParamExists('findAll_4', 'customers', customers)
+            // verify required parameter 'ids' is not null or undefined
+            assertParamExists('findAll_4', 'ids', ids)
+            const localVarPath = `/activeagent/adsets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (childResources) {
+                localVarQueryParameter['childResources'] = childResources;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+            if (platforms) {
+                localVarQueryParameter['platforms'] = platforms;
+            }
+
+            if (customers) {
+                localVarQueryParameter['customers'] = customers;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
+         * @param {Status} status Status of the Ads to return. Example: set status to Running to get a list of running Ads
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose Ads to include in the response.
+         * @param {Array<string>} ids List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_5: async (childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'childResources' is not null or undefined
+            assertParamExists('findAll_5', 'childResources', childResources)
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('findAll_5', 'status', status)
+            // verify required parameter 'platforms' is not null or undefined
+            assertParamExists('findAll_5', 'platforms', platforms)
+            // verify required parameter 'customers' is not null or undefined
+            assertParamExists('findAll_5', 'customers', customers)
+            // verify required parameter 'ids' is not null or undefined
+            assertParamExists('findAll_5', 'ids', ids)
             const localVarPath = `/activeagent/ads`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -778,17 +801,143 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_6: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/activeagent/credentials`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} id 
          * @param {string} childResources Comma separated list of child resources to include in the response. Possible values: Campaign, AdSet, Ad, Targeting
          * @param {boolean} [countCalls] If true, the number of calls made to the API is returned in the response body.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsControllerFindOneKx2rz2: async (id: string, childResources: string, countCalls?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        findOne: async (id: string, childResources: string, countCalls?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('adsControllerFindOneKx2rz2', 'id', id)
+            assertParamExists('findOne', 'id', id)
             // verify required parameter 'childResources' is not null or undefined
-            assertParamExists('adsControllerFindOneKx2rz2', 'childResources', childResources)
+            assertParamExists('findOne', 'childResources', childResources)
+            const localVarPath = `/activeagent/campaigns/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (childResources !== undefined) {
+                localVarQueryParameter['childResources'] = childResources;
+            }
+
+            if (countCalls !== undefined) {
+                localVarQueryParameter['countCalls'] = countCalls;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} childResources 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne_7: async (id: string, childResources: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('findOne_7', 'id', id)
+            // verify required parameter 'childResources' is not null or undefined
+            assertParamExists('findOne_7', 'childResources', childResources)
+            const localVarPath = `/activeagent/adsets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (childResources !== undefined) {
+                localVarQueryParameter['childResources'] = childResources;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} childResources Comma separated list of child resources to include in the response. Possible values: Campaign, AdSet, Ad, Targeting
+         * @param {boolean} [countCalls] If true, the number of calls made to the API is returned in the response body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne_8: async (id: string, childResources: string, countCalls?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('findOne_8', 'id', id)
+            // verify required parameter 'childResources' is not null or undefined
+            assertParamExists('findOne_8', 'childResources', childResources)
             const localVarPath = `/activeagent/ads/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -827,393 +976,19 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsetsControllerCreate7ajntd: async (body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('adsetsControllerCreate7ajntd', 'body', body)
-            const localVarPath = `/activeagent/adsets`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {Array<AdsetsControllerFindAll48b5vsChildResourcesEnum>} [childResources] 
-         * @param {Array<AdsetsControllerFindAll48b5vsPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose AdSets to include in the response.
-         * @param {Array<string>} [ids] List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {AdsetsControllerFindAll48b5vsStatusEnum} [status] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsetsControllerFindAll48b5vs: async (childResources?: Array<AdsetsControllerFindAll48b5vsChildResourcesEnum>, platforms?: Array<AdsetsControllerFindAll48b5vsPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, status?: AdsetsControllerFindAll48b5vsStatusEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/activeagent/adsets`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (childResources) {
-                localVarQueryParameter['childResources'] = childResources;
-            }
-
-            if (platforms) {
-                localVarQueryParameter['platforms'] = platforms;
-            }
-
-            if (customers) {
-                localVarQueryParameter['customers'] = customers;
-            }
-
-            if (ids) {
-                localVarQueryParameter['ids'] = ids;
-            }
-
-            if (status !== undefined) {
-                localVarQueryParameter['status'] = status;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @param {string} id 
-         * @param {string} childResources 
+         * @param {string} start Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+         * @param {string} end End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsetsControllerFindOneFfcces: async (id: string, childResources: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getReport: async (id: string, start: string, end: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('adsetsControllerFindOneFfcces', 'id', id)
-            // verify required parameter 'childResources' is not null or undefined
-            assertParamExists('adsetsControllerFindOneFfcces', 'childResources', childResources)
-            const localVarPath = `/activeagent/adsets/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (childResources !== undefined) {
-                localVarQueryParameter['childResources'] = childResources;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsetsControllerRemoveJnaag7: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('adsetsControllerRemoveJnaag7', 'id', id)
-            const localVarPath = `/activeagent/adsets/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsetsControllerUpdate31j4du: async (id: string, body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('adsetsControllerUpdate31j4du', 'id', id)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('adsetsControllerUpdate31j4du', 'body', body)
-            const localVarPath = `/activeagent/adsets/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerCreateLsx4bk: async (body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('campaignsControllerCreateLsx4bk', 'body', body)
-            const localVarPath = `/activeagent/campaigns`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {Array<CampaignsControllerFindAllVkjjqnChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {CampaignsControllerFindAllVkjjqnStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<CampaignsControllerFindAllVkjjqnPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerFindAllVkjjqn: async (childResources?: Array<CampaignsControllerFindAllVkjjqnChildResourcesEnum>, status?: CampaignsControllerFindAllVkjjqnStatusEnum, platforms?: Array<CampaignsControllerFindAllVkjjqnPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/activeagent/campaigns`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (childResources) {
-                localVarQueryParameter['childResources'] = childResources;
-            }
-
-            if (status !== undefined) {
-                localVarQueryParameter['status'] = status;
-            }
-
-            if (platforms) {
-                localVarQueryParameter['platforms'] = platforms;
-            }
-
-            if (customers) {
-                localVarQueryParameter['customers'] = customers;
-            }
-
-            if (ids) {
-                localVarQueryParameter['ids'] = ids;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {string} childResources Comma separated list of child resources to include in the response. Possible values: Campaign, AdSet, Ad, Targeting
-         * @param {boolean} [countCalls] If true, the number of calls made to the API is returned in the response body.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerFindOne32heet: async (id: string, childResources: string, countCalls?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('campaignsControllerFindOne32heet', 'id', id)
-            // verify required parameter 'childResources' is not null or undefined
-            assertParamExists('campaignsControllerFindOne32heet', 'childResources', childResources)
-            const localVarPath = `/activeagent/campaigns/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (childResources !== undefined) {
-                localVarQueryParameter['childResources'] = childResources;
-            }
-
-            if (countCalls !== undefined) {
-                localVarQueryParameter['countCalls'] = countCalls;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {string} granularity 
-         * @param {string} dimensions 
-         * @param {string} fields 
-         * @param {string} [start] Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [end] End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [filters] 
-         * @param {boolean} [callCounter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerGetReport11en29: async (id: string, granularity: string, dimensions: string, fields: string, start?: string, end?: string, filters?: string, callCounter?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('campaignsControllerGetReport11en29', 'id', id)
-            // verify required parameter 'granularity' is not null or undefined
-            assertParamExists('campaignsControllerGetReport11en29', 'granularity', granularity)
-            // verify required parameter 'dimensions' is not null or undefined
-            assertParamExists('campaignsControllerGetReport11en29', 'dimensions', dimensions)
-            // verify required parameter 'fields' is not null or undefined
-            assertParamExists('campaignsControllerGetReport11en29', 'fields', fields)
+            assertParamExists('getReport', 'id', id)
+            // verify required parameter 'start' is not null or undefined
+            assertParamExists('getReport', 'start', start)
+            // verify required parameter 'end' is not null or undefined
+            assertParamExists('getReport', 'end', end)
             const localVarPath = `/activeagent/campaigns/{id}/report`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1239,26 +1014,6 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
                 localVarQueryParameter['end'] = end;
             }
 
-            if (granularity !== undefined) {
-                localVarQueryParameter['granularity'] = granularity;
-            }
-
-            if (dimensions !== undefined) {
-                localVarQueryParameter['dimensions'] = dimensions;
-            }
-
-            if (fields !== undefined) {
-                localVarQueryParameter['fields'] = fields;
-            }
-
-            if (filters !== undefined) {
-                localVarQueryParameter['filters'] = filters;
-            }
-
-            if (callCounter !== undefined) {
-                localVarQueryParameter['callCounter'] = callCounter;
-            }
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -1272,209 +1027,17 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @param {string} id 
+         * @param {string} start Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+         * @param {string} end End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        campaignsControllerRemoveWx2dfy: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('campaignsControllerRemoveWx2dfy', 'id', id)
-            const localVarPath = `/activeagent/campaigns/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} childResources 
-         * @param {ActiveAgentOrderDto} activeAgentOrderDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerTranslateEcvpl4: async (childResources: string, activeAgentOrderDto: ActiveAgentOrderDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'childResources' is not null or undefined
-            assertParamExists('campaignsControllerTranslateEcvpl4', 'childResources', childResources)
-            // verify required parameter 'activeAgentOrderDto' is not null or undefined
-            assertParamExists('campaignsControllerTranslateEcvpl4', 'activeAgentOrderDto', activeAgentOrderDto)
-            const localVarPath = `/activeagent/campaigns/translate`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (childResources !== undefined) {
-                localVarQueryParameter['childResources'] = childResources;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(activeAgentOrderDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerUpdate058yv3: async (id: string, body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('campaignsControllerUpdate058yv3', 'id', id)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('campaignsControllerUpdate058yv3', 'body', body)
-            const localVarPath = `/activeagent/campaigns/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {ActiveAgentCreateCredentialDto} activeAgentCreateCredentialDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerCreateCustomer6ix19k: async (activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'activeAgentCreateCredentialDto' is not null or undefined
-            assertParamExists('credentialsControllerCreateCustomer6ix19k', 'activeAgentCreateCredentialDto', activeAgentCreateCredentialDto)
-            const localVarPath = `/activeagent/credentials/customer`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(activeAgentCreateCredentialDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerDeleteLt023k: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/activeagent/credentials`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerFindAllHu0kra: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/activeagent/credentials`;
+        getReport_9: async (start: string, end: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'start' is not null or undefined
+            assertParamExists('getReport_9', 'start', start)
+            // verify required parameter 'end' is not null or undefined
+            assertParamExists('getReport_9', 'end', end)
+            const localVarPath = `/activeagent/reporting`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1490,50 +1053,19 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {ActiveAgentCreateCredentialDto} activeAgentCreateCredentialDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerUpdateU7kaen: async (activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'activeAgentCreateCredentialDto' is not null or undefined
-            assertParamExists('credentialsControllerUpdateU7kaen', 'activeAgentCreateCredentialDto', activeAgentCreateCredentialDto)
-            const localVarPath = `/activeagent/credentials`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
+            if (start !== undefined) {
+                localVarQueryParameter['start'] = start;
             }
 
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            if (end !== undefined) {
+                localVarQueryParameter['end'] = end;
+            }
 
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(activeAgentCreateCredentialDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1547,11 +1079,11 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequest2jfj97Post: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestDelete: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequest2jfj97Post', 'customerId', customerId)
+            assertParamExists('rawRequestDelete', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequest2jfj97Post', 'externalPath', externalPath)
+            assertParamExists('rawRequestDelete', 'externalPath', externalPath)
             const localVarPath = `/activeagent/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -1562,7 +1094,7 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1588,11 +1120,11 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequest5ryooeGet: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestGet: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequest5ryooeGet', 'customerId', customerId)
+            assertParamExists('rawRequestGet', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequest5ryooeGet', 'externalPath', externalPath)
+            assertParamExists('rawRequestGet', 'externalPath', externalPath)
             const localVarPath = `/activeagent/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -1629,52 +1161,11 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequest7bmyr4Patch: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestHead: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequest7bmyr4Patch', 'customerId', customerId)
+            assertParamExists('rawRequestHead', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequest7bmyr4Patch', 'externalPath', externalPath)
-            const localVarPath = `/activeagent/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequest7qnyhrHead: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequest7qnyhrHead', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequest7qnyhrHead', 'externalPath', externalPath)
+            assertParamExists('rawRequestHead', 'externalPath', externalPath)
             const localVarPath = `/activeagent/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -1711,93 +1202,11 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequestGpk4z6Put: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestOptions: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequestGpk4z6Put', 'customerId', customerId)
+            assertParamExists('rawRequestOptions', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequestGpk4z6Put', 'externalPath', externalPath)
-            const localVarPath = `/activeagent/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequestO6zyiqDelete: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequestO6zyiqDelete', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequestO6zyiqDelete', 'externalPath', externalPath)
-            const localVarPath = `/activeagent/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequestT080myOptions: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequestT080myOptions', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequestT080myOptions', 'externalPath', externalPath)
+            assertParamExists('rawRequestOptions', 'externalPath', externalPath)
             const localVarPath = `/activeagent/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -1829,24 +1238,19 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @param {string} granularity 
-         * @param {string} dimensions 
-         * @param {string} fields 
-         * @param {string} [start] Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [end] End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [filters] 
-         * @param {boolean} [callCounter] 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportingControllerGetReportOj3kae: async (granularity: string, dimensions: string, fields: string, start?: string, end?: string, filters?: string, callCounter?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'granularity' is not null or undefined
-            assertParamExists('reportingControllerGetReportOj3kae', 'granularity', granularity)
-            // verify required parameter 'dimensions' is not null or undefined
-            assertParamExists('reportingControllerGetReportOj3kae', 'dimensions', dimensions)
-            // verify required parameter 'fields' is not null or undefined
-            assertParamExists('reportingControllerGetReportOj3kae', 'fields', fields)
-            const localVarPath = `/activeagent/reporting`;
+        rawRequestPatch: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestPatch', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestPatch', 'externalPath', externalPath)
+            const localVarPath = `/activeagent/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1854,41 +1258,13 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication bearerAuth required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (start !== undefined) {
-                localVarQueryParameter['start'] = start;
-            }
-
-            if (end !== undefined) {
-                localVarQueryParameter['end'] = end;
-            }
-
-            if (granularity !== undefined) {
-                localVarQueryParameter['granularity'] = granularity;
-            }
-
-            if (dimensions !== undefined) {
-                localVarQueryParameter['dimensions'] = dimensions;
-            }
-
-            if (fields !== undefined) {
-                localVarQueryParameter['fields'] = fields;
-            }
-
-            if (filters !== undefined) {
-                localVarQueryParameter['filters'] = filters;
-            }
-
-            if (callCounter !== undefined) {
-                localVarQueryParameter['callCounter'] = callCounter;
-            }
 
 
     
@@ -1903,19 +1279,459 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPost: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestPost', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestPost', 'externalPath', externalPath)
+            const localVarPath = `/activeagent/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPut: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestPut', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestPut', 'externalPath', externalPath)
+            const localVarPath = `/activeagent/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('remove', 'id', id)
+            const localVarPath = `/activeagent/campaigns/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove_10: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('remove_10', 'id', id)
+            const localVarPath = `/activeagent/adsets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sync: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/activeagent/adaccounts`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        syncCustomer: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/activeagent/adaccounts/customer`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} childResources 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        translate: async (childResources: string, body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'childResources' is not null or undefined
+            assertParamExists('translate', 'childResources', childResources)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('translate', 'body', body)
+            const localVarPath = `/activeagent/campaigns/translate`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (childResources !== undefined) {
+                localVarQueryParameter['childResources'] = childResources;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update: async (id: string, body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('update', 'id', id)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('update', 'body', body)
+            const localVarPath = `/activeagent/campaigns/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} resource 
+         * @param {string} resourceId 
+         * @param {CreateTargetingDto} createTargetingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateOrCreate: async (resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'resource' is not null or undefined
+            assertParamExists('updateOrCreate', 'resource', resource)
+            // verify required parameter 'resourceId' is not null or undefined
+            assertParamExists('updateOrCreate', 'resourceId', resourceId)
+            // verify required parameter 'createTargetingDto' is not null or undefined
+            assertParamExists('updateOrCreate', 'createTargetingDto', createTargetingDto)
+            const localVarPath = `/activeagent/{resource}/{resourceId}/targeting`
+                .replace(`{${"resource"}}`, encodeURIComponent(String(resource)))
+                .replace(`{${"resourceId"}}`, encodeURIComponent(String(resourceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createTargetingDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update_11: async (id: string, body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('update_11', 'id', id)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('update_11', 'body', body)
+            const localVarPath = `/activeagent/adsets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {ActiveAgentCreateCredentialDto} activeAgentCreateCredentialDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update_12: async (activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'activeAgentCreateCredentialDto' is not null or undefined
+            assertParamExists('update_12', 'activeAgentCreateCredentialDto', activeAgentCreateCredentialDto)
+            const localVarPath = `/activeagent/credentials`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(activeAgentCreateCredentialDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} resource 
          * @param {string} resourceId 
          * @param {CreateSettingDto} createSettingDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        settingsControllerUpdate6xv72v: async (resource: string, resourceId: string, createSettingDto: CreateSettingDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        update_13: async (resource: string, resourceId: string, createSettingDto: CreateSettingDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'resource' is not null or undefined
-            assertParamExists('settingsControllerUpdate6xv72v', 'resource', resource)
+            assertParamExists('update_13', 'resource', resource)
             // verify required parameter 'resourceId' is not null or undefined
-            assertParamExists('settingsControllerUpdate6xv72v', 'resourceId', resourceId)
+            assertParamExists('update_13', 'resourceId', resourceId)
             // verify required parameter 'createSettingDto' is not null or undefined
-            assertParamExists('settingsControllerUpdate6xv72v', 'createSettingDto', createSettingDto)
+            assertParamExists('update_13', 'createSettingDto', createSettingDto)
             const localVarPath = `/activeagent/{resource}/{resourceId}/settings`
                 .replace(`{${"resource"}}`, encodeURIComponent(String(resource)))
                 .replace(`{${"resourceId"}}`, encodeURIComponent(String(resourceId)));
@@ -1948,190 +1764,6 @@ export const ActiveAgentApiAxiosParamCreator = function (configuration?: Configu
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * 
-         * @param {string} resource 
-         * @param {string} resourceId 
-         * @param {CreateTargetingDto} createTargetingDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        targetingControllerCreate36thcg: async (resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'resource' is not null or undefined
-            assertParamExists('targetingControllerCreate36thcg', 'resource', resource)
-            // verify required parameter 'resourceId' is not null or undefined
-            assertParamExists('targetingControllerCreate36thcg', 'resourceId', resourceId)
-            // verify required parameter 'createTargetingDto' is not null or undefined
-            assertParamExists('targetingControllerCreate36thcg', 'createTargetingDto', createTargetingDto)
-            const localVarPath = `/activeagent/{resource}/{resourceId}/targeting`
-                .replace(`{${"resource"}}`, encodeURIComponent(String(resource)))
-                .replace(`{${"resourceId"}}`, encodeURIComponent(String(resourceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createTargetingDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} resource 
-         * @param {string} resourceId 
-         * @param {Array<string>} targetingKind 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        targetingControllerDelete3swtka: async (resource: string, resourceId: string, targetingKind: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'resource' is not null or undefined
-            assertParamExists('targetingControllerDelete3swtka', 'resource', resource)
-            // verify required parameter 'resourceId' is not null or undefined
-            assertParamExists('targetingControllerDelete3swtka', 'resourceId', resourceId)
-            // verify required parameter 'targetingKind' is not null or undefined
-            assertParamExists('targetingControllerDelete3swtka', 'targetingKind', targetingKind)
-            const localVarPath = `/activeagent/{resource}/{resourceId}/targeting/{targetingKind}`
-                .replace(`{${"resource"}}`, encodeURIComponent(String(resource)))
-                .replace(`{${"resourceId"}}`, encodeURIComponent(String(resourceId)))
-                .replace(`{${"targetingKind"}}`, encodeURIComponent(String(targetingKind)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} resource 
-         * @param {string} resourceId 
-         * @param {Array<string>} targetingKind 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        targetingControllerFind5148tb: async (resource: string, resourceId: string, targetingKind: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'resource' is not null or undefined
-            assertParamExists('targetingControllerFind5148tb', 'resource', resource)
-            // verify required parameter 'resourceId' is not null or undefined
-            assertParamExists('targetingControllerFind5148tb', 'resourceId', resourceId)
-            // verify required parameter 'targetingKind' is not null or undefined
-            assertParamExists('targetingControllerFind5148tb', 'targetingKind', targetingKind)
-            const localVarPath = `/activeagent/{resource}/{resourceId}/targeting/{targetingKind}`
-                .replace(`{${"resource"}}`, encodeURIComponent(String(resource)))
-                .replace(`{${"resourceId"}}`, encodeURIComponent(String(resourceId)))
-                .replace(`{${"targetingKind"}}`, encodeURIComponent(String(targetingKind)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} resource 
-         * @param {string} resourceId 
-         * @param {CreateTargetingDto} createTargetingDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        targetingControllerUpdateOrCreate2h20li: async (resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'resource' is not null or undefined
-            assertParamExists('targetingControllerUpdateOrCreate2h20li', 'resource', resource)
-            // verify required parameter 'resourceId' is not null or undefined
-            assertParamExists('targetingControllerUpdateOrCreate2h20li', 'resourceId', resourceId)
-            // verify required parameter 'createTargetingDto' is not null or undefined
-            assertParamExists('targetingControllerUpdateOrCreate2h20li', 'createTargetingDto', createTargetingDto)
-            const localVarPath = `/activeagent/{resource}/{resourceId}/targeting`
-                .replace(`{${"resource"}}`, encodeURIComponent(String(resource)))
-                .replace(`{${"resourceId"}}`, encodeURIComponent(String(resourceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createTargetingDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -2143,13 +1775,16 @@ export const ActiveAgentApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {string} resource 
+         * @param {string} resourceId 
+         * @param {Array<string>} targetingKind 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async adAccountsControllerSyncCustomerQ7yxiw(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adAccountsControllerSyncCustomerQ7yxiw(options);
+        async _delete(resource: string, resourceId: string, targetingKind: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator._delete(resource, resourceId, targetingKind, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.adAccountsControllerSyncCustomerQ7yxiw']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi._delete']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2157,26 +1792,133 @@ export const ActiveAgentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async adAccountsControllerSyncR5ln7z(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adAccountsControllerSyncR5ln7z(options);
+        async _delete_1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator._delete_1(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.adAccountsControllerSyncR5ln7z']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi._delete_1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @param {Array<AdsControllerFindAllV0i00iChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
-         * @param {AdsControllerFindAllV0i00iStatusEnum} [status] Status of the Ads to return. Example: set status to Running to get a list of running Ads
-         * @param {Array<AdsControllerFindAllV0i00iPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose Ads to include in the response.
-         * @param {Array<string>} [ids] List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {object} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async adsControllerFindAllV0i00i(childResources?: Array<AdsControllerFindAllV0i00iChildResourcesEnum>, status?: AdsControllerFindAllV0i00iStatusEnum, platforms?: Array<AdsControllerFindAllV0i00iPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Ad>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsControllerFindAllV0i00i(childResources, status, platforms, customers, ids, options);
+        async create(body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(body, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.adsControllerFindAllV0i00i']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.create']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {ActiveAgentCreateCredentialDto} activeAgentCreateCredentialDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createCustomer(activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createCustomer(activeAgentCreateCredentialDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.createCustomer']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} resource 
+         * @param {string} resourceId 
+         * @param {CreateTargetingDto} createTargetingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async create_2(resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create_2(resource, resourceId, createTargetingDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.create_2']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async create_3(body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create_3(body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.create_3']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} resource 
+         * @param {string} resourceId 
+         * @param {Array<string>} targetingKind 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async find(resource: string, resourceId: string, targetingKind: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.find(resource, resourceId, targetingKind, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.find']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll(childResources, status, platforms, customers, ids, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.findAll']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources 
+         * @param {Status} status Status of the AdSets to return. Example: set status to Running to get a list of running AdSets.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose AdSets to include in the response.
+         * @param {Array<string>} ids List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll_4(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll_4(childResources, status, platforms, customers, ids, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.findAll_4']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
+         * @param {Status} status Status of the Ads to return. Example: set status to Running to get a list of running Ads
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose Ads to include in the response.
+         * @param {Array<string>} ids List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll_5(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll_5(childResources, status, platforms, customers, ids, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.findAll_5']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll_6(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll_6(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.findAll_6']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2187,38 +1929,10 @@ export const ActiveAgentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async adsControllerFindOneKx2rz2(id: string, childResources: string, countCalls?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsControllerFindOneKx2rz2(id, childResources, countCalls, options);
+        async findOne(id: string, childResources: string, countCalls?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findOne(id, childResources, countCalls, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.adsControllerFindOneKx2rz2']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adsetsControllerCreate7ajntd(body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsetsControllerCreate7ajntd(body, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.adsetsControllerCreate7ajntd']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {Array<AdsetsControllerFindAll48b5vsChildResourcesEnum>} [childResources] 
-         * @param {Array<AdsetsControllerFindAll48b5vsPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose AdSets to include in the response.
-         * @param {Array<string>} [ids] List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {AdsetsControllerFindAll48b5vsStatusEnum} [status] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adsetsControllerFindAll48b5vs(childResources?: Array<AdsetsControllerFindAll48b5vsChildResourcesEnum>, platforms?: Array<AdsetsControllerFindAll48b5vsPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, status?: AdsetsControllerFindAll48b5vsStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AdSet>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsetsControllerFindAll48b5vs(childResources, platforms, customers, ids, status, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.adsetsControllerFindAll48b5vs']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.findOne']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2228,63 +1942,10 @@ export const ActiveAgentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async adsetsControllerFindOneFfcces(id: string, childResources: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdSet>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsetsControllerFindOneFfcces(id, childResources, options);
+        async findOne_7(id: string, childResources: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findOne_7(id, childResources, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.adsetsControllerFindOneFfcces']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adsetsControllerRemoveJnaag7(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsetsControllerRemoveJnaag7(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.adsetsControllerRemoveJnaag7']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adsetsControllerUpdate31j4du(id: string, body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsetsControllerUpdate31j4du(id, body, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.adsetsControllerUpdate31j4du']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async campaignsControllerCreateLsx4bk(body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsControllerCreateLsx4bk(body, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.campaignsControllerCreateLsx4bk']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {Array<CampaignsControllerFindAllVkjjqnChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {CampaignsControllerFindAllVkjjqnStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<CampaignsControllerFindAllVkjjqnPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async campaignsControllerFindAllVkjjqn(childResources?: Array<CampaignsControllerFindAllVkjjqnChildResourcesEnum>, status?: CampaignsControllerFindAllVkjjqnStatusEnum, platforms?: Array<CampaignsControllerFindAllVkjjqnPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Campaign>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsControllerFindAllVkjjqn(childResources, status, platforms, customers, ids, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.campaignsControllerFindAllVkjjqn']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.findOne_7']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2295,29 +1956,128 @@ export const ActiveAgentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async campaignsControllerFindOne32heet(id: string, childResources: string, countCalls?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsControllerFindOne32heet(id, childResources, countCalls, options);
+        async findOne_8(id: string, childResources: string, countCalls?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findOne_8(id, childResources, countCalls, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.campaignsControllerFindOne32heet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.findOne_8']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
          * @param {string} id 
-         * @param {string} granularity 
-         * @param {string} dimensions 
-         * @param {string} fields 
-         * @param {string} [start] Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [end] End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [filters] 
-         * @param {boolean} [callCounter] 
+         * @param {string} start Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+         * @param {string} end End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async campaignsControllerGetReport11en29(id: string, granularity: string, dimensions: string, fields: string, start?: string, end?: string, filters?: string, callCounter?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsControllerGetReport11en29(id, granularity, dimensions, fields, start, end, filters, callCounter, options);
+        async getReport(id: string, start: string, end: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getReport(id, start, end, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.campaignsControllerGetReport11en29']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.getReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} start Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+         * @param {string} end End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getReport_9(start: string, end: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getReport_9(start, end, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.getReport_9']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestDelete(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.rawRequestDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestGet(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.rawRequestGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestHead(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.rawRequestHead']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestOptions(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.rawRequestOptions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPatch(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.rawRequestPatch']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPost(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.rawRequestPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPut(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.rawRequestPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2326,23 +2086,57 @@ export const ActiveAgentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async campaignsControllerRemoveWx2dfy(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsControllerRemoveWx2dfy(id, options);
+        async remove(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.remove(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.campaignsControllerRemoveWx2dfy']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.remove']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async remove_10(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.remove_10(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.remove_10']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sync(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sync(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.sync']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async syncCustomer(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.syncCustomer(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.syncCustomer']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
          * @param {string} childResources 
-         * @param {ActiveAgentOrderDto} activeAgentOrderDto 
+         * @param {object} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async campaignsControllerTranslateEcvpl4(childResources: string, activeAgentOrderDto: ActiveAgentOrderDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Campaign>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsControllerTranslateEcvpl4(childResources, activeAgentOrderDto, options);
+        async translate(childResources: string, body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.translate(childResources, body, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.campaignsControllerTranslateEcvpl4']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.translate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2352,10 +2146,37 @@ export const ActiveAgentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async campaignsControllerUpdate058yv3(id: string, body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Campaign>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsControllerUpdate058yv3(id, body, options);
+        async update(id: string, body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update(id, body, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.campaignsControllerUpdate058yv3']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.update']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} resource 
+         * @param {string} resourceId 
+         * @param {CreateTargetingDto} createTargetingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateOrCreate(resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateOrCreate(resource, resourceId, createTargetingDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.updateOrCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async update_11(id: string, body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update_11(id, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.update_11']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2364,153 +2185,10 @@ export const ActiveAgentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async credentialsControllerCreateCustomer6ix19k(activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.credentialsControllerCreateCustomer6ix19k(activeAgentCreateCredentialDto, options);
+        async update_12(activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update_12(activeAgentCreateCredentialDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.credentialsControllerCreateCustomer6ix19k']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async credentialsControllerDeleteLt023k(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.credentialsControllerDeleteLt023k(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.credentialsControllerDeleteLt023k']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async credentialsControllerFindAllHu0kra(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.credentialsControllerFindAllHu0kra(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.credentialsControllerFindAllHu0kra']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {ActiveAgentCreateCredentialDto} activeAgentCreateCredentialDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async credentialsControllerUpdateU7kaen(activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.credentialsControllerUpdateU7kaen(activeAgentCreateCredentialDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.credentialsControllerUpdateU7kaen']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawControllerRawRequest2jfj97Post(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequest2jfj97Post(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.rawControllerRawRequest2jfj97Post']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawControllerRawRequest5ryooeGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequest5ryooeGet(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.rawControllerRawRequest5ryooeGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawControllerRawRequest7bmyr4Patch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequest7bmyr4Patch(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.rawControllerRawRequest7bmyr4Patch']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawControllerRawRequest7qnyhrHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequest7qnyhrHead(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.rawControllerRawRequest7qnyhrHead']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawControllerRawRequestGpk4z6Put(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequestGpk4z6Put(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.rawControllerRawRequestGpk4z6Put']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawControllerRawRequestO6zyiqDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequestO6zyiqDelete(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.rawControllerRawRequestO6zyiqDelete']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawControllerRawRequestT080myOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequestT080myOptions(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.rawControllerRawRequestT080myOptions']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} granularity 
-         * @param {string} dimensions 
-         * @param {string} fields 
-         * @param {string} [start] Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [end] End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [filters] 
-         * @param {boolean} [callCounter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async reportingControllerGetReportOj3kae(granularity: string, dimensions: string, fields: string, start?: string, end?: string, filters?: string, callCounter?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.reportingControllerGetReportOj3kae(granularity, dimensions, fields, start, end, filters, callCounter, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.reportingControllerGetReportOj3kae']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.update_12']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2521,66 +2199,10 @@ export const ActiveAgentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async settingsControllerUpdate6xv72v(resource: string, resourceId: string, createSettingDto: CreateSettingDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.settingsControllerUpdate6xv72v(resource, resourceId, createSettingDto, options);
+        async update_13(resource: string, resourceId: string, createSettingDto: CreateSettingDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update_13(resource, resourceId, createSettingDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.settingsControllerUpdate6xv72v']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} resource 
-         * @param {string} resourceId 
-         * @param {CreateTargetingDto} createTargetingDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async targetingControllerCreate36thcg(resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ZipcodeGeoTargetingDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.targetingControllerCreate36thcg(resource, resourceId, createTargetingDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.targetingControllerCreate36thcg']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} resource 
-         * @param {string} resourceId 
-         * @param {Array<string>} targetingKind 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async targetingControllerDelete3swtka(resource: string, resourceId: string, targetingKind: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<number>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.targetingControllerDelete3swtka(resource, resourceId, targetingKind, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.targetingControllerDelete3swtka']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} resource 
-         * @param {string} resourceId 
-         * @param {Array<string>} targetingKind 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async targetingControllerFind5148tb(resource: string, resourceId: string, targetingKind: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.targetingControllerFind5148tb(resource, resourceId, targetingKind, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.targetingControllerFind5148tb']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} resource 
-         * @param {string} resourceId 
-         * @param {CreateTargetingDto} createTargetingDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async targetingControllerUpdateOrCreate2h20li(resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.targetingControllerUpdateOrCreate2h20li(resource, resourceId, createTargetingDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.targetingControllerUpdateOrCreate2h20li']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ActiveAgentApi.update_13']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -2594,32 +2216,118 @@ export const ActiveAgentApiFactory = function (configuration?: Configuration, ba
     return {
         /**
          * 
+         * @param {string} resource 
+         * @param {string} resourceId 
+         * @param {Array<string>} targetingKind 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adAccountsControllerSyncCustomerQ7yxiw(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.adAccountsControllerSyncCustomerQ7yxiw(options).then((request) => request(axios, basePath));
+        _delete(resource: string, resourceId: string, targetingKind: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp._delete(resource, resourceId, targetingKind, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adAccountsControllerSyncR5ln7z(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.adAccountsControllerSyncR5ln7z(options).then((request) => request(axios, basePath));
+        _delete_1(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp._delete_1(options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {Array<AdsControllerFindAllV0i00iChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
-         * @param {AdsControllerFindAllV0i00iStatusEnum} [status] Status of the Ads to return. Example: set status to Running to get a list of running Ads
-         * @param {Array<AdsControllerFindAllV0i00iPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose Ads to include in the response.
-         * @param {Array<string>} [ids] List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {object} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsControllerFindAllV0i00i(childResources?: Array<AdsControllerFindAllV0i00iChildResourcesEnum>, status?: AdsControllerFindAllV0i00iStatusEnum, platforms?: Array<AdsControllerFindAllV0i00iPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<Array<Ad>> {
-            return localVarFp.adsControllerFindAllV0i00i(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
+        create(body: object, options?: RawAxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.create(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {ActiveAgentCreateCredentialDto} activeAgentCreateCredentialDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createCustomer(activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.createCustomer(activeAgentCreateCredentialDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} resource 
+         * @param {string} resourceId 
+         * @param {CreateTargetingDto} createTargetingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create_2(resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options?: RawAxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.create_2(resource, resourceId, createTargetingDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create_3(body: object, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.create_3(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} resource 
+         * @param {string} resourceId 
+         * @param {Array<string>} targetingKind 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        find(resource: string, resourceId: string, targetingKind: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.find(resource, resourceId, targetingKind, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findAll(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources 
+         * @param {Status} status Status of the AdSets to return. Example: set status to Running to get a list of running AdSets.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose AdSets to include in the response.
+         * @param {Array<string>} ids List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_4(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findAll_4(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
+         * @param {Status} status Status of the Ads to return. Example: set status to Running to get a list of running Ads
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose Ads to include in the response.
+         * @param {Array<string>} ids List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_5(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findAll_5(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_6(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findAll_6(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2629,30 +2337,8 @@ export const ActiveAgentApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsControllerFindOneKx2rz2(id: string, childResources: string, countCalls?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.adsControllerFindOneKx2rz2(id, childResources, countCalls, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsetsControllerCreate7ajntd(body: object, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.adsetsControllerCreate7ajntd(body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {Array<AdsetsControllerFindAll48b5vsChildResourcesEnum>} [childResources] 
-         * @param {Array<AdsetsControllerFindAll48b5vsPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose AdSets to include in the response.
-         * @param {Array<string>} [ids] List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {AdsetsControllerFindAll48b5vsStatusEnum} [status] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsetsControllerFindAll48b5vs(childResources?: Array<AdsetsControllerFindAll48b5vsChildResourcesEnum>, platforms?: Array<AdsetsControllerFindAll48b5vsPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, status?: AdsetsControllerFindAll48b5vsStatusEnum, options?: RawAxiosRequestConfig): AxiosPromise<Array<AdSet>> {
-            return localVarFp.adsetsControllerFindAll48b5vs(childResources, platforms, customers, ids, status, options).then((request) => request(axios, basePath));
+        findOne(id: string, childResources: string, countCalls?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findOne(id, childResources, countCalls, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2661,49 +2347,8 @@ export const ActiveAgentApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsetsControllerFindOneFfcces(id: string, childResources: string, options?: RawAxiosRequestConfig): AxiosPromise<AdSet> {
-            return localVarFp.adsetsControllerFindOneFfcces(id, childResources, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsetsControllerRemoveJnaag7(id: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.adsetsControllerRemoveJnaag7(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsetsControllerUpdate31j4du(id: string, body: object, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.adsetsControllerUpdate31j4du(id, body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerCreateLsx4bk(body: object, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.campaignsControllerCreateLsx4bk(body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {Array<CampaignsControllerFindAllVkjjqnChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {CampaignsControllerFindAllVkjjqnStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<CampaignsControllerFindAllVkjjqnPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerFindAllVkjjqn(childResources?: Array<CampaignsControllerFindAllVkjjqnChildResourcesEnum>, status?: CampaignsControllerFindAllVkjjqnStatusEnum, platforms?: Array<CampaignsControllerFindAllVkjjqnPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<Array<Campaign>> {
-            return localVarFp.campaignsControllerFindAllVkjjqn(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
+        findOne_7(id: string, childResources: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findOne_7(id, childResources, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2713,24 +2358,99 @@ export const ActiveAgentApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        campaignsControllerFindOne32heet(id: string, childResources: string, countCalls?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.campaignsControllerFindOne32heet(id, childResources, countCalls, options).then((request) => request(axios, basePath));
+        findOne_8(id: string, childResources: string, countCalls?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findOne_8(id, childResources, countCalls, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} id 
-         * @param {string} granularity 
-         * @param {string} dimensions 
-         * @param {string} fields 
-         * @param {string} [start] Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [end] End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [filters] 
-         * @param {boolean} [callCounter] 
+         * @param {string} start Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+         * @param {string} end End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        campaignsControllerGetReport11en29(id: string, granularity: string, dimensions: string, fields: string, start?: string, end?: string, filters?: string, callCounter?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.campaignsControllerGetReport11en29(id, granularity, dimensions, fields, start, end, filters, callCounter, options).then((request) => request(axios, basePath));
+        getReport(id: string, start: string, end: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getReport(id, start, end, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} start Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+         * @param {string} end End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getReport_9(start: string, end: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getReport_9(start, end, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestDelete(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestGet(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestHead(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestOptions(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPatch(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPost(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the ActiveAgent API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPut(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2738,18 +2458,43 @@ export const ActiveAgentApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        campaignsControllerRemoveWx2dfy(id: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.campaignsControllerRemoveWx2dfy(id, options).then((request) => request(axios, basePath));
+        remove(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.remove(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove_10(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.remove_10(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sync(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.sync(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        syncCustomer(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.syncCustomer(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} childResources 
-         * @param {ActiveAgentOrderDto} activeAgentOrderDto 
+         * @param {object} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        campaignsControllerTranslateEcvpl4(childResources: string, activeAgentOrderDto: ActiveAgentOrderDto, options?: RawAxiosRequestConfig): AxiosPromise<Campaign> {
-            return localVarFp.campaignsControllerTranslateEcvpl4(childResources, activeAgentOrderDto, options).then((request) => request(axios, basePath));
+        translate(childResources: string, body: object, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.translate(childResources, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2758,8 +2503,29 @@ export const ActiveAgentApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        campaignsControllerUpdate058yv3(id: string, body: object, options?: RawAxiosRequestConfig): AxiosPromise<Campaign> {
-            return localVarFp.campaignsControllerUpdate058yv3(id, body, options).then((request) => request(axios, basePath));
+        update(id: string, body: object, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.update(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} resource 
+         * @param {string} resourceId 
+         * @param {CreateTargetingDto} createTargetingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateOrCreate(resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.updateOrCreate(resource, resourceId, createTargetingDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update_11(id: string, body: object, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.update_11(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2767,118 +2533,8 @@ export const ActiveAgentApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        credentialsControllerCreateCustomer6ix19k(activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.credentialsControllerCreateCustomer6ix19k(activeAgentCreateCredentialDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerDeleteLt023k(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.credentialsControllerDeleteLt023k(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerFindAllHu0kra(options?: RawAxiosRequestConfig): AxiosPromise<Array<object>> {
-            return localVarFp.credentialsControllerFindAllHu0kra(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {ActiveAgentCreateCredentialDto} activeAgentCreateCredentialDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerUpdateU7kaen(activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.credentialsControllerUpdateU7kaen(activeAgentCreateCredentialDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequest2jfj97Post(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequest2jfj97Post(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequest5ryooeGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequest5ryooeGet(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequest7bmyr4Patch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequest7bmyr4Patch(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequest7qnyhrHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequest7qnyhrHead(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequestGpk4z6Put(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequestGpk4z6Put(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequestO6zyiqDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequestO6zyiqDelete(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the ActiveAgent API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequestT080myOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequestT080myOptions(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} granularity 
-         * @param {string} dimensions 
-         * @param {string} fields 
-         * @param {string} [start] Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [end] End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [filters] 
-         * @param {boolean} [callCounter] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        reportingControllerGetReportOj3kae(granularity: string, dimensions: string, fields: string, start?: string, end?: string, filters?: string, callCounter?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.reportingControllerGetReportOj3kae(granularity, dimensions, fields, start, end, filters, callCounter, options).then((request) => request(axios, basePath));
+        update_12(activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.update_12(activeAgentCreateCredentialDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2888,52 +2544,8 @@ export const ActiveAgentApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        settingsControllerUpdate6xv72v(resource: string, resourceId: string, createSettingDto: CreateSettingDto, options?: RawAxiosRequestConfig): AxiosPromise<Array<object>> {
-            return localVarFp.settingsControllerUpdate6xv72v(resource, resourceId, createSettingDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} resource 
-         * @param {string} resourceId 
-         * @param {CreateTargetingDto} createTargetingDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        targetingControllerCreate36thcg(resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options?: RawAxiosRequestConfig): AxiosPromise<ZipcodeGeoTargetingDto> {
-            return localVarFp.targetingControllerCreate36thcg(resource, resourceId, createTargetingDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} resource 
-         * @param {string} resourceId 
-         * @param {Array<string>} targetingKind 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        targetingControllerDelete3swtka(resource: string, resourceId: string, targetingKind: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<number> {
-            return localVarFp.targetingControllerDelete3swtka(resource, resourceId, targetingKind, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} resource 
-         * @param {string} resourceId 
-         * @param {Array<string>} targetingKind 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        targetingControllerFind5148tb(resource: string, resourceId: string, targetingKind: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<Array<object>> {
-            return localVarFp.targetingControllerFind5148tb(resource, resourceId, targetingKind, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} resource 
-         * @param {string} resourceId 
-         * @param {CreateTargetingDto} createTargetingDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        targetingControllerUpdateOrCreate2h20li(resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.targetingControllerUpdateOrCreate2h20li(resource, resourceId, createTargetingDto, options).then((request) => request(axios, basePath));
+        update_13(resource: string, resourceId: string, createSettingDto: CreateSettingDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.update_13(resource, resourceId, createSettingDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -2944,11 +2556,14 @@ export const ActiveAgentApiFactory = function (configuration?: Configuration, ba
 export class ActiveAgentApi extends BaseAPI {
     /**
      * 
+     * @param {string} resource 
+     * @param {string} resourceId 
+     * @param {Array<string>} targetingKind 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public adAccountsControllerSyncCustomerQ7yxiw(options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).adAccountsControllerSyncCustomerQ7yxiw(options).then((request) => request(this.axios, this.basePath));
+    public _delete(resource: string, resourceId: string, targetingKind: Array<string>, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration)._delete(resource, resourceId, targetingKind, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2956,22 +2571,113 @@ export class ActiveAgentApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public adAccountsControllerSyncR5ln7z(options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).adAccountsControllerSyncR5ln7z(options).then((request) => request(this.axios, this.basePath));
+    public _delete_1(options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration)._delete_1(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {Array<AdsControllerFindAllV0i00iChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
-     * @param {AdsControllerFindAllV0i00iStatusEnum} [status] Status of the Ads to return. Example: set status to Running to get a list of running Ads
-     * @param {Array<AdsControllerFindAllV0i00iPlatformsEnum>} [platforms] List of platforms to include in the response.
-     * @param {Array<string>} [customers] List of Customer IDs whose Ads to include in the response.
-     * @param {Array<string>} [ids] List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
+     * @param {object} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public adsControllerFindAllV0i00i(childResources?: Array<AdsControllerFindAllV0i00iChildResourcesEnum>, status?: AdsControllerFindAllV0i00iStatusEnum, platforms?: Array<AdsControllerFindAllV0i00iPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).adsControllerFindAllV0i00i(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
+    public create(body: object, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).create(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {ActiveAgentCreateCredentialDto} activeAgentCreateCredentialDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public createCustomer(activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).createCustomer(activeAgentCreateCredentialDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} resource 
+     * @param {string} resourceId 
+     * @param {CreateTargetingDto} createTargetingDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public create_2(resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).create_2(resource, resourceId, createTargetingDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {object} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public create_3(body: object, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).create_3(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} resource 
+     * @param {string} resourceId 
+     * @param {Array<string>} targetingKind 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public find(resource: string, resourceId: string, targetingKind: Array<string>, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).find(resource, resourceId, targetingKind, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+     * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+     * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+     * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+     * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findAll(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).findAll(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Array<ResourceKind>} childResources 
+     * @param {Status} status Status of the AdSets to return. Example: set status to Running to get a list of running AdSets.
+     * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+     * @param {Array<string>} customers List of Customer IDs whose AdSets to include in the response.
+     * @param {Array<string>} ids List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findAll_4(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).findAll_4(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
+     * @param {Status} status Status of the Ads to return. Example: set status to Running to get a list of running Ads
+     * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+     * @param {Array<string>} customers List of Customer IDs whose Ads to include in the response.
+     * @param {Array<string>} ids List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findAll_5(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).findAll_5(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findAll_6(options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).findAll_6(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2982,32 +2688,8 @@ export class ActiveAgentApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public adsControllerFindOneKx2rz2(id: string, childResources: string, countCalls?: boolean, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).adsControllerFindOneKx2rz2(id, childResources, countCalls, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {object} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adsetsControllerCreate7ajntd(body: object, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).adsetsControllerCreate7ajntd(body, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {Array<AdsetsControllerFindAll48b5vsChildResourcesEnum>} [childResources] 
-     * @param {Array<AdsetsControllerFindAll48b5vsPlatformsEnum>} [platforms] List of platforms to include in the response.
-     * @param {Array<string>} [customers] List of Customer IDs whose AdSets to include in the response.
-     * @param {Array<string>} [ids] List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
-     * @param {AdsetsControllerFindAll48b5vsStatusEnum} [status] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adsetsControllerFindAll48b5vs(childResources?: Array<AdsetsControllerFindAll48b5vsChildResourcesEnum>, platforms?: Array<AdsetsControllerFindAll48b5vsPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, status?: AdsetsControllerFindAll48b5vsStatusEnum, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).adsetsControllerFindAll48b5vs(childResources, platforms, customers, ids, status, options).then((request) => request(this.axios, this.basePath));
+    public findOne(id: string, childResources: string, countCalls?: boolean, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).findOne(id, childResources, countCalls, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3017,53 +2699,8 @@ export class ActiveAgentApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public adsetsControllerFindOneFfcces(id: string, childResources: string, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).adsetsControllerFindOneFfcces(id, childResources, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adsetsControllerRemoveJnaag7(id: string, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).adsetsControllerRemoveJnaag7(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {object} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adsetsControllerUpdate31j4du(id: string, body: object, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).adsetsControllerUpdate31j4du(id, body, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {object} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public campaignsControllerCreateLsx4bk(body: object, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).campaignsControllerCreateLsx4bk(body, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {Array<CampaignsControllerFindAllVkjjqnChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-     * @param {CampaignsControllerFindAllVkjjqnStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-     * @param {Array<CampaignsControllerFindAllVkjjqnPlatformsEnum>} [platforms] List of platforms to include in the response.
-     * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-     * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public campaignsControllerFindAllVkjjqn(childResources?: Array<CampaignsControllerFindAllVkjjqnChildResourcesEnum>, status?: CampaignsControllerFindAllVkjjqnStatusEnum, platforms?: Array<CampaignsControllerFindAllVkjjqnPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).campaignsControllerFindAllVkjjqn(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
+    public findOne_7(id: string, childResources: string, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).findOne_7(id, childResources, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3074,25 +2711,108 @@ export class ActiveAgentApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public campaignsControllerFindOne32heet(id: string, childResources: string, countCalls?: boolean, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).campaignsControllerFindOne32heet(id, childResources, countCalls, options).then((request) => request(this.axios, this.basePath));
+    public findOne_8(id: string, childResources: string, countCalls?: boolean, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).findOne_8(id, childResources, countCalls, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} id 
-     * @param {string} granularity 
-     * @param {string} dimensions 
-     * @param {string} fields 
-     * @param {string} [start] Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-     * @param {string} [end] End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-     * @param {string} [filters] 
-     * @param {boolean} [callCounter] 
+     * @param {string} start Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+     * @param {string} end End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public campaignsControllerGetReport11en29(id: string, granularity: string, dimensions: string, fields: string, start?: string, end?: string, filters?: string, callCounter?: boolean, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).campaignsControllerGetReport11en29(id, granularity, dimensions, fields, start, end, filters, callCounter, options).then((request) => request(this.axios, this.basePath));
+    public getReport(id: string, start: string, end: string, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).getReport(id, start, end, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} start Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+     * @param {string} end End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getReport_9(start: string, end: string, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).getReport_9(start, end, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the ActiveAgent API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).rawRequestDelete(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the ActiveAgent API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).rawRequestGet(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the ActiveAgent API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).rawRequestHead(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the ActiveAgent API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).rawRequestOptions(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the ActiveAgent API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).rawRequestPatch(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the ActiveAgent API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).rawRequestPost(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the ActiveAgent API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).rawRequestPut(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3101,19 +2821,47 @@ export class ActiveAgentApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public campaignsControllerRemoveWx2dfy(id: string, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).campaignsControllerRemoveWx2dfy(id, options).then((request) => request(this.axios, this.basePath));
+    public remove(id: string, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).remove(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public remove_10(id: string, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).remove_10(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public sync(options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).sync(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public syncCustomer(options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).syncCustomer(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} childResources 
-     * @param {ActiveAgentOrderDto} activeAgentOrderDto 
+     * @param {object} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public campaignsControllerTranslateEcvpl4(childResources: string, activeAgentOrderDto: ActiveAgentOrderDto, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).campaignsControllerTranslateEcvpl4(childResources, activeAgentOrderDto, options).then((request) => request(this.axios, this.basePath));
+    public translate(childResources: string, body: object, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).translate(childResources, body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3123,8 +2871,31 @@ export class ActiveAgentApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public campaignsControllerUpdate058yv3(id: string, body: object, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).campaignsControllerUpdate058yv3(id, body, options).then((request) => request(this.axios, this.basePath));
+    public update(id: string, body: object, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).update(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} resource 
+     * @param {string} resourceId 
+     * @param {CreateTargetingDto} createTargetingDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public updateOrCreate(resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).updateOrCreate(resource, resourceId, createTargetingDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {object} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public update_11(id: string, body: object, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).update_11(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3133,129 +2904,8 @@ export class ActiveAgentApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public credentialsControllerCreateCustomer6ix19k(activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).credentialsControllerCreateCustomer6ix19k(activeAgentCreateCredentialDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public credentialsControllerDeleteLt023k(options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).credentialsControllerDeleteLt023k(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public credentialsControllerFindAllHu0kra(options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).credentialsControllerFindAllHu0kra(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {ActiveAgentCreateCredentialDto} activeAgentCreateCredentialDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public credentialsControllerUpdateU7kaen(activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).credentialsControllerUpdateU7kaen(activeAgentCreateCredentialDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the ActiveAgent API request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawControllerRawRequest2jfj97Post(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).rawControllerRawRequest2jfj97Post(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the ActiveAgent API request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawControllerRawRequest5ryooeGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).rawControllerRawRequest5ryooeGet(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the ActiveAgent API request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawControllerRawRequest7bmyr4Patch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).rawControllerRawRequest7bmyr4Patch(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the ActiveAgent API request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawControllerRawRequest7qnyhrHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).rawControllerRawRequest7qnyhrHead(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the ActiveAgent API request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawControllerRawRequestGpk4z6Put(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).rawControllerRawRequestGpk4z6Put(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the ActiveAgent API request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawControllerRawRequestO6zyiqDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).rawControllerRawRequestO6zyiqDelete(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the ActiveAgent API request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawControllerRawRequestT080myOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).rawControllerRawRequestT080myOptions(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} granularity 
-     * @param {string} dimensions 
-     * @param {string} fields 
-     * @param {string} [start] Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-     * @param {string} [end] End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-     * @param {string} [filters] 
-     * @param {boolean} [callCounter] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public reportingControllerGetReportOj3kae(granularity: string, dimensions: string, fields: string, start?: string, end?: string, filters?: string, callCounter?: boolean, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).reportingControllerGetReportOj3kae(granularity, dimensions, fields, start, end, filters, callCounter, options).then((request) => request(this.axios, this.basePath));
+    public update_12(activeAgentCreateCredentialDto: ActiveAgentCreateCredentialDto, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).update_12(activeAgentCreateCredentialDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3266,128 +2916,11 @@ export class ActiveAgentApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public settingsControllerUpdate6xv72v(resource: string, resourceId: string, createSettingDto: CreateSettingDto, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).settingsControllerUpdate6xv72v(resource, resourceId, createSettingDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} resource 
-     * @param {string} resourceId 
-     * @param {CreateTargetingDto} createTargetingDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public targetingControllerCreate36thcg(resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).targetingControllerCreate36thcg(resource, resourceId, createTargetingDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} resource 
-     * @param {string} resourceId 
-     * @param {Array<string>} targetingKind 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public targetingControllerDelete3swtka(resource: string, resourceId: string, targetingKind: Array<string>, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).targetingControllerDelete3swtka(resource, resourceId, targetingKind, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} resource 
-     * @param {string} resourceId 
-     * @param {Array<string>} targetingKind 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public targetingControllerFind5148tb(resource: string, resourceId: string, targetingKind: Array<string>, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).targetingControllerFind5148tb(resource, resourceId, targetingKind, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} resource 
-     * @param {string} resourceId 
-     * @param {CreateTargetingDto} createTargetingDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public targetingControllerUpdateOrCreate2h20li(resource: string, resourceId: string, createTargetingDto: CreateTargetingDto, options?: RawAxiosRequestConfig) {
-        return ActiveAgentApiFp(this.configuration).targetingControllerUpdateOrCreate2h20li(resource, resourceId, createTargetingDto, options).then((request) => request(this.axios, this.basePath));
+    public update_13(resource: string, resourceId: string, createSettingDto: CreateSettingDto, options?: RawAxiosRequestConfig) {
+        return ActiveAgentApiFp(this.configuration).update_13(resource, resourceId, createSettingDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
-export const AdsControllerFindAllV0i00iChildResourcesEnum = {
-    Campaign: 'Campaign',
-    AdSet: 'AdSet',
-    Ad: 'Ad',
-    Targeting: 'Targeting',
-    AdAccount: 'AdAccount'
-} as const;
-export type AdsControllerFindAllV0i00iChildResourcesEnum = typeof AdsControllerFindAllV0i00iChildResourcesEnum[keyof typeof AdsControllerFindAllV0i00iChildResourcesEnum];
-export const AdsControllerFindAllV0i00iStatusEnum = {
-    Active: 'ACTIVE',
-    Running: 'RUNNING',
-    Paused: 'PAUSED',
-    Unknown: 'UNKNOWN'
-} as const;
-export type AdsControllerFindAllV0i00iStatusEnum = typeof AdsControllerFindAllV0i00iStatusEnum[keyof typeof AdsControllerFindAllV0i00iStatusEnum];
-export const AdsControllerFindAllV0i00iPlatformsEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-export type AdsControllerFindAllV0i00iPlatformsEnum = typeof AdsControllerFindAllV0i00iPlatformsEnum[keyof typeof AdsControllerFindAllV0i00iPlatformsEnum];
-export const AdsetsControllerFindAll48b5vsChildResourcesEnum = {
-    Campaign: 'Campaign',
-    AdSet: 'AdSet',
-    Ad: 'Ad',
-    Targeting: 'Targeting',
-    AdAccount: 'AdAccount'
-} as const;
-export type AdsetsControllerFindAll48b5vsChildResourcesEnum = typeof AdsetsControllerFindAll48b5vsChildResourcesEnum[keyof typeof AdsetsControllerFindAll48b5vsChildResourcesEnum];
-export const AdsetsControllerFindAll48b5vsPlatformsEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-export type AdsetsControllerFindAll48b5vsPlatformsEnum = typeof AdsetsControllerFindAll48b5vsPlatformsEnum[keyof typeof AdsetsControllerFindAll48b5vsPlatformsEnum];
-export const AdsetsControllerFindAll48b5vsStatusEnum = {
-    Active: 'ACTIVE',
-    Running: 'RUNNING',
-    Paused: 'PAUSED',
-    Unknown: 'UNKNOWN'
-} as const;
-export type AdsetsControllerFindAll48b5vsStatusEnum = typeof AdsetsControllerFindAll48b5vsStatusEnum[keyof typeof AdsetsControllerFindAll48b5vsStatusEnum];
-export const CampaignsControllerFindAllVkjjqnChildResourcesEnum = {
-    Campaign: 'Campaign',
-    AdSet: 'AdSet',
-    Ad: 'Ad',
-    Targeting: 'Targeting',
-    AdAccount: 'AdAccount'
-} as const;
-export type CampaignsControllerFindAllVkjjqnChildResourcesEnum = typeof CampaignsControllerFindAllVkjjqnChildResourcesEnum[keyof typeof CampaignsControllerFindAllVkjjqnChildResourcesEnum];
-export const CampaignsControllerFindAllVkjjqnStatusEnum = {
-    Active: 'ACTIVE',
-    Running: 'RUNNING',
-    Paused: 'PAUSED',
-    Unknown: 'UNKNOWN'
-} as const;
-export type CampaignsControllerFindAllVkjjqnStatusEnum = typeof CampaignsControllerFindAllVkjjqnStatusEnum[keyof typeof CampaignsControllerFindAllVkjjqnStatusEnum];
-export const CampaignsControllerFindAllVkjjqnPlatformsEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-export type CampaignsControllerFindAllVkjjqnPlatformsEnum = typeof CampaignsControllerFindAllVkjjqnPlatformsEnum[keyof typeof CampaignsControllerFindAllVkjjqnPlatformsEnum];
 
 
 /**
@@ -3397,12 +2930,16 @@ export const AdAccountsApiAxiosParamCreator = function (configuration?: Configur
     return {
         /**
          * 
-         * @param {Array<AdAccountsControllerFindAll1f63wuPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose AdAccounts to include in the response.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose AdAccounts to include in the response.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adAccountsControllerFindAll1f63wu: async (platforms?: Array<AdAccountsControllerFindAll1f63wuPlatformsEnum>, customers?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        findAll: async (platforms: Array<PlatformName>, customers: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'platforms' is not null or undefined
+            assertParamExists('findAll', 'platforms', platforms)
+            // verify required parameter 'customers' is not null or undefined
+            assertParamExists('findAll', 'customers', customers)
             const localVarPath = `/adaccounts`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3449,15 +2986,15 @@ export const AdAccountsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {Array<AdAccountsControllerFindAll1f63wuPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose AdAccounts to include in the response.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose AdAccounts to include in the response.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async adAccountsControllerFindAll1f63wu(platforms?: Array<AdAccountsControllerFindAll1f63wuPlatformsEnum>, customers?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adAccountsControllerFindAll1f63wu(platforms, customers, options);
+        async findAll(platforms: Array<PlatformName>, customers: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll(platforms, customers, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AdAccountsApi.adAccountsControllerFindAll1f63wu']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AdAccountsApi.findAll']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -3471,13 +3008,13 @@ export const AdAccountsApiFactory = function (configuration?: Configuration, bas
     return {
         /**
          * 
-         * @param {Array<AdAccountsControllerFindAll1f63wuPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose AdAccounts to include in the response.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose AdAccounts to include in the response.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adAccountsControllerFindAll1f63wu(platforms?: Array<AdAccountsControllerFindAll1f63wuPlatformsEnum>, customers?: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<Array<object>> {
-            return localVarFp.adAccountsControllerFindAll1f63wu(platforms, customers, options).then((request) => request(axios, basePath));
+        findAll(platforms: Array<PlatformName>, customers: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findAll(platforms, customers, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -3488,24 +3025,16 @@ export const AdAccountsApiFactory = function (configuration?: Configuration, bas
 export class AdAccountsApi extends BaseAPI {
     /**
      * 
-     * @param {Array<AdAccountsControllerFindAll1f63wuPlatformsEnum>} [platforms] List of platforms to include in the response.
-     * @param {Array<string>} [customers] List of Customer IDs whose AdAccounts to include in the response.
+     * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+     * @param {Array<string>} customers List of Customer IDs whose AdAccounts to include in the response.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public adAccountsControllerFindAll1f63wu(platforms?: Array<AdAccountsControllerFindAll1f63wuPlatformsEnum>, customers?: Array<string>, options?: RawAxiosRequestConfig) {
-        return AdAccountsApiFp(this.configuration).adAccountsControllerFindAll1f63wu(platforms, customers, options).then((request) => request(this.axios, this.basePath));
+    public findAll(platforms: Array<PlatformName>, customers: Array<string>, options?: RawAxiosRequestConfig) {
+        return AdAccountsApiFp(this.configuration).findAll(platforms, customers, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
-export const AdAccountsControllerFindAll1f63wuPlatformsEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-export type AdAccountsControllerFindAll1f63wuPlatformsEnum = typeof AdAccountsControllerFindAll1f63wuPlatformsEnum[keyof typeof AdAccountsControllerFindAll1f63wuPlatformsEnum];
 
 
 /**
@@ -3515,15 +3044,25 @@ export const AdSetsApiAxiosParamCreator = function (configuration?: Configuratio
     return {
         /**
          * 
-         * @param {Array<AdsetsControllerGetAdsetsJio5shChildResourcesEnum>} [childResources] 
-         * @param {Array<AdsetsControllerGetAdsetsJio5shPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose AdSets to include in the response.
-         * @param {Array<string>} [ids] List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {AdsetsControllerGetAdsetsJio5shStatusEnum} [status] 
+         * @param {Array<ResourceKind>} childResources 
+         * @param {Status} status Status of the AdSets to return. Example: set status to Running to get a list of running AdSets.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose AdSets to include in the response.
+         * @param {Array<string>} ids List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsetsControllerGetAdsetsJio5sh: async (childResources?: Array<AdsetsControllerGetAdsetsJio5shChildResourcesEnum>, platforms?: Array<AdsetsControllerGetAdsetsJio5shPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, status?: AdsetsControllerGetAdsetsJio5shStatusEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAdsets: async (childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'childResources' is not null or undefined
+            assertParamExists('getAdsets', 'childResources', childResources)
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('getAdsets', 'status', status)
+            // verify required parameter 'platforms' is not null or undefined
+            assertParamExists('getAdsets', 'platforms', platforms)
+            // verify required parameter 'customers' is not null or undefined
+            assertParamExists('getAdsets', 'customers', customers)
+            // verify required parameter 'ids' is not null or undefined
+            assertParamExists('getAdsets', 'ids', ids)
             const localVarPath = `/adsets`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3544,6 +3083,10 @@ export const AdSetsApiAxiosParamCreator = function (configuration?: Configuratio
                 localVarQueryParameter['childResources'] = childResources;
             }
 
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
             if (platforms) {
                 localVarQueryParameter['platforms'] = platforms;
             }
@@ -3554,10 +3097,6 @@ export const AdSetsApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (ids) {
                 localVarQueryParameter['ids'] = ids;
-            }
-
-            if (status !== undefined) {
-                localVarQueryParameter['status'] = status;
             }
 
 
@@ -3582,18 +3121,18 @@ export const AdSetsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {Array<AdsetsControllerGetAdsetsJio5shChildResourcesEnum>} [childResources] 
-         * @param {Array<AdsetsControllerGetAdsetsJio5shPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose AdSets to include in the response.
-         * @param {Array<string>} [ids] List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {AdsetsControllerGetAdsetsJio5shStatusEnum} [status] 
+         * @param {Array<ResourceKind>} childResources 
+         * @param {Status} status Status of the AdSets to return. Example: set status to Running to get a list of running AdSets.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose AdSets to include in the response.
+         * @param {Array<string>} ids List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async adsetsControllerGetAdsetsJio5sh(childResources?: Array<AdsetsControllerGetAdsetsJio5shChildResourcesEnum>, platforms?: Array<AdsetsControllerGetAdsetsJio5shPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, status?: AdsetsControllerGetAdsetsJio5shStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AdSet>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsetsControllerGetAdsetsJio5sh(childResources, platforms, customers, ids, status, options);
+        async getAdsets(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAdsets(childResources, status, platforms, customers, ids, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AdSetsApi.adsetsControllerGetAdsetsJio5sh']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AdSetsApi.getAdsets']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -3607,16 +3146,16 @@ export const AdSetsApiFactory = function (configuration?: Configuration, basePat
     return {
         /**
          * 
-         * @param {Array<AdsetsControllerGetAdsetsJio5shChildResourcesEnum>} [childResources] 
-         * @param {Array<AdsetsControllerGetAdsetsJio5shPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose AdSets to include in the response.
-         * @param {Array<string>} [ids] List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {AdsetsControllerGetAdsetsJio5shStatusEnum} [status] 
+         * @param {Array<ResourceKind>} childResources 
+         * @param {Status} status Status of the AdSets to return. Example: set status to Running to get a list of running AdSets.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose AdSets to include in the response.
+         * @param {Array<string>} ids List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsetsControllerGetAdsetsJio5sh(childResources?: Array<AdsetsControllerGetAdsetsJio5shChildResourcesEnum>, platforms?: Array<AdsetsControllerGetAdsetsJio5shPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, status?: AdsetsControllerGetAdsetsJio5shStatusEnum, options?: RawAxiosRequestConfig): AxiosPromise<Array<AdSet>> {
-            return localVarFp.adsetsControllerGetAdsetsJio5sh(childResources, platforms, customers, ids, status, options).then((request) => request(axios, basePath));
+        getAdsets(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getAdsets(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -3627,42 +3166,19 @@ export const AdSetsApiFactory = function (configuration?: Configuration, basePat
 export class AdSetsApi extends BaseAPI {
     /**
      * 
-     * @param {Array<AdsetsControllerGetAdsetsJio5shChildResourcesEnum>} [childResources] 
-     * @param {Array<AdsetsControllerGetAdsetsJio5shPlatformsEnum>} [platforms] List of platforms to include in the response.
-     * @param {Array<string>} [customers] List of Customer IDs whose AdSets to include in the response.
-     * @param {Array<string>} [ids] List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
-     * @param {AdsetsControllerGetAdsetsJio5shStatusEnum} [status] 
+     * @param {Array<ResourceKind>} childResources 
+     * @param {Status} status Status of the AdSets to return. Example: set status to Running to get a list of running AdSets.
+     * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+     * @param {Array<string>} customers List of Customer IDs whose AdSets to include in the response.
+     * @param {Array<string>} ids List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public adsetsControllerGetAdsetsJio5sh(childResources?: Array<AdsetsControllerGetAdsetsJio5shChildResourcesEnum>, platforms?: Array<AdsetsControllerGetAdsetsJio5shPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, status?: AdsetsControllerGetAdsetsJio5shStatusEnum, options?: RawAxiosRequestConfig) {
-        return AdSetsApiFp(this.configuration).adsetsControllerGetAdsetsJio5sh(childResources, platforms, customers, ids, status, options).then((request) => request(this.axios, this.basePath));
+    public getAdsets(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig) {
+        return AdSetsApiFp(this.configuration).getAdsets(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
-export const AdsetsControllerGetAdsetsJio5shChildResourcesEnum = {
-    Campaign: 'Campaign',
-    AdSet: 'AdSet',
-    Ad: 'Ad',
-    Targeting: 'Targeting',
-    AdAccount: 'AdAccount'
-} as const;
-export type AdsetsControllerGetAdsetsJio5shChildResourcesEnum = typeof AdsetsControllerGetAdsetsJio5shChildResourcesEnum[keyof typeof AdsetsControllerGetAdsetsJio5shChildResourcesEnum];
-export const AdsetsControllerGetAdsetsJio5shPlatformsEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-export type AdsetsControllerGetAdsetsJio5shPlatformsEnum = typeof AdsetsControllerGetAdsetsJio5shPlatformsEnum[keyof typeof AdsetsControllerGetAdsetsJio5shPlatformsEnum];
-export const AdsetsControllerGetAdsetsJio5shStatusEnum = {
-    Active: 'ACTIVE',
-    Running: 'RUNNING',
-    Paused: 'PAUSED',
-    Unknown: 'UNKNOWN'
-} as const;
-export type AdsetsControllerGetAdsetsJio5shStatusEnum = typeof AdsetsControllerGetAdsetsJio5shStatusEnum[keyof typeof AdsetsControllerGetAdsetsJio5shStatusEnum];
 
 
 /**
@@ -3672,15 +3188,25 @@ export const AdsApiAxiosParamCreator = function (configuration?: Configuration) 
     return {
         /**
          * 
-         * @param {Array<AdsControllerGetAds8yhkpxChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
-         * @param {AdsControllerGetAds8yhkpxStatusEnum} [status] Status of the Ads to return. Example: set status to Running to get a list of running Ads
-         * @param {Array<AdsControllerGetAds8yhkpxPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose Ads to include in the response.
-         * @param {Array<string>} [ids] List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
+         * @param {Status} status Status of the Ads to return. Example: set status to Running to get a list of running Ads
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose Ads to include in the response.
+         * @param {Array<string>} ids List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsControllerGetAds8yhkpx: async (childResources?: Array<AdsControllerGetAds8yhkpxChildResourcesEnum>, status?: AdsControllerGetAds8yhkpxStatusEnum, platforms?: Array<AdsControllerGetAds8yhkpxPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAds: async (childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'childResources' is not null or undefined
+            assertParamExists('getAds', 'childResources', childResources)
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('getAds', 'status', status)
+            // verify required parameter 'platforms' is not null or undefined
+            assertParamExists('getAds', 'platforms', platforms)
+            // verify required parameter 'customers' is not null or undefined
+            assertParamExists('getAds', 'customers', customers)
+            // verify required parameter 'ids' is not null or undefined
+            assertParamExists('getAds', 'ids', ids)
             const localVarPath = `/ads`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3739,18 +3265,18 @@ export const AdsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {Array<AdsControllerGetAds8yhkpxChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
-         * @param {AdsControllerGetAds8yhkpxStatusEnum} [status] Status of the Ads to return. Example: set status to Running to get a list of running Ads
-         * @param {Array<AdsControllerGetAds8yhkpxPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose Ads to include in the response.
-         * @param {Array<string>} [ids] List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
+         * @param {Status} status Status of the Ads to return. Example: set status to Running to get a list of running Ads
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose Ads to include in the response.
+         * @param {Array<string>} ids List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async adsControllerGetAds8yhkpx(childResources?: Array<AdsControllerGetAds8yhkpxChildResourcesEnum>, status?: AdsControllerGetAds8yhkpxStatusEnum, platforms?: Array<AdsControllerGetAds8yhkpxPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Ad>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsControllerGetAds8yhkpx(childResources, status, platforms, customers, ids, options);
+        async getAds(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAds(childResources, status, platforms, customers, ids, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AdsApi.adsControllerGetAds8yhkpx']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AdsApi.getAds']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -3764,16 +3290,16 @@ export const AdsApiFactory = function (configuration?: Configuration, basePath?:
     return {
         /**
          * 
-         * @param {Array<AdsControllerGetAds8yhkpxChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
-         * @param {AdsControllerGetAds8yhkpxStatusEnum} [status] Status of the Ads to return. Example: set status to Running to get a list of running Ads
-         * @param {Array<AdsControllerGetAds8yhkpxPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose Ads to include in the response.
-         * @param {Array<string>} [ids] List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
+         * @param {Status} status Status of the Ads to return. Example: set status to Running to get a list of running Ads
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose Ads to include in the response.
+         * @param {Array<string>} ids List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsControllerGetAds8yhkpx(childResources?: Array<AdsControllerGetAds8yhkpxChildResourcesEnum>, status?: AdsControllerGetAds8yhkpxStatusEnum, platforms?: Array<AdsControllerGetAds8yhkpxPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<Array<Ad>> {
-            return localVarFp.adsControllerGetAds8yhkpx(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
+        getAds(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getAds(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -3784,42 +3310,19 @@ export const AdsApiFactory = function (configuration?: Configuration, basePath?:
 export class AdsApi extends BaseAPI {
     /**
      * 
-     * @param {Array<AdsControllerGetAds8yhkpxChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
-     * @param {AdsControllerGetAds8yhkpxStatusEnum} [status] Status of the Ads to return. Example: set status to Running to get a list of running Ads
-     * @param {Array<AdsControllerGetAds8yhkpxPlatformsEnum>} [platforms] List of platforms to include in the response.
-     * @param {Array<string>} [customers] List of Customer IDs whose Ads to include in the response.
-     * @param {Array<string>} [ids] List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
+     * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting to get a list of Ads with their Targetings
+     * @param {Status} status Status of the Ads to return. Example: set status to Running to get a list of running Ads
+     * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+     * @param {Array<string>} customers List of Customer IDs whose Ads to include in the response.
+     * @param {Array<string>} ids List of Ad IDs to include in the response. Requires platform and customer to be set to a single value.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public adsControllerGetAds8yhkpx(childResources?: Array<AdsControllerGetAds8yhkpxChildResourcesEnum>, status?: AdsControllerGetAds8yhkpxStatusEnum, platforms?: Array<AdsControllerGetAds8yhkpxPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig) {
-        return AdsApiFp(this.configuration).adsControllerGetAds8yhkpx(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
+    public getAds(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig) {
+        return AdsApiFp(this.configuration).getAds(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
-export const AdsControllerGetAds8yhkpxChildResourcesEnum = {
-    Campaign: 'Campaign',
-    AdSet: 'AdSet',
-    Ad: 'Ad',
-    Targeting: 'Targeting',
-    AdAccount: 'AdAccount'
-} as const;
-export type AdsControllerGetAds8yhkpxChildResourcesEnum = typeof AdsControllerGetAds8yhkpxChildResourcesEnum[keyof typeof AdsControllerGetAds8yhkpxChildResourcesEnum];
-export const AdsControllerGetAds8yhkpxStatusEnum = {
-    Active: 'ACTIVE',
-    Running: 'RUNNING',
-    Paused: 'PAUSED',
-    Unknown: 'UNKNOWN'
-} as const;
-export type AdsControllerGetAds8yhkpxStatusEnum = typeof AdsControllerGetAds8yhkpxStatusEnum[keyof typeof AdsControllerGetAds8yhkpxStatusEnum];
-export const AdsControllerGetAds8yhkpxPlatformsEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-export type AdsControllerGetAds8yhkpxPlatformsEnum = typeof AdsControllerGetAds8yhkpxPlatformsEnum[keyof typeof AdsControllerGetAds8yhkpxPlatformsEnum];
 
 
 /**
@@ -3832,7 +3335,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerCreateCompanyTokenK3gngq: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createCompanyToken: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/auth/company_token`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3865,7 +3368,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerDeleteCompanyTokenU6zccl: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteCompanyToken: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/auth/company_token`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3898,7 +3401,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerGetCompanyToken8bpz6u: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCompanyToken: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/auth/company_token`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3931,7 +3434,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerGetHelloR0h1ua: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getHello: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/auth/user`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3965,9 +3468,9 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerGetSessionTokenRbwd43: async (sessionTokenDto: SessionTokenDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getSessionToken: async (sessionTokenDto: SessionTokenDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'sessionTokenDto' is not null or undefined
-            assertParamExists('authControllerGetSessionTokenRbwd43', 'sessionTokenDto', sessionTokenDto)
+            assertParamExists('getSessionToken', 'sessionTokenDto', sessionTokenDto)
             const localVarPath = `/auth/session_token`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3992,78 +3495,6 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(sessionTokenDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authControllerRefreshHq9r5i: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/auth/refresh`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {SessionTokenVerifyDto} sessionTokenVerifyDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authControllerVerifySessionTokenQkbht6: async (sessionTokenVerifyDto: SessionTokenVerifyDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'sessionTokenVerifyDto' is not null or undefined
-            assertParamExists('authControllerVerifySessionTokenQkbht6', 'sessionTokenVerifyDto', sessionTokenVerifyDto)
-            const localVarPath = `/auth/session_token/verify`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(sessionTokenVerifyDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -4106,6 +3537,78 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        refresh: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/auth/refresh`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {SessionTokenVerifyDto} sessionTokenVerifyDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        verifySessionToken: async (sessionTokenVerifyDto: SessionTokenVerifyDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'sessionTokenVerifyDto' is not null or undefined
+            assertParamExists('verifySessionToken', 'sessionTokenVerifyDto', sessionTokenVerifyDto)
+            const localVarPath = `/auth/session_token/verify`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(sessionTokenVerifyDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -4120,10 +3623,10 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authControllerCreateCompanyTokenK3gngq(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerCreateCompanyTokenK3gngq(options);
+        async createCompanyToken(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createCompanyToken(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.authControllerCreateCompanyTokenK3gngq']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.createCompanyToken']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4131,10 +3634,10 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authControllerDeleteCompanyTokenU6zccl(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerDeleteCompanyTokenU6zccl(options);
+        async deleteCompanyToken(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCompanyToken(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.authControllerDeleteCompanyTokenU6zccl']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.deleteCompanyToken']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4142,10 +3645,10 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authControllerGetCompanyToken8bpz6u(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerGetCompanyToken8bpz6u(options);
+        async getCompanyToken(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCompanyToken(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.authControllerGetCompanyToken8bpz6u']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.getCompanyToken']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4153,10 +3656,10 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authControllerGetHelloR0h1ua(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerGetHelloR0h1ua(options);
+        async getHello(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getHello(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.authControllerGetHelloR0h1ua']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.getHello']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4165,33 +3668,10 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authControllerGetSessionTokenRbwd43(sessionTokenDto: SessionTokenDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerGetSessionTokenRbwd43(sessionTokenDto, options);
+        async getSessionToken(sessionTokenDto: SessionTokenDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSessionToken(sessionTokenDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.authControllerGetSessionTokenRbwd43']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async authControllerRefreshHq9r5i(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerRefreshHq9r5i(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.authControllerRefreshHq9r5i']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {SessionTokenVerifyDto} sessionTokenVerifyDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async authControllerVerifySessionTokenQkbht6(sessionTokenVerifyDto: SessionTokenVerifyDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerVerifySessionTokenQkbht6(sessionTokenVerifyDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.authControllerVerifySessionTokenQkbht6']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.getSessionToken']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4201,10 +3681,33 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async login(loginDto: LoginDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async login(loginDto: LoginDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.login(loginDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.login']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async refresh(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.refresh(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.refresh']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {SessionTokenVerifyDto} sessionTokenVerifyDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async verifySessionToken(sessionTokenVerifyDto: SessionTokenVerifyDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.verifySessionToken(sessionTokenVerifyDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.verifySessionToken']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -4221,32 +3724,32 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerCreateCompanyTokenK3gngq(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.authControllerCreateCompanyTokenK3gngq(options).then((request) => request(axios, basePath));
+        createCompanyToken(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.createCompanyToken(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerDeleteCompanyTokenU6zccl(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.authControllerDeleteCompanyTokenU6zccl(options).then((request) => request(axios, basePath));
+        deleteCompanyToken(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteCompanyToken(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerGetCompanyToken8bpz6u(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.authControllerGetCompanyToken8bpz6u(options).then((request) => request(axios, basePath));
+        getCompanyToken(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getCompanyToken(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerGetHelloR0h1ua(options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.authControllerGetHelloR0h1ua(options).then((request) => request(axios, basePath));
+        getHello(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getHello(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4254,25 +3757,8 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerGetSessionTokenRbwd43(sessionTokenDto: SessionTokenDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.authControllerGetSessionTokenRbwd43(sessionTokenDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authControllerRefreshHq9r5i(options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.authControllerRefreshHq9r5i(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {SessionTokenVerifyDto} sessionTokenVerifyDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authControllerVerifySessionTokenQkbht6(sessionTokenVerifyDto: SessionTokenVerifyDto, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.authControllerVerifySessionTokenQkbht6(sessionTokenVerifyDto, options).then((request) => request(axios, basePath));
+        getSessionToken(sessionTokenDto: SessionTokenDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getSessionToken(sessionTokenDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Login with *username* and *password*. Returns an access token.
@@ -4281,8 +3767,25 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        login(loginDto: LoginDto, options?: RawAxiosRequestConfig): AxiosPromise<object> {
+        login(loginDto: LoginDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.login(loginDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        refresh(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.refresh(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {SessionTokenVerifyDto} sessionTokenVerifyDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        verifySessionToken(sessionTokenVerifyDto: SessionTokenVerifyDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.verifySessionToken(sessionTokenVerifyDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4296,8 +3799,8 @@ export class AuthenticationApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public authControllerCreateCompanyTokenK3gngq(options?: RawAxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).authControllerCreateCompanyTokenK3gngq(options).then((request) => request(this.axios, this.basePath));
+    public createCompanyToken(options?: RawAxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).createCompanyToken(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4305,8 +3808,8 @@ export class AuthenticationApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public authControllerDeleteCompanyTokenU6zccl(options?: RawAxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).authControllerDeleteCompanyTokenU6zccl(options).then((request) => request(this.axios, this.basePath));
+    public deleteCompanyToken(options?: RawAxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).deleteCompanyToken(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4314,8 +3817,8 @@ export class AuthenticationApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public authControllerGetCompanyToken8bpz6u(options?: RawAxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).authControllerGetCompanyToken8bpz6u(options).then((request) => request(this.axios, this.basePath));
+    public getCompanyToken(options?: RawAxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).getCompanyToken(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4323,8 +3826,8 @@ export class AuthenticationApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public authControllerGetHelloR0h1ua(options?: RawAxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).authControllerGetHelloR0h1ua(options).then((request) => request(this.axios, this.basePath));
+    public getHello(options?: RawAxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).getHello(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4333,27 +3836,8 @@ export class AuthenticationApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public authControllerGetSessionTokenRbwd43(sessionTokenDto: SessionTokenDto, options?: RawAxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).authControllerGetSessionTokenRbwd43(sessionTokenDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public authControllerRefreshHq9r5i(options?: RawAxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).authControllerRefreshHq9r5i(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {SessionTokenVerifyDto} sessionTokenVerifyDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public authControllerVerifySessionTokenQkbht6(sessionTokenVerifyDto: SessionTokenVerifyDto, options?: RawAxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).authControllerVerifySessionTokenQkbht6(sessionTokenVerifyDto, options).then((request) => request(this.axios, this.basePath));
+    public getSessionToken(sessionTokenDto: SessionTokenDto, options?: RawAxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).getSessionToken(sessionTokenDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4366,6 +3850,25 @@ export class AuthenticationApi extends BaseAPI {
     public login(loginDto: LoginDto, options?: RawAxiosRequestConfig) {
         return AuthenticationApiFp(this.configuration).login(loginDto, options).then((request) => request(this.axios, this.basePath));
     }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public refresh(options?: RawAxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).refresh(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {SessionTokenVerifyDto} sessionTokenVerifyDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public verifySessionToken(sessionTokenVerifyDto: SessionTokenVerifyDto, options?: RawAxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).verifySessionToken(sessionTokenVerifyDto, options).then((request) => request(this.axios, this.basePath));
+    }
 }
 
 
@@ -4377,15 +3880,25 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * 
-         * @param {Array<CampaignsControllerGetCampaigns2qcanuChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {CampaignsControllerGetCampaigns2qcanuStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<CampaignsControllerGetCampaigns2qcanuPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        campaignsControllerGetCampaigns2qcanu: async (childResources?: Array<CampaignsControllerGetCampaigns2qcanuChildResourcesEnum>, status?: CampaignsControllerGetCampaigns2qcanuStatusEnum, platforms?: Array<CampaignsControllerGetCampaigns2qcanuPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCampaigns: async (childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'childResources' is not null or undefined
+            assertParamExists('getCampaigns', 'childResources', childResources)
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('getCampaigns', 'status', status)
+            // verify required parameter 'platforms' is not null or undefined
+            assertParamExists('getCampaigns', 'platforms', platforms)
+            // verify required parameter 'customers' is not null or undefined
+            assertParamExists('getCampaigns', 'customers', customers)
+            // verify required parameter 'ids' is not null or undefined
+            assertParamExists('getCampaigns', 'ids', ids)
             const localVarPath = `/campaigns`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4444,18 +3957,18 @@ export const CampaignsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {Array<CampaignsControllerGetCampaigns2qcanuChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {CampaignsControllerGetCampaigns2qcanuStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<CampaignsControllerGetCampaigns2qcanuPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async campaignsControllerGetCampaigns2qcanu(childResources?: Array<CampaignsControllerGetCampaigns2qcanuChildResourcesEnum>, status?: CampaignsControllerGetCampaigns2qcanuStatusEnum, platforms?: Array<CampaignsControllerGetCampaigns2qcanuPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Campaign>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsControllerGetCampaigns2qcanu(childResources, status, platforms, customers, ids, options);
+        async getCampaigns(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCampaigns(childResources, status, platforms, customers, ids, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CampaignsApi.campaignsControllerGetCampaigns2qcanu']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CampaignsApi.getCampaigns']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -4469,16 +3982,16 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
-         * @param {Array<CampaignsControllerGetCampaigns2qcanuChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {CampaignsControllerGetCampaigns2qcanuStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<CampaignsControllerGetCampaigns2qcanuPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        campaignsControllerGetCampaigns2qcanu(childResources?: Array<CampaignsControllerGetCampaigns2qcanuChildResourcesEnum>, status?: CampaignsControllerGetCampaigns2qcanuStatusEnum, platforms?: Array<CampaignsControllerGetCampaigns2qcanuPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<Array<Campaign>> {
-            return localVarFp.campaignsControllerGetCampaigns2qcanu(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
+        getCampaigns(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getCampaigns(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4489,42 +4002,19 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
 export class CampaignsApi extends BaseAPI {
     /**
      * 
-     * @param {Array<CampaignsControllerGetCampaigns2qcanuChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-     * @param {CampaignsControllerGetCampaigns2qcanuStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-     * @param {Array<CampaignsControllerGetCampaigns2qcanuPlatformsEnum>} [platforms] List of platforms to include in the response.
-     * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-     * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+     * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+     * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+     * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+     * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+     * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public campaignsControllerGetCampaigns2qcanu(childResources?: Array<CampaignsControllerGetCampaigns2qcanuChildResourcesEnum>, status?: CampaignsControllerGetCampaigns2qcanuStatusEnum, platforms?: Array<CampaignsControllerGetCampaigns2qcanuPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig) {
-        return CampaignsApiFp(this.configuration).campaignsControllerGetCampaigns2qcanu(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
+    public getCampaigns(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig) {
+        return CampaignsApiFp(this.configuration).getCampaigns(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
-export const CampaignsControllerGetCampaigns2qcanuChildResourcesEnum = {
-    Campaign: 'Campaign',
-    AdSet: 'AdSet',
-    Ad: 'Ad',
-    Targeting: 'Targeting',
-    AdAccount: 'AdAccount'
-} as const;
-export type CampaignsControllerGetCampaigns2qcanuChildResourcesEnum = typeof CampaignsControllerGetCampaigns2qcanuChildResourcesEnum[keyof typeof CampaignsControllerGetCampaigns2qcanuChildResourcesEnum];
-export const CampaignsControllerGetCampaigns2qcanuStatusEnum = {
-    Active: 'ACTIVE',
-    Running: 'RUNNING',
-    Paused: 'PAUSED',
-    Unknown: 'UNKNOWN'
-} as const;
-export type CampaignsControllerGetCampaigns2qcanuStatusEnum = typeof CampaignsControllerGetCampaigns2qcanuStatusEnum[keyof typeof CampaignsControllerGetCampaigns2qcanuStatusEnum];
-export const CampaignsControllerGetCampaigns2qcanuPlatformsEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-export type CampaignsControllerGetCampaigns2qcanuPlatformsEnum = typeof CampaignsControllerGetCampaigns2qcanuPlatformsEnum[keyof typeof CampaignsControllerGetCampaigns2qcanuPlatformsEnum];
 
 
 /**
@@ -4537,7 +4027,7 @@ export const CompaniesApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        companiesControllerGetCompany2lyej4: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCompany: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/companies`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4570,7 +4060,7 @@ export const CompaniesApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        companiesControllerGetRedirectUriF0i71s: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRedirectUri: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/companies/redirect_uri`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4604,9 +4094,9 @@ export const CompaniesApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        companiesControllerSetRedirectUriFcrzml: async (redirectUriDTO: RedirectUriDTO, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setRedirectUri: async (redirectUriDTO: RedirectUriDTO, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'redirectUriDTO' is not null or undefined
-            assertParamExists('companiesControllerSetRedirectUriFcrzml', 'redirectUriDTO', redirectUriDTO)
+            assertParamExists('setRedirectUri', 'redirectUriDTO', redirectUriDTO)
             const localVarPath = `/companies/redirect_uri`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4651,10 +4141,10 @@ export const CompaniesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async companiesControllerGetCompany2lyej4(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.companiesControllerGetCompany2lyej4(options);
+        async getCompany(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCompany(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CompaniesApi.companiesControllerGetCompany2lyej4']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CompaniesApi.getCompany']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4662,10 +4152,10 @@ export const CompaniesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async companiesControllerGetRedirectUriF0i71s(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RedirectUriDTO>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.companiesControllerGetRedirectUriF0i71s(options);
+        async getRedirectUri(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRedirectUri(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CompaniesApi.companiesControllerGetRedirectUriF0i71s']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CompaniesApi.getRedirectUri']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4674,10 +4164,10 @@ export const CompaniesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async companiesControllerSetRedirectUriFcrzml(redirectUriDTO: RedirectUriDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RedirectUriDTO>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.companiesControllerSetRedirectUriFcrzml(redirectUriDTO, options);
+        async setRedirectUri(redirectUriDTO: RedirectUriDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setRedirectUri(redirectUriDTO, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CompaniesApi.companiesControllerSetRedirectUriFcrzml']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CompaniesApi.setRedirectUri']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -4694,16 +4184,16 @@ export const CompaniesApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        companiesControllerGetCompany2lyej4(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.companiesControllerGetCompany2lyej4(options).then((request) => request(axios, basePath));
+        getCompany(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getCompany(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        companiesControllerGetRedirectUriF0i71s(options?: RawAxiosRequestConfig): AxiosPromise<RedirectUriDTO> {
-            return localVarFp.companiesControllerGetRedirectUriF0i71s(options).then((request) => request(axios, basePath));
+        getRedirectUri(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getRedirectUri(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4711,8 +4201,8 @@ export const CompaniesApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        companiesControllerSetRedirectUriFcrzml(redirectUriDTO: RedirectUriDTO, options?: RawAxiosRequestConfig): AxiosPromise<RedirectUriDTO> {
-            return localVarFp.companiesControllerSetRedirectUriFcrzml(redirectUriDTO, options).then((request) => request(axios, basePath));
+        setRedirectUri(redirectUriDTO: RedirectUriDTO, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.setRedirectUri(redirectUriDTO, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4726,8 +4216,8 @@ export class CompaniesApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public companiesControllerGetCompany2lyej4(options?: RawAxiosRequestConfig) {
-        return CompaniesApiFp(this.configuration).companiesControllerGetCompany2lyej4(options).then((request) => request(this.axios, this.basePath));
+    public getCompany(options?: RawAxiosRequestConfig) {
+        return CompaniesApiFp(this.configuration).getCompany(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4735,8 +4225,8 @@ export class CompaniesApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public companiesControllerGetRedirectUriF0i71s(options?: RawAxiosRequestConfig) {
-        return CompaniesApiFp(this.configuration).companiesControllerGetRedirectUriF0i71s(options).then((request) => request(this.axios, this.basePath));
+    public getRedirectUri(options?: RawAxiosRequestConfig) {
+        return CompaniesApiFp(this.configuration).getRedirectUri(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4745,8 +4235,8 @@ export class CompaniesApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public companiesControllerSetRedirectUriFcrzml(redirectUriDTO: RedirectUriDTO, options?: RawAxiosRequestConfig) {
-        return CompaniesApiFp(this.configuration).companiesControllerSetRedirectUriFcrzml(redirectUriDTO, options).then((request) => request(this.axios, this.basePath));
+    public setRedirectUri(redirectUriDTO: RedirectUriDTO, options?: RawAxiosRequestConfig) {
+        return CompaniesApiFp(this.configuration).setRedirectUri(redirectUriDTO, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -4758,14 +4248,15 @@ export class CompaniesApi extends BaseAPI {
 export const CustomersApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
+         * Create a new customer.
+         * @summary Create customer
          * @param {CreateCustomerDto} createCustomerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        customersControllerCreateCustomer2cjlz2: async (createCustomerDto: CreateCustomerDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createCustomer: async (createCustomerDto: CreateCustomerDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'createCustomerDto' is not null or undefined
-            assertParamExists('customersControllerCreateCustomer2cjlz2', 'createCustomerDto', createCustomerDto)
+            assertParamExists('createCustomer', 'createCustomerDto', createCustomerDto)
             const localVarPath = `/customers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4797,14 +4288,15 @@ export const CustomersApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
+         * Delete a customer by their id.
+         * @summary Delete customer
          * @param {string} id The id of the customer to delete.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        customersControllerDeleteCustomer00kwoh: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteCustomer: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('customersControllerDeleteCustomer00kwoh', 'id', id)
+            assertParamExists('deleteCustomer', 'id', id)
             const localVarPath = `/customers/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4834,124 +4326,16 @@ export const CustomersApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        customersControllerFindAllKggoor: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/customers`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {Array<string>} [customers] The ids of the customers to fetch.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        customersControllerFindAllWithPlatformsXzeg6k: async (customers?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/customers/platforms`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (customers) {
-                localVarQueryParameter['customers'] = customers;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        customersControllerFindOneV9u2yc: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('customersControllerFindOneV9u2yc', 'id', id)
-            const localVarPath = `/customers/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Generate a connect URL for a customer. This URL will redirect the customer to the platform\'s authentication page. If no platform is specified, the user will be presented with a list of platforms to choose from.
          * @summary Generate connect URL for a customer
          * @param {string} id The id (UUID) of the customer to connect.
-         * @param {GetConnectCustomerUrlPlatformEnum} [platform] The platform to connect the customer to. If undefined, users will be presented with a list of platforms to choose from.
+         * @param {GenerateConnectCustomerUrlPlatformEnum} [platform] The platform to connect the customer to. If undefined, users will be presented with a list of platforms to choose from.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getConnectCustomerUrl: async (id: string, platform?: GetConnectCustomerUrlPlatformEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        generateConnectCustomerUrl: async (id: string, platform?: GenerateConnectCustomerUrlPlatformEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('getConnectCustomerUrl', 'id', id)
+            assertParamExists('generateConnectCustomerUrl', 'id', id)
             const localVarPath = `/customers/{id}/connect`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4984,6 +4368,155 @@ export const CustomersApiAxiosParamCreator = function (configuration?: Configura
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Get a list of all customers.
+         * @summary Get all customers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllCustomers: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/customers`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get a list of all customers with their connected platforms.
+         * @summary Get all customers with platforms
+         * @param {Array<string>} [customers] The ids of the customers to fetch.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllCustomersWithPlatforms: async (customers?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/customers/platforms`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (customers) {
+                localVarQueryParameter['customers'] = customers;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get a single customer by their id. Returns 404 if the customer does not exist.
+         * @summary Get customer by id
+         * @param {string} id The id (UUID) of the customer to fetch.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCustomer: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getCustomer', 'id', id)
+            const localVarPath = `/customers/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get a single customer with their connected platforms. Returns 404 if the customer does not exist.
+         * @summary Get customer with platforms
+         * @param {string} id The id (UUID) of the customer to fetch with platforms.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCustomerWithPlatforms: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getCustomerWithPlatforms', 'id', id)
+            const localVarPath = `/customers/{id}/platforms`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -4994,76 +4527,94 @@ export const CustomersApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = CustomersApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Create a new customer.
+         * @summary Create customer
          * @param {CreateCustomerDto} createCustomerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async customersControllerCreateCustomer2cjlz2(createCustomerDto: CreateCustomerDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.customersControllerCreateCustomer2cjlz2(createCustomerDto, options);
+        async createCustomer(createCustomerDto: CreateCustomerDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createCustomer(createCustomerDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CustomersApi.customersControllerCreateCustomer2cjlz2']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CustomersApi.createCustomer']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Delete a customer by their id.
+         * @summary Delete customer
          * @param {string} id The id of the customer to delete.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async customersControllerDeleteCustomer00kwoh(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.customersControllerDeleteCustomer00kwoh(id, options);
+        async deleteCustomer(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCustomer(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CustomersApi.customersControllerDeleteCustomer00kwoh']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async customersControllerFindAllKggoor(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.customersControllerFindAllKggoor(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CustomersApi.customersControllerFindAllKggoor']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {Array<string>} [customers] The ids of the customers to fetch.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async customersControllerFindAllWithPlatformsXzeg6k(customers?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.customersControllerFindAllWithPlatformsXzeg6k(customers, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CustomersApi.customersControllerFindAllWithPlatformsXzeg6k']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async customersControllerFindOneV9u2yc(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.customersControllerFindOneV9u2yc(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CustomersApi.customersControllerFindOneV9u2yc']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CustomersApi.deleteCustomer']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Generate a connect URL for a customer. This URL will redirect the customer to the platform\'s authentication page. If no platform is specified, the user will be presented with a list of platforms to choose from.
          * @summary Generate connect URL for a customer
          * @param {string} id The id (UUID) of the customer to connect.
-         * @param {GetConnectCustomerUrlPlatformEnum} [platform] The platform to connect the customer to. If undefined, users will be presented with a list of platforms to choose from.
+         * @param {GenerateConnectCustomerUrlPlatformEnum} [platform] The platform to connect the customer to. If undefined, users will be presented with a list of platforms to choose from.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getConnectCustomerUrl(id: string, platform?: GetConnectCustomerUrlPlatformEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getConnectCustomerUrl(id, platform, options);
+        async generateConnectCustomerUrl(id: string, platform?: GenerateConnectCustomerUrlPlatformEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.generateConnectCustomerUrl(id, platform, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CustomersApi.getConnectCustomerUrl']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CustomersApi.generateConnectCustomerUrl']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get a list of all customers.
+         * @summary Get all customers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAllCustomers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CustomerDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllCustomers(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CustomersApi.getAllCustomers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get a list of all customers with their connected platforms.
+         * @summary Get all customers with platforms
+         * @param {Array<string>} [customers] The ids of the customers to fetch.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAllCustomersWithPlatforms(customers?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CustomerWithPlatformsDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllCustomersWithPlatforms(customers, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CustomersApi.getAllCustomersWithPlatforms']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get a single customer by their id. Returns 404 if the customer does not exist.
+         * @summary Get customer by id
+         * @param {string} id The id (UUID) of the customer to fetch.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCustomer(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomer(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CustomersApi.getCustomer']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get a single customer with their connected platforms. Returns 404 if the customer does not exist.
+         * @summary Get customer with platforms
+         * @param {string} id The id (UUID) of the customer to fetch with platforms.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCustomerWithPlatforms(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerWithPlatformsDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerWithPlatforms(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CustomersApi.getCustomerWithPlatforms']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -5076,59 +4627,74 @@ export const CustomersApiFactory = function (configuration?: Configuration, base
     const localVarFp = CustomersApiFp(configuration)
     return {
         /**
-         * 
+         * Create a new customer.
+         * @summary Create customer
          * @param {CreateCustomerDto} createCustomerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        customersControllerCreateCustomer2cjlz2(createCustomerDto: CreateCustomerDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.customersControllerCreateCustomer2cjlz2(createCustomerDto, options).then((request) => request(axios, basePath));
+        createCustomer(createCustomerDto: CreateCustomerDto, options?: RawAxiosRequestConfig): AxiosPromise<CustomerDto> {
+            return localVarFp.createCustomer(createCustomerDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Delete a customer by their id.
+         * @summary Delete customer
          * @param {string} id The id of the customer to delete.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        customersControllerDeleteCustomer00kwoh(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.customersControllerDeleteCustomer00kwoh(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        customersControllerFindAllKggoor(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.customersControllerFindAllKggoor(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {Array<string>} [customers] The ids of the customers to fetch.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        customersControllerFindAllWithPlatformsXzeg6k(customers?: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.customersControllerFindAllWithPlatformsXzeg6k(customers, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        customersControllerFindOneV9u2yc(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.customersControllerFindOneV9u2yc(id, options).then((request) => request(axios, basePath));
+        deleteCustomer(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteCustomer(id, options).then((request) => request(axios, basePath));
         },
         /**
          * Generate a connect URL for a customer. This URL will redirect the customer to the platform\'s authentication page. If no platform is specified, the user will be presented with a list of platforms to choose from.
          * @summary Generate connect URL for a customer
          * @param {string} id The id (UUID) of the customer to connect.
-         * @param {GetConnectCustomerUrlPlatformEnum} [platform] The platform to connect the customer to. If undefined, users will be presented with a list of platforms to choose from.
+         * @param {GenerateConnectCustomerUrlPlatformEnum} [platform] The platform to connect the customer to. If undefined, users will be presented with a list of platforms to choose from.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getConnectCustomerUrl(id: string, platform?: GetConnectCustomerUrlPlatformEnum, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.getConnectCustomerUrl(id, platform, options).then((request) => request(axios, basePath));
+        generateConnectCustomerUrl(id: string, platform?: GenerateConnectCustomerUrlPlatformEnum, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.generateConnectCustomerUrl(id, platform, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get a list of all customers.
+         * @summary Get all customers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllCustomers(options?: RawAxiosRequestConfig): AxiosPromise<Array<CustomerDto>> {
+            return localVarFp.getAllCustomers(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get a list of all customers with their connected platforms.
+         * @summary Get all customers with platforms
+         * @param {Array<string>} [customers] The ids of the customers to fetch.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllCustomersWithPlatforms(customers?: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<Array<CustomerWithPlatformsDto>> {
+            return localVarFp.getAllCustomersWithPlatforms(customers, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get a single customer by their id. Returns 404 if the customer does not exist.
+         * @summary Get customer by id
+         * @param {string} id The id (UUID) of the customer to fetch.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCustomer(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CustomerDto> {
+            return localVarFp.getCustomer(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get a single customer with their connected platforms. Returns 404 if the customer does not exist.
+         * @summary Get customer with platforms
+         * @param {string} id The id (UUID) of the customer to fetch with platforms.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCustomerWithPlatforms(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CustomerWithPlatformsDto> {
+            return localVarFp.getCustomerWithPlatforms(id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5138,75 +4704,92 @@ export const CustomersApiFactory = function (configuration?: Configuration, base
  */
 export class CustomersApi extends BaseAPI {
     /**
-     * 
+     * Create a new customer.
+     * @summary Create customer
      * @param {CreateCustomerDto} createCustomerDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public customersControllerCreateCustomer2cjlz2(createCustomerDto: CreateCustomerDto, options?: RawAxiosRequestConfig) {
-        return CustomersApiFp(this.configuration).customersControllerCreateCustomer2cjlz2(createCustomerDto, options).then((request) => request(this.axios, this.basePath));
+    public createCustomer(createCustomerDto: CreateCustomerDto, options?: RawAxiosRequestConfig) {
+        return CustomersApiFp(this.configuration).createCustomer(createCustomerDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * Delete a customer by their id.
+     * @summary Delete customer
      * @param {string} id The id of the customer to delete.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public customersControllerDeleteCustomer00kwoh(id: string, options?: RawAxiosRequestConfig) {
-        return CustomersApiFp(this.configuration).customersControllerDeleteCustomer00kwoh(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public customersControllerFindAllKggoor(options?: RawAxiosRequestConfig) {
-        return CustomersApiFp(this.configuration).customersControllerFindAllKggoor(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {Array<string>} [customers] The ids of the customers to fetch.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public customersControllerFindAllWithPlatformsXzeg6k(customers?: Array<string>, options?: RawAxiosRequestConfig) {
-        return CustomersApiFp(this.configuration).customersControllerFindAllWithPlatformsXzeg6k(customers, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public customersControllerFindOneV9u2yc(id: string, options?: RawAxiosRequestConfig) {
-        return CustomersApiFp(this.configuration).customersControllerFindOneV9u2yc(id, options).then((request) => request(this.axios, this.basePath));
+    public deleteCustomer(id: string, options?: RawAxiosRequestConfig) {
+        return CustomersApiFp(this.configuration).deleteCustomer(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Generate a connect URL for a customer. This URL will redirect the customer to the platform\'s authentication page. If no platform is specified, the user will be presented with a list of platforms to choose from.
      * @summary Generate connect URL for a customer
      * @param {string} id The id (UUID) of the customer to connect.
-     * @param {GetConnectCustomerUrlPlatformEnum} [platform] The platform to connect the customer to. If undefined, users will be presented with a list of platforms to choose from.
+     * @param {GenerateConnectCustomerUrlPlatformEnum} [platform] The platform to connect the customer to. If undefined, users will be presented with a list of platforms to choose from.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public getConnectCustomerUrl(id: string, platform?: GetConnectCustomerUrlPlatformEnum, options?: RawAxiosRequestConfig) {
-        return CustomersApiFp(this.configuration).getConnectCustomerUrl(id, platform, options).then((request) => request(this.axios, this.basePath));
+    public generateConnectCustomerUrl(id: string, platform?: GenerateConnectCustomerUrlPlatformEnum, options?: RawAxiosRequestConfig) {
+        return CustomersApiFp(this.configuration).generateConnectCustomerUrl(id, platform, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get a list of all customers.
+     * @summary Get all customers
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getAllCustomers(options?: RawAxiosRequestConfig) {
+        return CustomersApiFp(this.configuration).getAllCustomers(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get a list of all customers with their connected platforms.
+     * @summary Get all customers with platforms
+     * @param {Array<string>} [customers] The ids of the customers to fetch.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getAllCustomersWithPlatforms(customers?: Array<string>, options?: RawAxiosRequestConfig) {
+        return CustomersApiFp(this.configuration).getAllCustomersWithPlatforms(customers, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get a single customer by their id. Returns 404 if the customer does not exist.
+     * @summary Get customer by id
+     * @param {string} id The id (UUID) of the customer to fetch.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getCustomer(id: string, options?: RawAxiosRequestConfig) {
+        return CustomersApiFp(this.configuration).getCustomer(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get a single customer with their connected platforms. Returns 404 if the customer does not exist.
+     * @summary Get customer with platforms
+     * @param {string} id The id (UUID) of the customer to fetch with platforms.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getCustomerWithPlatforms(id: string, options?: RawAxiosRequestConfig) {
+        return CustomersApiFp(this.configuration).getCustomerWithPlatforms(id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
-export const GetConnectCustomerUrlPlatformEnum = {
+export const GenerateConnectCustomerUrlPlatformEnum = {
     ActiveAgent: 'ActiveAgent',
     Facebook: 'Facebook',
     GoogleAds: 'GoogleAds',
     TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
+    Pinterest: 'Pinterest',
+    LinkedIn: 'LinkedIn'
 } as const;
-export type GetConnectCustomerUrlPlatformEnum = typeof GetConnectCustomerUrlPlatformEnum[keyof typeof GetConnectCustomerUrlPlatformEnum];
+export type GenerateConnectCustomerUrlPlatformEnum = typeof GenerateConnectCustomerUrlPlatformEnum[keyof typeof GenerateConnectCustomerUrlPlatformEnum];
 
 
 /**
@@ -5216,11 +4799,14 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
     return {
         /**
          * 
+         * @param {FacebookCreateCredentialDto} facebookCreateCredentialDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adAccountsControllerFindAll0549lm: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/facebook/adaccounts`;
+        createCustomer: async (facebookCreateCredentialDto: FacebookCreateCredentialDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'facebookCreateCredentialDto' is not null or undefined
+            assertParamExists('createCustomer', 'facebookCreateCredentialDto', facebookCreateCredentialDto)
+            const localVarPath = `/facebook/credentials/customer`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5228,7 +4814,7 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -5238,9 +4824,12 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(facebookCreateCredentialDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -5249,143 +4838,15 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @param {string} customerId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adAccountsControllerSyncCustomerKpkzo2: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/facebook/adaccounts/customer`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {Array<AdSetsControllerFindAllGeus8dChildResourcesEnum>} [childResources] 
-         * @param {Array<AdSetsControllerFindAllGeus8dPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose AdSets to include in the response.
-         * @param {Array<string>} [ids] List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {AdSetsControllerFindAllGeus8dStatusEnum} [status] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adSetsControllerFindAllGeus8d: async (childResources?: Array<AdSetsControllerFindAllGeus8dChildResourcesEnum>, platforms?: Array<AdSetsControllerFindAllGeus8dPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, status?: AdSetsControllerFindAllGeus8dStatusEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/facebook/adsets`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (childResources) {
-                localVarQueryParameter['childResources'] = childResources;
-            }
-
-            if (platforms) {
-                localVarQueryParameter['platforms'] = platforms;
-            }
-
-            if (customers) {
-                localVarQueryParameter['customers'] = customers;
-            }
-
-            if (ids) {
-                localVarQueryParameter['ids'] = ids;
-            }
-
-            if (status !== undefined) {
-                localVarQueryParameter['status'] = status;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adSetsControllerFindOne7d8j59: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('adSetsControllerFindOne7d8j59', 'id', id)
-            const localVarPath = `/facebook/adsets/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adSetsControllerRemoveQpjoni: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('adSetsControllerRemoveQpjoni', 'id', id)
-            const localVarPath = `/facebook/adsets/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+        deleteCustomer: async (customerId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('deleteCustomer', 'customerId', customerId)
+            const localVarPath = `/facebook/credentials/{customerId}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5414,18 +4875,11 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @param {string} id 
-         * @param {object} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adSetsControllerUpdate505b7c: async (id: string, body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('adSetsControllerUpdate505b7c', 'id', id)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('adSetsControllerUpdate505b7c', 'body', body)
-            const localVarPath = `/facebook/adsets/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+        findAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/facebook/credentials`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5433,7 +4887,7 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -5443,12 +4897,9 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -5457,54 +4908,25 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @param {CreateFacebookAuthDto} createFacebookAuthDto 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerGetAccessTokenT41rff: async (createFacebookAuthDto: CreateFacebookAuthDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createFacebookAuthDto' is not null or undefined
-            assertParamExists('authControllerGetAccessTokenT41rff', 'createFacebookAuthDto', createFacebookAuthDto)
-            const localVarPath = `/facebook/auth`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createFacebookAuthDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {Array<CampaignsControllerFindAllZ5jbtsChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {CampaignsControllerFindAllZ5jbtsStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<CampaignsControllerFindAllZ5jbtsPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerFindAllZ5jbts: async (childResources?: Array<CampaignsControllerFindAllZ5jbtsChildResourcesEnum>, status?: CampaignsControllerFindAllZ5jbtsStatusEnum, platforms?: Array<CampaignsControllerFindAllZ5jbtsPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        findAll_1: async (childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'childResources' is not null or undefined
+            assertParamExists('findAll_1', 'childResources', childResources)
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('findAll_1', 'status', status)
+            // verify required parameter 'platforms' is not null or undefined
+            assertParamExists('findAll_1', 'platforms', platforms)
+            // verify required parameter 'customers' is not null or undefined
+            assertParamExists('findAll_1', 'customers', customers)
+            // verify required parameter 'ids' is not null or undefined
+            assertParamExists('findAll_1', 'ids', ids)
             const localVarPath = `/facebook/campaigns`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5554,14 +4976,26 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @param {FacebookCreateCredentialDto} facebookCreateCredentialDto 
+         * @param {Array<ResourceKind>} childResources 
+         * @param {Status} status Status of the AdSets to return. Example: set status to Running to get a list of running AdSets.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose AdSets to include in the response.
+         * @param {Array<string>} ids List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        credentialsControllerCreateCustomerLqwsc5: async (facebookCreateCredentialDto: FacebookCreateCredentialDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'facebookCreateCredentialDto' is not null or undefined
-            assertParamExists('credentialsControllerCreateCustomerLqwsc5', 'facebookCreateCredentialDto', facebookCreateCredentialDto)
-            const localVarPath = `/facebook/credentials/customer`;
+        findAll_2: async (childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'childResources' is not null or undefined
+            assertParamExists('findAll_2', 'childResources', childResources)
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('findAll_2', 'status', status)
+            // verify required parameter 'platforms' is not null or undefined
+            assertParamExists('findAll_2', 'platforms', platforms)
+            // verify required parameter 'customers' is not null or undefined
+            assertParamExists('findAll_2', 'customers', customers)
+            // verify required parameter 'ids' is not null or undefined
+            assertParamExists('findAll_2', 'ids', ids)
+            const localVarPath = `/facebook/adsets`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5569,7 +5003,7 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -5577,45 +5011,25 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(facebookCreateCredentialDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} customerId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerDeleteCustomerGkcpsz: async (customerId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('credentialsControllerDeleteCustomerGkcpsz', 'customerId', customerId)
-            const localVarPath = `/facebook/credentials/{customerId}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
+            if (childResources) {
+                localVarQueryParameter['childResources'] = childResources;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
 
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            if (platforms) {
+                localVarQueryParameter['platforms'] = platforms;
+            }
+
+            if (customers) {
+                localVarQueryParameter['customers'] = customers;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
 
 
     
@@ -5633,8 +5047,8 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        credentialsControllerFindAllUrmvrv: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/facebook/credentials`;
+        findAll_3: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/facebook/adaccounts`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5663,10 +5077,86 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        credentialsControllerIsConnectedTfvw6f: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        findOne: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('findOne', 'id', id)
+            const localVarPath = `/facebook/adsets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateFacebookAuthDto} createFacebookAuthDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccessToken: async (createFacebookAuthDto: CreateFacebookAuthDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createFacebookAuthDto' is not null or undefined
+            assertParamExists('getAccessToken', 'createFacebookAuthDto', createFacebookAuthDto)
+            const localVarPath = `/facebook/auth`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createFacebookAuthDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        isConnected: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/facebook/credentials/isConnected`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5701,175 +5191,11 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequest1fu5v3Put: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestDelete: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequest1fu5v3Put', 'customerId', customerId)
+            assertParamExists('rawRequestDelete', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequest1fu5v3Put', 'externalPath', externalPath)
-            const localVarPath = `/facebook/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequest2tg1shGet: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequest2tg1shGet', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequest2tg1shGet', 'externalPath', externalPath)
-            const localVarPath = `/facebook/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequestF1g1cgPost: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequestF1g1cgPost', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequestF1g1cgPost', 'externalPath', externalPath)
-            const localVarPath = `/facebook/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequestG9ig2bPatch: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequestG9ig2bPatch', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequestG9ig2bPatch', 'externalPath', externalPath)
-            const localVarPath = `/facebook/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequestHkcfxtDelete: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequestHkcfxtDelete', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequestHkcfxtDelete', 'externalPath', externalPath)
+            assertParamExists('rawRequestDelete', 'externalPath', externalPath)
             const localVarPath = `/facebook/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -5906,11 +5232,93 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequestU28fawOptions: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestGet: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequestU28fawOptions', 'customerId', customerId)
+            assertParamExists('rawRequestGet', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequestU28fawOptions', 'externalPath', externalPath)
+            assertParamExists('rawRequestGet', 'externalPath', externalPath)
+            const localVarPath = `/facebook/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestHead: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestHead', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestHead', 'externalPath', externalPath)
+            const localVarPath = `/facebook/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'HEAD', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestOptions: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestOptions', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestOptions', 'externalPath', externalPath)
             const localVarPath = `/facebook/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -5947,11 +5355,11 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequestUdhoymHead: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestPatch: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequestUdhoymHead', 'customerId', customerId)
+            assertParamExists('rawRequestPatch', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequestUdhoymHead', 'externalPath', externalPath)
+            assertParamExists('rawRequestPatch', 'externalPath', externalPath)
             const localVarPath = `/facebook/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -5962,7 +5370,7 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'HEAD', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -5981,164 +5389,6 @@ export const FacebookApiAxiosParamCreator = function (configuration?: Configurat
                 options: localVarRequestOptions,
             };
         },
-    }
-};
-
-/**
- * FacebookApi - functional programming interface
- */
-export const FacebookApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = FacebookApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adAccountsControllerFindAll0549lm(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FacebookAdAccountWrapper>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adAccountsControllerFindAll0549lm(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.adAccountsControllerFindAll0549lm']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adAccountsControllerSyncCustomerKpkzo2(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adAccountsControllerSyncCustomerKpkzo2(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.adAccountsControllerSyncCustomerKpkzo2']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {Array<AdSetsControllerFindAllGeus8dChildResourcesEnum>} [childResources] 
-         * @param {Array<AdSetsControllerFindAllGeus8dPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose AdSets to include in the response.
-         * @param {Array<string>} [ids] List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {AdSetsControllerFindAllGeus8dStatusEnum} [status] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adSetsControllerFindAllGeus8d(childResources?: Array<AdSetsControllerFindAllGeus8dChildResourcesEnum>, platforms?: Array<AdSetsControllerFindAllGeus8dPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, status?: AdSetsControllerFindAllGeus8dStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AdSet>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adSetsControllerFindAllGeus8d(childResources, platforms, customers, ids, status, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.adSetsControllerFindAllGeus8d']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adSetsControllerFindOne7d8j59(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adSetsControllerFindOne7d8j59(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.adSetsControllerFindOne7d8j59']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adSetsControllerRemoveQpjoni(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adSetsControllerRemoveQpjoni(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.adSetsControllerRemoveQpjoni']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adSetsControllerUpdate505b7c(id: string, body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adSetsControllerUpdate505b7c(id, body, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.adSetsControllerUpdate505b7c']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {CreateFacebookAuthDto} createFacebookAuthDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async authControllerGetAccessTokenT41rff(createFacebookAuthDto: CreateFacebookAuthDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerGetAccessTokenT41rff(createFacebookAuthDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.authControllerGetAccessTokenT41rff']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {Array<CampaignsControllerFindAllZ5jbtsChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {CampaignsControllerFindAllZ5jbtsStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<CampaignsControllerFindAllZ5jbtsPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async campaignsControllerFindAllZ5jbts(childResources?: Array<CampaignsControllerFindAllZ5jbtsChildResourcesEnum>, status?: CampaignsControllerFindAllZ5jbtsStatusEnum, platforms?: Array<CampaignsControllerFindAllZ5jbtsPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Campaign>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsControllerFindAllZ5jbts(childResources, status, platforms, customers, ids, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.campaignsControllerFindAllZ5jbts']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {FacebookCreateCredentialDto} facebookCreateCredentialDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async credentialsControllerCreateCustomerLqwsc5(facebookCreateCredentialDto: FacebookCreateCredentialDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.credentialsControllerCreateCustomerLqwsc5(facebookCreateCredentialDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.credentialsControllerCreateCustomerLqwsc5']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async credentialsControllerDeleteCustomerGkcpsz(customerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.credentialsControllerDeleteCustomerGkcpsz(customerId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.credentialsControllerDeleteCustomerGkcpsz']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async credentialsControllerFindAllUrmvrv(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.credentialsControllerFindAllUrmvrv(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.credentialsControllerFindAllUrmvrv']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async credentialsControllerIsConnectedTfvw6f(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.credentialsControllerIsConnectedTfvw6f(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.credentialsControllerIsConnectedTfvw6f']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
         /**
          * 
          * @param {string} customerId Customer UUID
@@ -6146,552 +5396,14 @@ export const FacebookApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawControllerRawRequest1fu5v3Put(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequest1fu5v3Put(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.rawControllerRawRequest1fu5v3Put']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawControllerRawRequest2tg1shGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequest2tg1shGet(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.rawControllerRawRequest2tg1shGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawControllerRawRequestF1g1cgPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequestF1g1cgPost(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.rawControllerRawRequestF1g1cgPost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawControllerRawRequestG9ig2bPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequestG9ig2bPatch(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.rawControllerRawRequestG9ig2bPatch']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawControllerRawRequestHkcfxtDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequestHkcfxtDelete(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.rawControllerRawRequestHkcfxtDelete']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawControllerRawRequestU28fawOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequestU28fawOptions(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.rawControllerRawRequestU28fawOptions']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawControllerRawRequestUdhoymHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequestUdhoymHead(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FacebookApi.rawControllerRawRequestUdhoymHead']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * FacebookApi - factory interface
- */
-export const FacebookApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = FacebookApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adAccountsControllerFindAll0549lm(options?: RawAxiosRequestConfig): AxiosPromise<Array<FacebookAdAccountWrapper>> {
-            return localVarFp.adAccountsControllerFindAll0549lm(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adAccountsControllerSyncCustomerKpkzo2(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.adAccountsControllerSyncCustomerKpkzo2(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {Array<AdSetsControllerFindAllGeus8dChildResourcesEnum>} [childResources] 
-         * @param {Array<AdSetsControllerFindAllGeus8dPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose AdSets to include in the response.
-         * @param {Array<string>} [ids] List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {AdSetsControllerFindAllGeus8dStatusEnum} [status] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adSetsControllerFindAllGeus8d(childResources?: Array<AdSetsControllerFindAllGeus8dChildResourcesEnum>, platforms?: Array<AdSetsControllerFindAllGeus8dPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, status?: AdSetsControllerFindAllGeus8dStatusEnum, options?: RawAxiosRequestConfig): AxiosPromise<Array<AdSet>> {
-            return localVarFp.adSetsControllerFindAllGeus8d(childResources, platforms, customers, ids, status, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adSetsControllerFindOne7d8j59(id: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.adSetsControllerFindOne7d8j59(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adSetsControllerRemoveQpjoni(id: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.adSetsControllerRemoveQpjoni(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adSetsControllerUpdate505b7c(id: string, body: object, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.adSetsControllerUpdate505b7c(id, body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {CreateFacebookAuthDto} createFacebookAuthDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authControllerGetAccessTokenT41rff(createFacebookAuthDto: CreateFacebookAuthDto, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.authControllerGetAccessTokenT41rff(createFacebookAuthDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {Array<CampaignsControllerFindAllZ5jbtsChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {CampaignsControllerFindAllZ5jbtsStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<CampaignsControllerFindAllZ5jbtsPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerFindAllZ5jbts(childResources?: Array<CampaignsControllerFindAllZ5jbtsChildResourcesEnum>, status?: CampaignsControllerFindAllZ5jbtsStatusEnum, platforms?: Array<CampaignsControllerFindAllZ5jbtsPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<Array<Campaign>> {
-            return localVarFp.campaignsControllerFindAllZ5jbts(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {FacebookCreateCredentialDto} facebookCreateCredentialDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerCreateCustomerLqwsc5(facebookCreateCredentialDto: FacebookCreateCredentialDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.credentialsControllerCreateCustomerLqwsc5(facebookCreateCredentialDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerDeleteCustomerGkcpsz(customerId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.credentialsControllerDeleteCustomerGkcpsz(customerId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerFindAllUrmvrv(options?: RawAxiosRequestConfig): AxiosPromise<Array<object>> {
-            return localVarFp.credentialsControllerFindAllUrmvrv(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerIsConnectedTfvw6f(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.credentialsControllerIsConnectedTfvw6f(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequest1fu5v3Put(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequest1fu5v3Put(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequest2tg1shGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequest2tg1shGet(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequestF1g1cgPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequestF1g1cgPost(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequestG9ig2bPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequestG9ig2bPatch(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequestHkcfxtDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequestHkcfxtDelete(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequestU28fawOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequestU28fawOptions(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Facebook Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawControllerRawRequestUdhoymHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequestUdhoymHead(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * FacebookApi - object-oriented interface
- */
-export class FacebookApi extends BaseAPI {
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adAccountsControllerFindAll0549lm(options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).adAccountsControllerFindAll0549lm(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adAccountsControllerSyncCustomerKpkzo2(options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).adAccountsControllerSyncCustomerKpkzo2(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {Array<AdSetsControllerFindAllGeus8dChildResourcesEnum>} [childResources] 
-     * @param {Array<AdSetsControllerFindAllGeus8dPlatformsEnum>} [platforms] List of platforms to include in the response.
-     * @param {Array<string>} [customers] List of Customer IDs whose AdSets to include in the response.
-     * @param {Array<string>} [ids] List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
-     * @param {AdSetsControllerFindAllGeus8dStatusEnum} [status] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adSetsControllerFindAllGeus8d(childResources?: Array<AdSetsControllerFindAllGeus8dChildResourcesEnum>, platforms?: Array<AdSetsControllerFindAllGeus8dPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, status?: AdSetsControllerFindAllGeus8dStatusEnum, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).adSetsControllerFindAllGeus8d(childResources, platforms, customers, ids, status, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adSetsControllerFindOne7d8j59(id: string, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).adSetsControllerFindOne7d8j59(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adSetsControllerRemoveQpjoni(id: string, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).adSetsControllerRemoveQpjoni(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {object} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adSetsControllerUpdate505b7c(id: string, body: object, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).adSetsControllerUpdate505b7c(id, body, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {CreateFacebookAuthDto} createFacebookAuthDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public authControllerGetAccessTokenT41rff(createFacebookAuthDto: CreateFacebookAuthDto, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).authControllerGetAccessTokenT41rff(createFacebookAuthDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {Array<CampaignsControllerFindAllZ5jbtsChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-     * @param {CampaignsControllerFindAllZ5jbtsStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-     * @param {Array<CampaignsControllerFindAllZ5jbtsPlatformsEnum>} [platforms] List of platforms to include in the response.
-     * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-     * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public campaignsControllerFindAllZ5jbts(childResources?: Array<CampaignsControllerFindAllZ5jbtsChildResourcesEnum>, status?: CampaignsControllerFindAllZ5jbtsStatusEnum, platforms?: Array<CampaignsControllerFindAllZ5jbtsPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).campaignsControllerFindAllZ5jbts(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {FacebookCreateCredentialDto} facebookCreateCredentialDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public credentialsControllerCreateCustomerLqwsc5(facebookCreateCredentialDto: FacebookCreateCredentialDto, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).credentialsControllerCreateCustomerLqwsc5(facebookCreateCredentialDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public credentialsControllerDeleteCustomerGkcpsz(customerId: string, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).credentialsControllerDeleteCustomerGkcpsz(customerId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public credentialsControllerFindAllUrmvrv(options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).credentialsControllerFindAllUrmvrv(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public credentialsControllerIsConnectedTfvw6f(options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).credentialsControllerIsConnectedTfvw6f(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the Facebook Ads API request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawControllerRawRequest1fu5v3Put(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).rawControllerRawRequest1fu5v3Put(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the Facebook Ads API request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawControllerRawRequest2tg1shGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).rawControllerRawRequest2tg1shGet(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the Facebook Ads API request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawControllerRawRequestF1g1cgPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).rawControllerRawRequestF1g1cgPost(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the Facebook Ads API request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawControllerRawRequestG9ig2bPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).rawControllerRawRequestG9ig2bPatch(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the Facebook Ads API request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawControllerRawRequestHkcfxtDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).rawControllerRawRequestHkcfxtDelete(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the Facebook Ads API request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawControllerRawRequestU28fawOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).rawControllerRawRequestU28fawOptions(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the Facebook Ads API request.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawControllerRawRequestUdhoymHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return FacebookApiFp(this.configuration).rawControllerRawRequestUdhoymHead(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-export const AdSetsControllerFindAllGeus8dChildResourcesEnum = {
-    Campaign: 'Campaign',
-    AdSet: 'AdSet',
-    Ad: 'Ad',
-    Targeting: 'Targeting',
-    AdAccount: 'AdAccount'
-} as const;
-export type AdSetsControllerFindAllGeus8dChildResourcesEnum = typeof AdSetsControllerFindAllGeus8dChildResourcesEnum[keyof typeof AdSetsControllerFindAllGeus8dChildResourcesEnum];
-export const AdSetsControllerFindAllGeus8dPlatformsEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-export type AdSetsControllerFindAllGeus8dPlatformsEnum = typeof AdSetsControllerFindAllGeus8dPlatformsEnum[keyof typeof AdSetsControllerFindAllGeus8dPlatformsEnum];
-export const AdSetsControllerFindAllGeus8dStatusEnum = {
-    Active: 'ACTIVE',
-    Running: 'RUNNING',
-    Paused: 'PAUSED',
-    Unknown: 'UNKNOWN'
-} as const;
-export type AdSetsControllerFindAllGeus8dStatusEnum = typeof AdSetsControllerFindAllGeus8dStatusEnum[keyof typeof AdSetsControllerFindAllGeus8dStatusEnum];
-export const CampaignsControllerFindAllZ5jbtsChildResourcesEnum = {
-    Campaign: 'Campaign',
-    AdSet: 'AdSet',
-    Ad: 'Ad',
-    Targeting: 'Targeting',
-    AdAccount: 'AdAccount'
-} as const;
-export type CampaignsControllerFindAllZ5jbtsChildResourcesEnum = typeof CampaignsControllerFindAllZ5jbtsChildResourcesEnum[keyof typeof CampaignsControllerFindAllZ5jbtsChildResourcesEnum];
-export const CampaignsControllerFindAllZ5jbtsStatusEnum = {
-    Active: 'ACTIVE',
-    Running: 'RUNNING',
-    Paused: 'PAUSED',
-    Unknown: 'UNKNOWN'
-} as const;
-export type CampaignsControllerFindAllZ5jbtsStatusEnum = typeof CampaignsControllerFindAllZ5jbtsStatusEnum[keyof typeof CampaignsControllerFindAllZ5jbtsStatusEnum];
-export const CampaignsControllerFindAllZ5jbtsPlatformsEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-export type CampaignsControllerFindAllZ5jbtsPlatformsEnum = typeof CampaignsControllerFindAllZ5jbtsPlatformsEnum[keyof typeof CampaignsControllerFindAllZ5jbtsPlatformsEnum];
-
-
-/**
- * GoogleAdsApi - axios parameter creator
- */
-export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adAccountsControllerFindAllMln5nd: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/googleads/adaccounts`;
+        rawRequestPost: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestPost', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestPost', 'externalPath', externalPath)
+            const localVarPath = `/facebook/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6699,7 +5411,7 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -6720,15 +5432,19 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @param {string} customerId 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adAccountsControllerSyncCustomer2j6xn9: async (customerId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestPut: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('adAccountsControllerSyncCustomer2j6xn9', 'customerId', customerId)
-            const localVarPath = `/googleads/{customerId}/adaccounts`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)));
+            assertParamExists('rawRequestPut', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestPut', 'externalPath', externalPath)
+            const localVarPath = `/facebook/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6757,148 +5473,14 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsControllerCreate5j1f9u: async (body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('adsControllerCreate5j1f9u', 'body', body)
-            const localVarPath = `/googleads/ads`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {Array<AdsControllerFindAllErdkmsChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {AdsControllerFindAllErdkmsStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<AdsControllerFindAllErdkmsPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsControllerFindAllErdkms: async (childResources?: Array<AdsControllerFindAllErdkmsChildResourcesEnum>, status?: AdsControllerFindAllErdkmsStatusEnum, platforms?: Array<AdsControllerFindAllErdkmsPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/googleads/ads`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (childResources) {
-                localVarQueryParameter['childResources'] = childResources;
-            }
-
-            if (status !== undefined) {
-                localVarQueryParameter['status'] = status;
-            }
-
-            if (platforms) {
-                localVarQueryParameter['platforms'] = platforms;
-            }
-
-            if (customers) {
-                localVarQueryParameter['customers'] = customers;
-            }
-
-            if (ids) {
-                localVarQueryParameter['ids'] = ids;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsControllerFindOneNutbxl: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        remove: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('adsControllerFindOneNutbxl', 'id', id)
-            const localVarPath = `/googleads/ads/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsControllerRemoveAhonpn: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('adsControllerRemoveAhonpn', 'id', id)
-            const localVarPath = `/googleads/ads/{id}`
+            assertParamExists('remove', 'id', id)
+            const localVarPath = `/facebook/adsets/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6928,17 +5510,50 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        syncCustomer: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/facebook/adaccounts/customer`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} id 
          * @param {object} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsControllerUpdateT99o7f: async (id: string, body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        update: async (id: string, body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('adsControllerUpdateT99o7f', 'id', id)
+            assertParamExists('update', 'id', id)
             // verify required parameter 'body' is not null or undefined
-            assertParamExists('adsControllerUpdateT99o7f', 'body', body)
-            const localVarPath = `/googleads/ads/{id}`
+            assertParamExists('update', 'body', body)
+            const localVarPath = `/facebook/adsets/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6969,102 +5584,92 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
                 options: localVarRequestOptions,
             };
         },
+    }
+};
+
+/**
+ * FacebookApi - functional programming interface
+ */
+export const FacebookApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = FacebookApiAxiosParamCreator(configuration)
+    return {
         /**
          * 
-         * @param {object} body 
+         * @param {FacebookCreateCredentialDto} facebookCreateCredentialDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsetsControllerCreateX8svw5: async (body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('adsetsControllerCreateX8svw5', 'body', body)
-            const localVarPath = `/googleads/adsets`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
+        async createCustomer(facebookCreateCredentialDto: FacebookCreateCredentialDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createCustomer(facebookCreateCredentialDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.createCustomer']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @param {Array<AdsetsControllerFindAll9d7h31ChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {AdsetsControllerFindAll9d7h31StatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<AdsetsControllerFindAll9d7h31PlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {string} customerId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsetsControllerFindAll9d7h31: async (childResources?: Array<AdsetsControllerFindAll9d7h31ChildResourcesEnum>, status?: AdsetsControllerFindAll9d7h31StatusEnum, platforms?: Array<AdsetsControllerFindAll9d7h31PlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/googleads/adsets`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (childResources) {
-                localVarQueryParameter['childResources'] = childResources;
-            }
-
-            if (status !== undefined) {
-                localVarQueryParameter['status'] = status;
-            }
-
-            if (platforms) {
-                localVarQueryParameter['platforms'] = platforms;
-            }
-
-            if (customers) {
-                localVarQueryParameter['customers'] = customers;
-            }
-
-            if (ids) {
-                localVarQueryParameter['ids'] = ids;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
+        async deleteCustomer(customerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCustomer(customerId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.deleteCustomer']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.findAll']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll_1(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll_1(childResources, status, platforms, customers, ids, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.findAll_1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources 
+         * @param {Status} status Status of the AdSets to return. Example: set status to Running to get a list of running AdSets.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose AdSets to include in the response.
+         * @param {Array<string>} ids List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll_2(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll_2(childResources, status, platforms, customers, ids, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.findAll_2']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll_3(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll_3(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.findAll_3']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -7072,36 +5677,125 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsetsControllerFindOne3q406b: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('adsetsControllerFindOne3q406b', 'id', id)
-            const localVarPath = `/googleads/adsets/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
+        async findOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findOne(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.findOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {CreateFacebookAuthDto} createFacebookAuthDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAccessToken(createFacebookAuthDto: CreateFacebookAuthDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccessToken(createFacebookAuthDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.getAccessToken']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async isConnected(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.isConnected(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.isConnected']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestDelete(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.rawRequestDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestGet(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.rawRequestGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestHead(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.rawRequestHead']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestOptions(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.rawRequestOptions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPatch(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.rawRequestPatch']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPost(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.rawRequestPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPut(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.rawRequestPut']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -7109,36 +5803,22 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsetsControllerRemoveIariyn: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('adsetsControllerRemoveIariyn', 'id', id)
-            const localVarPath = `/googleads/adsets/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
+        async remove(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.remove(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.remove']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async syncCustomer(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.syncCustomer(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.syncCustomer']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -7147,90 +5827,430 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsetsControllerUpdateQb6632: async (id: string, body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('adsetsControllerUpdateQb6632', 'id', id)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('adsetsControllerUpdateQb6632', 'body', body)
-            const localVarPath = `/googleads/adsets/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
+        async update(id: string, body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update(id, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FacebookApi.update']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+    }
+};
+
+/**
+ * FacebookApi - factory interface
+ */
+export const FacebookApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = FacebookApiFp(configuration)
+    return {
         /**
          * 
-         * @param {CreateGoogleAdsAuthDto} createGoogleAdsAuthDto 
+         * @param {FacebookCreateCredentialDto} facebookCreateCredentialDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerGetAccessToken69qgkv: async (createGoogleAdsAuthDto: CreateGoogleAdsAuthDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createGoogleAdsAuthDto' is not null or undefined
-            assertParamExists('authControllerGetAccessToken69qgkv', 'createGoogleAdsAuthDto', createGoogleAdsAuthDto)
-            const localVarPath = `/googleads/auth`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createGoogleAdsAuthDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
+        createCustomer(facebookCreateCredentialDto: FacebookCreateCredentialDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.createCustomer(facebookCreateCredentialDto, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {string} customerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCustomer(customerId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteCustomer(customerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findAll(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_1(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findAll_1(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources 
+         * @param {Status} status Status of the AdSets to return. Example: set status to Running to get a list of running AdSets.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose AdSets to include in the response.
+         * @param {Array<string>} ids List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_2(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findAll_2(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_3(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findAll_3(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findOne(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateFacebookAuthDto} createFacebookAuthDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccessToken(createFacebookAuthDto: CreateFacebookAuthDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getAccessToken(createFacebookAuthDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        isConnected(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.isConnected(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestDelete(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestGet(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestHead(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestOptions(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPatch(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPost(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Facebook Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPut(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.remove(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        syncCustomer(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.syncCustomer(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update(id: string, body: object, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.update(id, body, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * FacebookApi - object-oriented interface
+ */
+export class FacebookApi extends BaseAPI {
+    /**
+     * 
+     * @param {FacebookCreateCredentialDto} facebookCreateCredentialDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public createCustomer(facebookCreateCredentialDto: FacebookCreateCredentialDto, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).createCustomer(facebookCreateCredentialDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public deleteCustomer(customerId: string, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).deleteCustomer(customerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findAll(options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).findAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+     * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+     * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+     * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+     * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findAll_1(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).findAll_1(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Array<ResourceKind>} childResources 
+     * @param {Status} status Status of the AdSets to return. Example: set status to Running to get a list of running AdSets.
+     * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+     * @param {Array<string>} customers List of Customer IDs whose AdSets to include in the response.
+     * @param {Array<string>} ids List of AdSet IDs to include in the response. Requires platform and customer to be set to a single value.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findAll_2(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).findAll_2(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findAll_3(options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).findAll_3(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findOne(id: string, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).findOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateFacebookAuthDto} createFacebookAuthDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getAccessToken(createFacebookAuthDto: CreateFacebookAuthDto, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).getAccessToken(createFacebookAuthDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public isConnected(options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).isConnected(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the Facebook Ads API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).rawRequestDelete(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the Facebook Ads API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).rawRequestGet(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the Facebook Ads API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).rawRequestHead(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the Facebook Ads API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).rawRequestOptions(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the Facebook Ads API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).rawRequestPatch(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the Facebook Ads API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).rawRequestPost(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the Facebook Ads API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).rawRequestPut(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public remove(id: string, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).remove(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public syncCustomer(options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).syncCustomer(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {object} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public update(id: string, body: object, options?: RawAxiosRequestConfig) {
+        return FacebookApiFp(this.configuration).update(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * GoogleAdsApi - axios parameter creator
+ */
+export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
         /**
          * 
          * @param {object} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        campaignsControllerCreateWi0t68: async (body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        create: async (body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
-            assertParamExists('campaignsControllerCreateWi0t68', 'body', body)
+            assertParamExists('create', 'body', body)
             const localVarPath = `/googleads/campaigns`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -7240,181 +6260,6 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
             }
 
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {Array<CampaignsControllerFindAllJazafvChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {CampaignsControllerFindAllJazafvStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<CampaignsControllerFindAllJazafvPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerFindAllJazafv: async (childResources?: Array<CampaignsControllerFindAllJazafvChildResourcesEnum>, status?: CampaignsControllerFindAllJazafvStatusEnum, platforms?: Array<CampaignsControllerFindAllJazafvPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/googleads/campaigns`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (childResources) {
-                localVarQueryParameter['childResources'] = childResources;
-            }
-
-            if (status !== undefined) {
-                localVarQueryParameter['status'] = status;
-            }
-
-            if (platforms) {
-                localVarQueryParameter['platforms'] = platforms;
-            }
-
-            if (customers) {
-                localVarQueryParameter['customers'] = customers;
-            }
-
-            if (ids) {
-                localVarQueryParameter['ids'] = ids;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerFindOneU27hua: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('campaignsControllerFindOneU27hua', 'id', id)
-            const localVarPath = `/googleads/campaigns/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerRemoveWvf99p: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('campaignsControllerRemoveWvf99p', 'id', id)
-            const localVarPath = `/googleads/campaigns/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerUpdate40ll7r: async (id: string, body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('campaignsControllerUpdate40ll7r', 'id', id)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('campaignsControllerUpdate40ll7r', 'body', body)
-            const localVarPath = `/googleads/campaigns/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -7442,9 +6287,9 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        credentialsControllerCreateCustomer8qpv6w: async (googleAdsCreateCredentialDto: GoogleAdsCreateCredentialDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createCustomer: async (googleAdsCreateCredentialDto: GoogleAdsCreateCredentialDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'googleAdsCreateCredentialDto' is not null or undefined
-            assertParamExists('credentialsControllerCreateCustomer8qpv6w', 'googleAdsCreateCredentialDto', googleAdsCreateCredentialDto)
+            assertParamExists('createCustomer', 'googleAdsCreateCredentialDto', googleAdsCreateCredentialDto)
             const localVarPath = `/googleads/credentials/customer`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -7477,13 +6322,91 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create_1: async (body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('create_1', 'body', body)
+            const localVarPath = `/googleads/ads`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create_2: async (body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('create_2', 'body', body)
+            const localVarPath = `/googleads/adsets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} customerId The id (UUID) of the customer whose credentials should be deleted.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        credentialsControllerDeleteCustomerCredentialsSiel2b: async (customerId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteCustomerCredentials: async (customerId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('credentialsControllerDeleteCustomerCredentialsSiel2b', 'customerId', customerId)
+            assertParamExists('deleteCustomerCredentials', 'customerId', customerId)
             const localVarPath = `/googleads/{customerId}/credentials`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -7517,7 +6440,7 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        credentialsControllerFindAll9quhk2: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        findAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/googleads/credentials`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -7547,19 +6470,26 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequest60eqvdPost: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequest60eqvdPost', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequest60eqvdPost', 'externalPath', externalPath)
-            const localVarPath = `/googleads/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+        findAll_3: async (childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'childResources' is not null or undefined
+            assertParamExists('findAll_3', 'childResources', childResources)
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('findAll_3', 'status', status)
+            // verify required parameter 'platforms' is not null or undefined
+            assertParamExists('findAll_3', 'platforms', platforms)
+            // verify required parameter 'customers' is not null or undefined
+            assertParamExists('findAll_3', 'customers', customers)
+            // verify required parameter 'ids' is not null or undefined
+            assertParamExists('findAll_3', 'ids', ids)
+            const localVarPath = `/googleads/campaigns`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7567,13 +6497,33 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication bearerAuth required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (childResources) {
+                localVarQueryParameter['childResources'] = childResources;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+            if (platforms) {
+                localVarQueryParameter['platforms'] = platforms;
+            }
+
+            if (customers) {
+                localVarQueryParameter['customers'] = customers;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
 
 
     
@@ -7588,19 +6538,147 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequest7vtbrnGet: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequest7vtbrnGet', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequest7vtbrnGet', 'externalPath', externalPath)
-            const localVarPath = `/googleads/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+        findAll_4: async (childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'childResources' is not null or undefined
+            assertParamExists('findAll_4', 'childResources', childResources)
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('findAll_4', 'status', status)
+            // verify required parameter 'platforms' is not null or undefined
+            assertParamExists('findAll_4', 'platforms', platforms)
+            // verify required parameter 'customers' is not null or undefined
+            assertParamExists('findAll_4', 'customers', customers)
+            // verify required parameter 'ids' is not null or undefined
+            assertParamExists('findAll_4', 'ids', ids)
+            const localVarPath = `/googleads/ads`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (childResources) {
+                localVarQueryParameter['childResources'] = childResources;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+            if (platforms) {
+                localVarQueryParameter['platforms'] = platforms;
+            }
+
+            if (customers) {
+                localVarQueryParameter['customers'] = customers;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_5: async (childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'childResources' is not null or undefined
+            assertParamExists('findAll_5', 'childResources', childResources)
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('findAll_5', 'status', status)
+            // verify required parameter 'platforms' is not null or undefined
+            assertParamExists('findAll_5', 'platforms', platforms)
+            // verify required parameter 'customers' is not null or undefined
+            assertParamExists('findAll_5', 'customers', customers)
+            // verify required parameter 'ids' is not null or undefined
+            assertParamExists('findAll_5', 'ids', ids)
+            const localVarPath = `/googleads/adsets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (childResources) {
+                localVarQueryParameter['childResources'] = childResources;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+            if (platforms) {
+                localVarQueryParameter['platforms'] = platforms;
+            }
+
+            if (customers) {
+                localVarQueryParameter['customers'] = customers;
+            }
+
+            if (ids) {
+                localVarQueryParameter['ids'] = ids;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_6: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/googleads/adaccounts`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7629,16 +6707,166 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('findOne', 'id', id)
+            const localVarPath = `/googleads/campaigns/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne_7: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('findOne_7', 'id', id)
+            const localVarPath = `/googleads/ads/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne_8: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('findOne_8', 'id', id)
+            const localVarPath = `/googleads/adsets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateGoogleAdsAuthDto} createGoogleAdsAuthDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccessToken: async (createGoogleAdsAuthDto: CreateGoogleAdsAuthDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createGoogleAdsAuthDto' is not null or undefined
+            assertParamExists('getAccessToken', 'createGoogleAdsAuthDto', createGoogleAdsAuthDto)
+            const localVarPath = `/googleads/auth`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createGoogleAdsAuthDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} customerId Customer UUID
          * @param {string} externalPath The external path for the Google Ads API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequestAfsh4hDelete: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestDelete: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequestAfsh4hDelete', 'customerId', customerId)
+            assertParamExists('rawRequestDelete', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequestAfsh4hDelete', 'externalPath', externalPath)
+            assertParamExists('rawRequestDelete', 'externalPath', externalPath)
             const localVarPath = `/googleads/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -7675,11 +6903,52 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequestD0r8raHead: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestGet: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequestD0r8raHead', 'customerId', customerId)
+            assertParamExists('rawRequestGet', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequestD0r8raHead', 'externalPath', externalPath)
+            assertParamExists('rawRequestGet', 'externalPath', externalPath)
+            const localVarPath = `/googleads/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestHead: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestHead', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestHead', 'externalPath', externalPath)
             const localVarPath = `/googleads/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -7716,11 +6985,11 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequestF0ip1pOptions: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestOptions: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequestF0ip1pOptions', 'customerId', customerId)
+            assertParamExists('rawRequestOptions', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequestF0ip1pOptions', 'externalPath', externalPath)
+            assertParamExists('rawRequestOptions', 'externalPath', externalPath)
             const localVarPath = `/googleads/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -7757,11 +7026,93 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequestH2cub1Put: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestPatch: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequestH2cub1Put', 'customerId', customerId)
+            assertParamExists('rawRequestPatch', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequestH2cub1Put', 'externalPath', externalPath)
+            assertParamExists('rawRequestPatch', 'externalPath', externalPath)
+            const localVarPath = `/googleads/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPost: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestPost', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestPost', 'externalPath', externalPath)
+            const localVarPath = `/googleads/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPut: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestPut', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestPut', 'externalPath', externalPath)
             const localVarPath = `/googleads/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -7793,17 +7144,1542 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('remove', 'id', id)
+            const localVarPath = `/googleads/campaigns/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove_9: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('remove_9', 'id', id)
+            const localVarPath = `/googleads/ads/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove_10: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('remove_10', 'id', id)
+            const localVarPath = `/googleads/adsets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} customerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        syncCustomer: async (customerId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('syncCustomer', 'customerId', customerId)
+            const localVarPath = `/googleads/{customerId}/adaccounts`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update: async (id: string, body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('update', 'id', id)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('update', 'body', body)
+            const localVarPath = `/googleads/campaigns/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update_11: async (id: string, body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('update_11', 'id', id)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('update_11', 'body', body)
+            const localVarPath = `/googleads/ads/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update_12: async (id: string, body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('update_12', 'id', id)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('update_12', 'body', body)
+            const localVarPath = `/googleads/adsets/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * GoogleAdsApi - functional programming interface
+ */
+export const GoogleAdsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = GoogleAdsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async create(body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.create']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {GoogleAdsCreateCredentialDto} googleAdsCreateCredentialDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createCustomer(googleAdsCreateCredentialDto: GoogleAdsCreateCredentialDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createCustomer(googleAdsCreateCredentialDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.createCustomer']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async create_1(body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create_1(body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.create_1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async create_2(body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create_2(body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.create_2']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId The id (UUID) of the customer whose credentials should be deleted.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteCustomerCredentials(customerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCustomerCredentials(customerId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.deleteCustomerCredentials']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.findAll']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll_3(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll_3(childResources, status, platforms, customers, ids, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.findAll_3']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll_4(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll_4(childResources, status, platforms, customers, ids, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.findAll_4']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll_5(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll_5(childResources, status, platforms, customers, ids, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.findAll_5']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findAll_6(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findAll_6(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.findAll_6']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findOne(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.findOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findOne_7(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findOne_7(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.findOne_7']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findOne_8(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findOne_8(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.findOne_8']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {CreateGoogleAdsAuthDto} createGoogleAdsAuthDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAccessToken(createGoogleAdsAuthDto: CreateGoogleAdsAuthDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccessToken(createGoogleAdsAuthDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.getAccessToken']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {string} customerId Customer UUID
          * @param {string} externalPath The external path for the Google Ads API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequestWg2qdkPatch: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        async rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestDelete(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.rawRequestDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestGet(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.rawRequestGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestHead(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.rawRequestHead']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestOptions(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.rawRequestOptions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPatch(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.rawRequestPatch']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPost(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.rawRequestPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPut(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.rawRequestPut']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async remove(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.remove(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.remove']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async remove_9(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.remove_9(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.remove_9']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async remove_10(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.remove_10(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.remove_10']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} customerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async syncCustomer(customerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.syncCustomer(customerId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.syncCustomer']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async update(id: string, body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update(id, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.update']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async update_11(id: string, body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update_11(id, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.update_11']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async update_12(id: string, body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update_12(id, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.update_12']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * GoogleAdsApi - factory interface
+ */
+export const GoogleAdsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = GoogleAdsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create(body: object, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.create(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {GoogleAdsCreateCredentialDto} googleAdsCreateCredentialDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createCustomer(googleAdsCreateCredentialDto: GoogleAdsCreateCredentialDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.createCustomer(googleAdsCreateCredentialDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create_1(body: object, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.create_1(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create_2(body: object, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.create_2(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId The id (UUID) of the customer whose credentials should be deleted.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCustomerCredentials(customerId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteCustomerCredentials(customerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findAll(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_3(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findAll_3(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_4(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findAll_4(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+         * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+         * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+         * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+         * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_5(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findAll_5(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findAll_6(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findAll_6(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findOne(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne_7(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findOne_7(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findOne_8(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.findOne_8(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {CreateGoogleAdsAuthDto} createGoogleAdsAuthDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccessToken(createGoogleAdsAuthDto: CreateGoogleAdsAuthDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getAccessToken(createGoogleAdsAuthDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestDelete(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestGet(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestHead(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestOptions(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPatch(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPost(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPut(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.remove(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove_9(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.remove_9(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        remove_10(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.remove_10(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} customerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        syncCustomer(customerId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.syncCustomer(customerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update(id: string, body: object, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.update(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update_11(id: string, body: object, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.update_11(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update_12(id: string, body: object, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.update_12(id, body, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * GoogleAdsApi - object-oriented interface
+ */
+export class GoogleAdsApi extends BaseAPI {
+    /**
+     * 
+     * @param {object} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public create(body: object, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).create(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {GoogleAdsCreateCredentialDto} googleAdsCreateCredentialDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public createCustomer(googleAdsCreateCredentialDto: GoogleAdsCreateCredentialDto, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).createCustomer(googleAdsCreateCredentialDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {object} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public create_1(body: object, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).create_1(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {object} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public create_2(body: object, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).create_2(body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId The id (UUID) of the customer whose credentials should be deleted.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public deleteCustomerCredentials(customerId: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).deleteCustomerCredentials(customerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findAll(options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).findAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+     * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+     * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+     * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+     * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findAll_3(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).findAll_3(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+     * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+     * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+     * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+     * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findAll_4(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).findAll_4(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Array<ResourceKind>} childResources List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
+     * @param {Status} status Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
+     * @param {Array<PlatformName>} platforms List of platforms to include in the response.
+     * @param {Array<string>} customers List of Customer IDs whose campaigns to include in the response.
+     * @param {Array<string>} ids List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findAll_5(childResources: Array<ResourceKind>, status: Status, platforms: Array<PlatformName>, customers: Array<string>, ids: Array<string>, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).findAll_5(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findAll_6(options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).findAll_6(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findOne(id: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).findOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findOne_7(id: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).findOne_7(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public findOne_8(id: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).findOne_8(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {CreateGoogleAdsAuthDto} createGoogleAdsAuthDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getAccessToken(createGoogleAdsAuthDto: CreateGoogleAdsAuthDto, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).getAccessToken(createGoogleAdsAuthDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the Google Ads API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).rawRequestDelete(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the Google Ads API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).rawRequestGet(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the Google Ads API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).rawRequestHead(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the Google Ads API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).rawRequestOptions(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the Google Ads API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).rawRequestPatch(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the Google Ads API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).rawRequestPost(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath The external path for the Google Ads API request.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).rawRequestPut(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public remove(id: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).remove(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public remove_9(id: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).remove_9(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public remove_10(id: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).remove_10(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} customerId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public syncCustomer(customerId: string, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).syncCustomer(customerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {object} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public update(id: string, body: object, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).update(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {object} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public update_11(id: string, body: object, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).update_11(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {object} body 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public update_12(id: string, body: object, options?: RawAxiosRequestConfig) {
+        return GoogleAdsApiFp(this.configuration).update_12(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * LinkedInApi - axios parameter creator
+ */
+export const LinkedInApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Store LinkedIn credentials for a customer. This requires a customer session token for authentication. Using a regular token will fail.
+         * @summary Store LinkedIn credentials for a customer
+         * @param {LinkedInCreateCredentialDto} linkedInCreateCredentialDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createCustomer: async (linkedInCreateCredentialDto: LinkedInCreateCredentialDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'linkedInCreateCredentialDto' is not null or undefined
+            assertParamExists('createCustomer', 'linkedInCreateCredentialDto', linkedInCreateCredentialDto)
+            const localVarPath = `/linkedin/credentials/customer`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(linkedInCreateCredentialDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Delete all LinkedIn credentials for a given customer and its related synced ad accounts data. Calling this method will not delete data on LinkedIn itself, but will revoke the permissions granted to the app.
+         * @summary Delete LinkedIn credentials for a customer
+         * @param {string} customerId The ID of the customer whose credentials are to be deleted.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCustomer: async (customerId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawControllerRawRequestWg2qdkPatch', 'customerId', customerId)
+            assertParamExists('deleteCustomer', 'customerId', customerId)
+            const localVarPath = `/linkedin/credentials/{customerId}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Convert a LinkedIn authorization code into access and refresh tokens. This route requires a customer session token for authentication. Requests will fail with a regular token.
+         * @summary Convert LinkedIn auth code
+         * @param {CreateAuthDto} createAuthDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccessToken: async (createAuthDto: CreateAuthDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createAuthDto' is not null or undefined
+            assertParamExists('getAccessToken', 'createAuthDto', createAuthDto)
+            const localVarPath = `/linkedin/auth`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createAuthDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the LinkedIn API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestDelete: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestDelete', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawControllerRawRequestWg2qdkPatch', 'externalPath', externalPath)
-            const localVarPath = `/googleads/{customerId}/raw/{externalPath}`
+            assertParamExists('rawRequestDelete', 'externalPath', externalPath)
+            const localVarPath = `/linkedin/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the LinkedIn API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestGet: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestGet', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestGet', 'externalPath', externalPath)
+            const localVarPath = `/linkedin/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the LinkedIn API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestHead: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestHead', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestHead', 'externalPath', externalPath)
+            const localVarPath = `/linkedin/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'HEAD', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the LinkedIn API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestOptions: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestOptions', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestOptions', 'externalPath', externalPath)
+            const localVarPath = `/linkedin/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'OPTIONS', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the LinkedIn API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPatch: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestPatch', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestPatch', 'externalPath', externalPath)
+            const localVarPath = `/linkedin/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -7832,1029 +8708,477 @@ export const GoogleAdsApiAxiosParamCreator = function (configuration?: Configura
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the LinkedIn API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPost: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestPost', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestPost', 'externalPath', externalPath)
+            const localVarPath = `/linkedin/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the LinkedIn API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPut: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestPut', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestPut', 'externalPath', externalPath)
+            const localVarPath = `/linkedin/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
 /**
- * GoogleAdsApi - functional programming interface
+ * LinkedInApi - functional programming interface
  */
-export const GoogleAdsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = GoogleAdsApiAxiosParamCreator(configuration)
+export const LinkedInApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = LinkedInApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Store LinkedIn credentials for a customer. This requires a customer session token for authentication. Using a regular token will fail.
+         * @summary Store LinkedIn credentials for a customer
+         * @param {LinkedInCreateCredentialDto} linkedInCreateCredentialDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async adAccountsControllerFindAllMln5nd(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GoogleAdsAdAccountWrapper>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adAccountsControllerFindAllMln5nd(options);
+        async createCustomer(linkedInCreateCredentialDto: LinkedInCreateCredentialDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createCustomer(linkedInCreateCredentialDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.adAccountsControllerFindAllMln5nd']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LinkedInApi.createCustomer']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @param {string} customerId 
+         * Delete all LinkedIn credentials for a given customer and its related synced ad accounts data. Calling this method will not delete data on LinkedIn itself, but will revoke the permissions granted to the app.
+         * @summary Delete LinkedIn credentials for a customer
+         * @param {string} customerId The ID of the customer whose credentials are to be deleted.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async adAccountsControllerSyncCustomer2j6xn9(customerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adAccountsControllerSyncCustomer2j6xn9(customerId, options);
+        async deleteCustomer(customerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCustomer(customerId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.adAccountsControllerSyncCustomer2j6xn9']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LinkedInApi.deleteCustomer']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @param {object} body 
+         * Convert a LinkedIn authorization code into access and refresh tokens. This route requires a customer session token for authentication. Requests will fail with a regular token.
+         * @summary Convert LinkedIn auth code
+         * @param {CreateAuthDto} createAuthDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async adsControllerCreate5j1f9u(body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsControllerCreate5j1f9u(body, options);
+        async getAccessToken(createAuthDto: CreateAuthDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccessToken(createAuthDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.adsControllerCreate5j1f9u']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LinkedInApi.getAccessToken']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @param {Array<AdsControllerFindAllErdkmsChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {AdsControllerFindAllErdkmsStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<AdsControllerFindAllErdkmsPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adsControllerFindAllErdkms(childResources?: Array<AdsControllerFindAllErdkmsChildResourcesEnum>, status?: AdsControllerFindAllErdkmsStatusEnum, platforms?: Array<AdsControllerFindAllErdkmsPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Ad>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsControllerFindAllErdkms(childResources, status, platforms, customers, ids, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.adsControllerFindAllErdkms']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adsControllerFindOneNutbxl(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsControllerFindOneNutbxl(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.adsControllerFindOneNutbxl']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adsControllerRemoveAhonpn(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsControllerRemoveAhonpn(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.adsControllerRemoveAhonpn']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adsControllerUpdateT99o7f(id: string, body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsControllerUpdateT99o7f(id, body, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.adsControllerUpdateT99o7f']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adsetsControllerCreateX8svw5(body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsetsControllerCreateX8svw5(body, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.adsetsControllerCreateX8svw5']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {Array<AdsetsControllerFindAll9d7h31ChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {AdsetsControllerFindAll9d7h31StatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<AdsetsControllerFindAll9d7h31PlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adsetsControllerFindAll9d7h31(childResources?: Array<AdsetsControllerFindAll9d7h31ChildResourcesEnum>, status?: AdsetsControllerFindAll9d7h31StatusEnum, platforms?: Array<AdsetsControllerFindAll9d7h31PlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AdSet>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsetsControllerFindAll9d7h31(childResources, status, platforms, customers, ids, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.adsetsControllerFindAll9d7h31']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adsetsControllerFindOne3q406b(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsetsControllerFindOne3q406b(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.adsetsControllerFindOne3q406b']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adsetsControllerRemoveIariyn(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsetsControllerRemoveIariyn(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.adsetsControllerRemoveIariyn']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adsetsControllerUpdateQb6632(id: string, body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adsetsControllerUpdateQb6632(id, body, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.adsetsControllerUpdateQb6632']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {CreateGoogleAdsAuthDto} createGoogleAdsAuthDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async authControllerGetAccessToken69qgkv(createGoogleAdsAuthDto: CreateGoogleAdsAuthDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerGetAccessToken69qgkv(createGoogleAdsAuthDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.authControllerGetAccessToken69qgkv']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async campaignsControllerCreateWi0t68(body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsControllerCreateWi0t68(body, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.campaignsControllerCreateWi0t68']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {Array<CampaignsControllerFindAllJazafvChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {CampaignsControllerFindAllJazafvStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<CampaignsControllerFindAllJazafvPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async campaignsControllerFindAllJazafv(childResources?: Array<CampaignsControllerFindAllJazafvChildResourcesEnum>, status?: CampaignsControllerFindAllJazafvStatusEnum, platforms?: Array<CampaignsControllerFindAllJazafvPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsControllerFindAllJazafv(childResources, status, platforms, customers, ids, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.campaignsControllerFindAllJazafv']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async campaignsControllerFindOneU27hua(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsControllerFindOneU27hua(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.campaignsControllerFindOneU27hua']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async campaignsControllerRemoveWvf99p(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsControllerRemoveWvf99p(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.campaignsControllerRemoveWvf99p']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async campaignsControllerUpdate40ll7r(id: string, body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsControllerUpdate40ll7r(id, body, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.campaignsControllerUpdate40ll7r']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {GoogleAdsCreateCredentialDto} googleAdsCreateCredentialDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async credentialsControllerCreateCustomer8qpv6w(googleAdsCreateCredentialDto: GoogleAdsCreateCredentialDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.credentialsControllerCreateCustomer8qpv6w(googleAdsCreateCredentialDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.credentialsControllerCreateCustomer8qpv6w']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} customerId The id (UUID) of the customer whose credentials should be deleted.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async credentialsControllerDeleteCustomerCredentialsSiel2b(customerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.credentialsControllerDeleteCustomerCredentialsSiel2b(customerId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.credentialsControllerDeleteCustomerCredentialsSiel2b']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async credentialsControllerFindAll9quhk2(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.credentialsControllerFindAll9quhk2(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.credentialsControllerFindAll9quhk2']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
          * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {string} externalPath The external path for the LinkedIn API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawControllerRawRequest60eqvdPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequest60eqvdPost(customerId, externalPath, options);
+        async rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestDelete(customerId, externalPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.rawControllerRawRequest60eqvdPost']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LinkedInApi.rawRequestDelete']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
          * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {string} externalPath The external path for the LinkedIn API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawControllerRawRequest7vtbrnGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequest7vtbrnGet(customerId, externalPath, options);
+        async rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestGet(customerId, externalPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.rawControllerRawRequest7vtbrnGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LinkedInApi.rawRequestGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
          * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {string} externalPath The external path for the LinkedIn API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawControllerRawRequestAfsh4hDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequestAfsh4hDelete(customerId, externalPath, options);
+        async rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestHead(customerId, externalPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.rawControllerRawRequestAfsh4hDelete']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LinkedInApi.rawRequestHead']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
          * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {string} externalPath The external path for the LinkedIn API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawControllerRawRequestD0r8raHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequestD0r8raHead(customerId, externalPath, options);
+        async rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestOptions(customerId, externalPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.rawControllerRawRequestD0r8raHead']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LinkedInApi.rawRequestOptions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
          * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {string} externalPath The external path for the LinkedIn API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawControllerRawRequestF0ip1pOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequestF0ip1pOptions(customerId, externalPath, options);
+        async rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPatch(customerId, externalPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.rawControllerRawRequestF0ip1pOptions']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LinkedInApi.rawRequestPatch']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
          * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {string} externalPath The external path for the LinkedIn API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawControllerRawRequestH2cub1Put(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequestH2cub1Put(customerId, externalPath, options);
+        async rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPost(customerId, externalPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.rawControllerRawRequestH2cub1Put']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LinkedInApi.rawRequestPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
          * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {string} externalPath The external path for the LinkedIn API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawControllerRawRequestWg2qdkPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawControllerRawRequestWg2qdkPatch(customerId, externalPath, options);
+        async rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPut(customerId, externalPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GoogleAdsApi.rawControllerRawRequestWg2qdkPatch']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LinkedInApi.rawRequestPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * GoogleAdsApi - factory interface
+ * LinkedInApi - factory interface
  */
-export const GoogleAdsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = GoogleAdsApiFp(configuration)
+export const LinkedInApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = LinkedInApiFp(configuration)
     return {
         /**
-         * 
+         * Store LinkedIn credentials for a customer. This requires a customer session token for authentication. Using a regular token will fail.
+         * @summary Store LinkedIn credentials for a customer
+         * @param {LinkedInCreateCredentialDto} linkedInCreateCredentialDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adAccountsControllerFindAllMln5nd(options?: RawAxiosRequestConfig): AxiosPromise<Array<GoogleAdsAdAccountWrapper>> {
-            return localVarFp.adAccountsControllerFindAllMln5nd(options).then((request) => request(axios, basePath));
+        createCustomer(linkedInCreateCredentialDto: LinkedInCreateCredentialDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.createCustomer(linkedInCreateCredentialDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @param {string} customerId 
+         * Delete all LinkedIn credentials for a given customer and its related synced ad accounts data. Calling this method will not delete data on LinkedIn itself, but will revoke the permissions granted to the app.
+         * @summary Delete LinkedIn credentials for a customer
+         * @param {string} customerId The ID of the customer whose credentials are to be deleted.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adAccountsControllerSyncCustomer2j6xn9(customerId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.adAccountsControllerSyncCustomer2j6xn9(customerId, options).then((request) => request(axios, basePath));
+        deleteCustomer(customerId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteCustomer(customerId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @param {object} body 
+         * Convert a LinkedIn authorization code into access and refresh tokens. This route requires a customer session token for authentication. Requests will fail with a regular token.
+         * @summary Convert LinkedIn auth code
+         * @param {CreateAuthDto} createAuthDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        adsControllerCreate5j1f9u(body: object, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.adsControllerCreate5j1f9u(body, options).then((request) => request(axios, basePath));
+        getAccessToken(createAuthDto: CreateAuthDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getAccessToken(createAuthDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @param {Array<AdsControllerFindAllErdkmsChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {AdsControllerFindAllErdkmsStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<AdsControllerFindAllErdkmsPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsControllerFindAllErdkms(childResources?: Array<AdsControllerFindAllErdkmsChildResourcesEnum>, status?: AdsControllerFindAllErdkmsStatusEnum, platforms?: Array<AdsControllerFindAllErdkmsPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<Array<Ad>> {
-            return localVarFp.adsControllerFindAllErdkms(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsControllerFindOneNutbxl(id: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.adsControllerFindOneNutbxl(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsControllerRemoveAhonpn(id: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.adsControllerRemoveAhonpn(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsControllerUpdateT99o7f(id: string, body: object, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.adsControllerUpdateT99o7f(id, body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsetsControllerCreateX8svw5(body: object, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.adsetsControllerCreateX8svw5(body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {Array<AdsetsControllerFindAll9d7h31ChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {AdsetsControllerFindAll9d7h31StatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<AdsetsControllerFindAll9d7h31PlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsetsControllerFindAll9d7h31(childResources?: Array<AdsetsControllerFindAll9d7h31ChildResourcesEnum>, status?: AdsetsControllerFindAll9d7h31StatusEnum, platforms?: Array<AdsetsControllerFindAll9d7h31PlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<Array<AdSet>> {
-            return localVarFp.adsetsControllerFindAll9d7h31(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsetsControllerFindOne3q406b(id: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.adsetsControllerFindOne3q406b(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsetsControllerRemoveIariyn(id: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.adsetsControllerRemoveIariyn(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adsetsControllerUpdateQb6632(id: string, body: object, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.adsetsControllerUpdateQb6632(id, body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {CreateGoogleAdsAuthDto} createGoogleAdsAuthDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authControllerGetAccessToken69qgkv(createGoogleAdsAuthDto: CreateGoogleAdsAuthDto, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.authControllerGetAccessToken69qgkv(createGoogleAdsAuthDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerCreateWi0t68(body: object, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.campaignsControllerCreateWi0t68(body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {Array<CampaignsControllerFindAllJazafvChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-         * @param {CampaignsControllerFindAllJazafvStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-         * @param {Array<CampaignsControllerFindAllJazafvPlatformsEnum>} [platforms] List of platforms to include in the response.
-         * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-         * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerFindAllJazafv(childResources?: Array<CampaignsControllerFindAllJazafvChildResourcesEnum>, status?: CampaignsControllerFindAllJazafvStatusEnum, platforms?: Array<CampaignsControllerFindAllJazafvPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.campaignsControllerFindAllJazafv(childResources, status, platforms, customers, ids, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerFindOneU27hua(id: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.campaignsControllerFindOneU27hua(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerRemoveWvf99p(id: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.campaignsControllerRemoveWvf99p(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {object} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        campaignsControllerUpdate40ll7r(id: string, body: object, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.campaignsControllerUpdate40ll7r(id, body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {GoogleAdsCreateCredentialDto} googleAdsCreateCredentialDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerCreateCustomer8qpv6w(googleAdsCreateCredentialDto: GoogleAdsCreateCredentialDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.credentialsControllerCreateCustomer8qpv6w(googleAdsCreateCredentialDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} customerId The id (UUID) of the customer whose credentials should be deleted.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerDeleteCustomerCredentialsSiel2b(customerId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.credentialsControllerDeleteCustomerCredentialsSiel2b(customerId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        credentialsControllerFindAll9quhk2(options?: RawAxiosRequestConfig): AxiosPromise<Array<object>> {
-            return localVarFp.credentialsControllerFindAll9quhk2(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
          * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {string} externalPath The external path for the LinkedIn API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequest60eqvdPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequest60eqvdPost(customerId, externalPath, options).then((request) => request(axios, basePath));
+        rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestDelete(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
          * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {string} externalPath The external path for the LinkedIn API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequest7vtbrnGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequest7vtbrnGet(customerId, externalPath, options).then((request) => request(axios, basePath));
+        rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestGet(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
          * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {string} externalPath The external path for the LinkedIn API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequestAfsh4hDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequestAfsh4hDelete(customerId, externalPath, options).then((request) => request(axios, basePath));
+        rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestHead(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
          * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {string} externalPath The external path for the LinkedIn API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequestD0r8raHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequestD0r8raHead(customerId, externalPath, options).then((request) => request(axios, basePath));
+        rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestOptions(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
          * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {string} externalPath The external path for the LinkedIn API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequestF0ip1pOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequestF0ip1pOptions(customerId, externalPath, options).then((request) => request(axios, basePath));
+        rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPatch(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
          * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {string} externalPath The external path for the LinkedIn API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequestH2cub1Put(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequestH2cub1Put(customerId, externalPath, options).then((request) => request(axios, basePath));
+        rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPost(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the LinkedIn API
          * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Google Ads API request.
+         * @param {string} externalPath The external path for the LinkedIn API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawControllerRawRequestWg2qdkPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawControllerRawRequestWg2qdkPatch(customerId, externalPath, options).then((request) => request(axios, basePath));
+        rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPut(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * GoogleAdsApi - object-oriented interface
+ * LinkedInApi - object-oriented interface
  */
-export class GoogleAdsApi extends BaseAPI {
+export class LinkedInApi extends BaseAPI {
     /**
-     * 
+     * Store LinkedIn credentials for a customer. This requires a customer session token for authentication. Using a regular token will fail.
+     * @summary Store LinkedIn credentials for a customer
+     * @param {LinkedInCreateCredentialDto} linkedInCreateCredentialDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public adAccountsControllerFindAllMln5nd(options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).adAccountsControllerFindAllMln5nd(options).then((request) => request(this.axios, this.basePath));
+    public createCustomer(linkedInCreateCredentialDto: LinkedInCreateCredentialDto, options?: RawAxiosRequestConfig) {
+        return LinkedInApiFp(this.configuration).createCustomer(linkedInCreateCredentialDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
-     * @param {string} customerId 
+     * Delete all LinkedIn credentials for a given customer and its related synced ad accounts data. Calling this method will not delete data on LinkedIn itself, but will revoke the permissions granted to the app.
+     * @summary Delete LinkedIn credentials for a customer
+     * @param {string} customerId The ID of the customer whose credentials are to be deleted.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public adAccountsControllerSyncCustomer2j6xn9(customerId: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).adAccountsControllerSyncCustomer2j6xn9(customerId, options).then((request) => request(this.axios, this.basePath));
+    public deleteCustomer(customerId: string, options?: RawAxiosRequestConfig) {
+        return LinkedInApiFp(this.configuration).deleteCustomer(customerId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
-     * @param {object} body 
+     * Convert a LinkedIn authorization code into access and refresh tokens. This route requires a customer session token for authentication. Requests will fail with a regular token.
+     * @summary Convert LinkedIn auth code
+     * @param {CreateAuthDto} createAuthDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public adsControllerCreate5j1f9u(body: object, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).adsControllerCreate5j1f9u(body, options).then((request) => request(this.axios, this.basePath));
+    public getAccessToken(createAuthDto: CreateAuthDto, options?: RawAxiosRequestConfig) {
+        return LinkedInApiFp(this.configuration).getAccessToken(createAuthDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
-     * @param {Array<AdsControllerFindAllErdkmsChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-     * @param {AdsControllerFindAllErdkmsStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-     * @param {Array<AdsControllerFindAllErdkmsPlatformsEnum>} [platforms] List of platforms to include in the response.
-     * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-     * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adsControllerFindAllErdkms(childResources?: Array<AdsControllerFindAllErdkmsChildResourcesEnum>, status?: AdsControllerFindAllErdkmsStatusEnum, platforms?: Array<AdsControllerFindAllErdkmsPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).adsControllerFindAllErdkms(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adsControllerFindOneNutbxl(id: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).adsControllerFindOneNutbxl(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adsControllerRemoveAhonpn(id: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).adsControllerRemoveAhonpn(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {object} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adsControllerUpdateT99o7f(id: string, body: object, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).adsControllerUpdateT99o7f(id, body, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {object} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adsetsControllerCreateX8svw5(body: object, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).adsetsControllerCreateX8svw5(body, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {Array<AdsetsControllerFindAll9d7h31ChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-     * @param {AdsetsControllerFindAll9d7h31StatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-     * @param {Array<AdsetsControllerFindAll9d7h31PlatformsEnum>} [platforms] List of platforms to include in the response.
-     * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-     * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adsetsControllerFindAll9d7h31(childResources?: Array<AdsetsControllerFindAll9d7h31ChildResourcesEnum>, status?: AdsetsControllerFindAll9d7h31StatusEnum, platforms?: Array<AdsetsControllerFindAll9d7h31PlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).adsetsControllerFindAll9d7h31(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adsetsControllerFindOne3q406b(id: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).adsetsControllerFindOne3q406b(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adsetsControllerRemoveIariyn(id: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).adsetsControllerRemoveIariyn(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {object} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public adsetsControllerUpdateQb6632(id: string, body: object, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).adsetsControllerUpdateQb6632(id, body, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {CreateGoogleAdsAuthDto} createGoogleAdsAuthDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public authControllerGetAccessToken69qgkv(createGoogleAdsAuthDto: CreateGoogleAdsAuthDto, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).authControllerGetAccessToken69qgkv(createGoogleAdsAuthDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {object} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public campaignsControllerCreateWi0t68(body: object, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).campaignsControllerCreateWi0t68(body, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {Array<CampaignsControllerFindAllJazafvChildResourcesEnum>} [childResources] List of child resources to include in the response. Example: set childResources to Targeting and AdSet to get a list of Campaigns with their Targetings and AdSets (and the AdSets Targetings)
-     * @param {CampaignsControllerFindAllJazafvStatusEnum} [status] Status of the Campaigns to return. Example: set status to Running to get a list of running Campaigns.
-     * @param {Array<CampaignsControllerFindAllJazafvPlatformsEnum>} [platforms] List of platforms to include in the response.
-     * @param {Array<string>} [customers] List of Customer IDs whose campaigns to include in the response.
-     * @param {Array<string>} [ids] List of Campaign IDs to include in the response. Requires platform and customer to be set to a single value.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public campaignsControllerFindAllJazafv(childResources?: Array<CampaignsControllerFindAllJazafvChildResourcesEnum>, status?: CampaignsControllerFindAllJazafvStatusEnum, platforms?: Array<CampaignsControllerFindAllJazafvPlatformsEnum>, customers?: Array<string>, ids?: Array<string>, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).campaignsControllerFindAllJazafv(childResources, status, platforms, customers, ids, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public campaignsControllerFindOneU27hua(id: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).campaignsControllerFindOneU27hua(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public campaignsControllerRemoveWvf99p(id: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).campaignsControllerRemoveWvf99p(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id 
-     * @param {object} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public campaignsControllerUpdate40ll7r(id: string, body: object, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).campaignsControllerUpdate40ll7r(id, body, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {GoogleAdsCreateCredentialDto} googleAdsCreateCredentialDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public credentialsControllerCreateCustomer8qpv6w(googleAdsCreateCredentialDto: GoogleAdsCreateCredentialDto, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).credentialsControllerCreateCustomer8qpv6w(googleAdsCreateCredentialDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} customerId The id (UUID) of the customer whose credentials should be deleted.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public credentialsControllerDeleteCustomerCredentialsSiel2b(customerId: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).credentialsControllerDeleteCustomerCredentialsSiel2b(customerId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public credentialsControllerFindAll9quhk2(options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).credentialsControllerFindAll9quhk2(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
+     * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+     * @summary Proxy raw requests to the LinkedIn API
      * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the Google Ads API request.
+     * @param {string} externalPath The external path for the LinkedIn API request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public rawControllerRawRequest60eqvdPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).rawControllerRawRequest60eqvdPost(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    public rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return LinkedInApiFp(this.configuration).rawRequestDelete(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+     * @summary Proxy raw requests to the LinkedIn API
      * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the Google Ads API request.
+     * @param {string} externalPath The external path for the LinkedIn API request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public rawControllerRawRequest7vtbrnGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).rawControllerRawRequest7vtbrnGet(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    public rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return LinkedInApiFp(this.configuration).rawRequestGet(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+     * @summary Proxy raw requests to the LinkedIn API
      * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the Google Ads API request.
+     * @param {string} externalPath The external path for the LinkedIn API request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public rawControllerRawRequestAfsh4hDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).rawControllerRawRequestAfsh4hDelete(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    public rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return LinkedInApiFp(this.configuration).rawRequestHead(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+     * @summary Proxy raw requests to the LinkedIn API
      * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the Google Ads API request.
+     * @param {string} externalPath The external path for the LinkedIn API request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public rawControllerRawRequestD0r8raHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).rawControllerRawRequestD0r8raHead(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    public rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return LinkedInApiFp(this.configuration).rawRequestOptions(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+     * @summary Proxy raw requests to the LinkedIn API
      * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the Google Ads API request.
+     * @param {string} externalPath The external path for the LinkedIn API request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public rawControllerRawRequestF0ip1pOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).rawControllerRawRequestF0ip1pOptions(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    public rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return LinkedInApiFp(this.configuration).rawRequestPatch(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+     * @summary Proxy raw requests to the LinkedIn API
      * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the Google Ads API request.
+     * @param {string} externalPath The external path for the LinkedIn API request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public rawControllerRawRequestH2cub1Put(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).rawControllerRawRequestH2cub1Put(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    public rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return LinkedInApiFp(this.configuration).rawRequestPost(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * This route proxies raw requests to the LinkedIn API, allowing for dynamic endpoints and parameters.
+     * @summary Proxy raw requests to the LinkedIn API
      * @param {string} customerId Customer UUID
-     * @param {string} externalPath The external path for the Google Ads API request.
+     * @param {string} externalPath The external path for the LinkedIn API request.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public rawControllerRawRequestWg2qdkPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return GoogleAdsApiFp(this.configuration).rawControllerRawRequestWg2qdkPatch(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    public rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return LinkedInApiFp(this.configuration).rawRequestPut(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
-export const AdsControllerFindAllErdkmsChildResourcesEnum = {
-    Campaign: 'Campaign',
-    AdSet: 'AdSet',
-    Ad: 'Ad',
-    Targeting: 'Targeting',
-    AdAccount: 'AdAccount'
-} as const;
-export type AdsControllerFindAllErdkmsChildResourcesEnum = typeof AdsControllerFindAllErdkmsChildResourcesEnum[keyof typeof AdsControllerFindAllErdkmsChildResourcesEnum];
-export const AdsControllerFindAllErdkmsStatusEnum = {
-    Active: 'ACTIVE',
-    Running: 'RUNNING',
-    Paused: 'PAUSED',
-    Unknown: 'UNKNOWN'
-} as const;
-export type AdsControllerFindAllErdkmsStatusEnum = typeof AdsControllerFindAllErdkmsStatusEnum[keyof typeof AdsControllerFindAllErdkmsStatusEnum];
-export const AdsControllerFindAllErdkmsPlatformsEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-export type AdsControllerFindAllErdkmsPlatformsEnum = typeof AdsControllerFindAllErdkmsPlatformsEnum[keyof typeof AdsControllerFindAllErdkmsPlatformsEnum];
-export const AdsetsControllerFindAll9d7h31ChildResourcesEnum = {
-    Campaign: 'Campaign',
-    AdSet: 'AdSet',
-    Ad: 'Ad',
-    Targeting: 'Targeting',
-    AdAccount: 'AdAccount'
-} as const;
-export type AdsetsControllerFindAll9d7h31ChildResourcesEnum = typeof AdsetsControllerFindAll9d7h31ChildResourcesEnum[keyof typeof AdsetsControllerFindAll9d7h31ChildResourcesEnum];
-export const AdsetsControllerFindAll9d7h31StatusEnum = {
-    Active: 'ACTIVE',
-    Running: 'RUNNING',
-    Paused: 'PAUSED',
-    Unknown: 'UNKNOWN'
-} as const;
-export type AdsetsControllerFindAll9d7h31StatusEnum = typeof AdsetsControllerFindAll9d7h31StatusEnum[keyof typeof AdsetsControllerFindAll9d7h31StatusEnum];
-export const AdsetsControllerFindAll9d7h31PlatformsEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-export type AdsetsControllerFindAll9d7h31PlatformsEnum = typeof AdsetsControllerFindAll9d7h31PlatformsEnum[keyof typeof AdsetsControllerFindAll9d7h31PlatformsEnum];
-export const CampaignsControllerFindAllJazafvChildResourcesEnum = {
-    Campaign: 'Campaign',
-    AdSet: 'AdSet',
-    Ad: 'Ad',
-    Targeting: 'Targeting',
-    AdAccount: 'AdAccount'
-} as const;
-export type CampaignsControllerFindAllJazafvChildResourcesEnum = typeof CampaignsControllerFindAllJazafvChildResourcesEnum[keyof typeof CampaignsControllerFindAllJazafvChildResourcesEnum];
-export const CampaignsControllerFindAllJazafvStatusEnum = {
-    Active: 'ACTIVE',
-    Running: 'RUNNING',
-    Paused: 'PAUSED',
-    Unknown: 'UNKNOWN'
-} as const;
-export type CampaignsControllerFindAllJazafvStatusEnum = typeof CampaignsControllerFindAllJazafvStatusEnum[keyof typeof CampaignsControllerFindAllJazafvStatusEnum];
-export const CampaignsControllerFindAllJazafvPlatformsEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-export type CampaignsControllerFindAllJazafvPlatformsEnum = typeof CampaignsControllerFindAllJazafvPlatformsEnum[keyof typeof CampaignsControllerFindAllJazafvPlatformsEnum];
 
 
 /**
@@ -8863,15 +9187,93 @@ export type CampaignsControllerFindAllJazafvPlatformsEnum = typeof CampaignsCont
 export const PinterestApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Store Pinterest credentials for a customer. This requires a customer session token for authentication. Using a regular token will fail.
+         * @summary Store Pinterest credentials for a customer
+         * @param {PinterestCreateCredentialDto} pinterestCreateCredentialDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createCustomer: async (pinterestCreateCredentialDto: PinterestCreateCredentialDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'pinterestCreateCredentialDto' is not null or undefined
+            assertParamExists('createCustomer', 'pinterestCreateCredentialDto', pinterestCreateCredentialDto)
+            const localVarPath = `/pinterest/credentials/customer`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(pinterestCreateCredentialDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Delete all Pinterest credentials for a given customer and its related synced ad accounts data. Calling this method will not delete data on Pinterest itself.
+         * @summary Delete Pinterest credentials for a customer
+         * @param {string} customerId The ID of the customer whose credentials are to be deleted.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteCustomerCredentials: async (customerId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('deleteCustomerCredentials', 'customerId', customerId)
+            const localVarPath = `/pinterest/credentials/{customerId}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Convert a Pinterest authorization code into access and refresh tokens. This route requires a customer session token for authentication. Requests will fail with a regular token.
          * @summary Convert Pinterest auth code
          * @param {CreatePinterestAuthDto} createPinterestAuthDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        convertAuthCode: async (createPinterestAuthDto: CreatePinterestAuthDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAccessToken: async (createPinterestAuthDto: CreatePinterestAuthDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'createPinterestAuthDto' is not null or undefined
-            assertParamExists('convertAuthCode', 'createPinterestAuthDto', createPinterestAuthDto)
+            assertParamExists('getAccessToken', 'createPinterestAuthDto', createPinterestAuthDto)
             const localVarPath = `/pinterest/auth`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -8903,17 +9305,21 @@ export const PinterestApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Delete all Pinterest credentials for a given customer and its related synced ad accounts data. Calling this method will not delete data on Pinterest itself.
-         * @summary Delete Pinterest credentials for a customer
-         * @param {string} customerId The ID of the customer whose credentials are to be deleted.
+         * This route proxies raw requests to the Pinterest API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the Pinterest API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Pinterest Ads API request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deletePinterestCustomerCredentials: async (customerId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestDelete: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('deletePinterestCustomerCredentials', 'customerId', customerId)
-            const localVarPath = `/pinterest/credentials/{customerId}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)));
+            assertParamExists('rawRequestDelete', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestDelete', 'externalPath', externalPath)
+            const localVarPath = `/pinterest/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -8948,11 +9354,11 @@ export const PinterestApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawRequest: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestGet: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawRequest', 'customerId', customerId)
+            assertParamExists('rawRequestGet', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawRequest', 'externalPath', externalPath)
+            assertParamExists('rawRequestGet', 'externalPath', externalPath)
             const localVarPath = `/pinterest/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -8990,11 +9396,11 @@ export const PinterestApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawRequest_1: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestHead: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawRequest_1', 'customerId', customerId)
+            assertParamExists('rawRequestHead', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawRequest_1', 'externalPath', externalPath)
+            assertParamExists('rawRequestHead', 'externalPath', externalPath)
             const localVarPath = `/pinterest/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -9032,11 +9438,11 @@ export const PinterestApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawRequest_2: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestOptions: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawRequest_2', 'customerId', customerId)
+            assertParamExists('rawRequestOptions', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawRequest_2', 'externalPath', externalPath)
+            assertParamExists('rawRequestOptions', 'externalPath', externalPath)
             const localVarPath = `/pinterest/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -9047,7 +9453,7 @@ export const PinterestApiAxiosParamCreator = function (configuration?: Configura
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'OPTIONS', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -9074,95 +9480,11 @@ export const PinterestApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawRequest_3: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestPatch: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawRequest_3', 'customerId', customerId)
+            assertParamExists('rawRequestPatch', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawRequest_3', 'externalPath', externalPath)
-            const localVarPath = `/pinterest/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * This route proxies raw requests to the Pinterest API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the Pinterest API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Pinterest Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest_4: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawRequest_4', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawRequest_4', 'externalPath', externalPath)
-            const localVarPath = `/pinterest/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * This route proxies raw requests to the Pinterest API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the Pinterest API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath The external path for the Pinterest Ads API request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest_5: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawRequest_5', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawRequest_5', 'externalPath', externalPath)
+            assertParamExists('rawRequestPatch', 'externalPath', externalPath)
             const localVarPath = `/pinterest/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
@@ -9200,51 +9522,14 @@ export const PinterestApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawRequest_6: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        rawRequestPost: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawRequest_6', 'customerId', customerId)
+            assertParamExists('rawRequestPost', 'customerId', customerId)
             // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawRequest_6', 'externalPath', externalPath)
+            assertParamExists('rawRequestPost', 'externalPath', externalPath)
             const localVarPath = `/pinterest/{customerId}/raw/{externalPath}`
                 .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
                 .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'OPTIONS', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Store Pinterest credentials for a customer. This requires a customer session token for authentication. Using a regular token will fail.
-         * @summary Store Pinterest credentials for a customer
-         * @param {PinterestCreateCredentialDto} pinterestCreateCredentialDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        storePinterestCustomerCredentials: async (pinterestCreateCredentialDto: PinterestCreateCredentialDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'pinterestCreateCredentialDto' is not null or undefined
-            assertParamExists('storePinterestCustomerCredentials', 'pinterestCreateCredentialDto', pinterestCreateCredentialDto)
-            const localVarPath = `/pinterest/credentials/customer`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9262,12 +9547,51 @@ export const PinterestApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(pinterestCreateCredentialDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This route proxies raw requests to the Pinterest API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the Pinterest API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath The external path for the Pinterest Ads API request.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPut: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestPut', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestPut', 'externalPath', externalPath)
+            const localVarPath = `/pinterest/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -9284,16 +9608,16 @@ export const PinterestApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PinterestApiAxiosParamCreator(configuration)
     return {
         /**
-         * Convert a Pinterest authorization code into access and refresh tokens. This route requires a customer session token for authentication. Requests will fail with a regular token.
-         * @summary Convert Pinterest auth code
-         * @param {CreatePinterestAuthDto} createPinterestAuthDto 
+         * Store Pinterest credentials for a customer. This requires a customer session token for authentication. Using a regular token will fail.
+         * @summary Store Pinterest credentials for a customer
+         * @param {PinterestCreateCredentialDto} pinterestCreateCredentialDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async convertAuthCode(createPinterestAuthDto: CreatePinterestAuthDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.convertAuthCode(createPinterestAuthDto, options);
+        async createCustomer(pinterestCreateCredentialDto: PinterestCreateCredentialDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createCustomer(pinterestCreateCredentialDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PinterestApi.convertAuthCode']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PinterestApi.createCustomer']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -9303,10 +9627,23 @@ export const PinterestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deletePinterestCustomerCredentials(customerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deletePinterestCustomerCredentials(customerId, options);
+        async deleteCustomerCredentials(customerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCustomerCredentials(customerId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PinterestApi.deletePinterestCustomerCredentials']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PinterestApi.deleteCustomerCredentials']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Convert a Pinterest authorization code into access and refresh tokens. This route requires a customer session token for authentication. Requests will fail with a regular token.
+         * @summary Convert Pinterest auth code
+         * @param {CreatePinterestAuthDto} createPinterestAuthDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAccessToken(createPinterestAuthDto: CreatePinterestAuthDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccessToken(createPinterestAuthDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PinterestApi.getAccessToken']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -9317,10 +9654,10 @@ export const PinterestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawRequest(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequest(customerId, externalPath, options);
+        async rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestDelete(customerId, externalPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PinterestApi.rawRequest']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PinterestApi.rawRequestDelete']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -9331,10 +9668,10 @@ export const PinterestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawRequest_1(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequest_1(customerId, externalPath, options);
+        async rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestGet(customerId, externalPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PinterestApi.rawRequest_1']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PinterestApi.rawRequestGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -9345,10 +9682,10 @@ export const PinterestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawRequest_2(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequest_2(customerId, externalPath, options);
+        async rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestHead(customerId, externalPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PinterestApi.rawRequest_2']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PinterestApi.rawRequestHead']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -9359,10 +9696,10 @@ export const PinterestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawRequest_3(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequest_3(customerId, externalPath, options);
+        async rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestOptions(customerId, externalPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PinterestApi.rawRequest_3']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PinterestApi.rawRequestOptions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -9373,10 +9710,10 @@ export const PinterestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawRequest_4(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequest_4(customerId, externalPath, options);
+        async rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPatch(customerId, externalPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PinterestApi.rawRequest_4']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PinterestApi.rawRequestPatch']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -9387,10 +9724,10 @@ export const PinterestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawRequest_5(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequest_5(customerId, externalPath, options);
+        async rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPost(customerId, externalPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PinterestApi.rawRequest_5']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PinterestApi.rawRequestPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -9401,23 +9738,10 @@ export const PinterestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rawRequest_6(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequest_6(customerId, externalPath, options);
+        async rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPut(customerId, externalPath, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PinterestApi.rawRequest_6']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Store Pinterest credentials for a customer. This requires a customer session token for authentication. Using a regular token will fail.
-         * @summary Store Pinterest credentials for a customer
-         * @param {PinterestCreateCredentialDto} pinterestCreateCredentialDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async storePinterestCustomerCredentials(pinterestCreateCredentialDto: PinterestCreateCredentialDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.storePinterestCustomerCredentials(pinterestCreateCredentialDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PinterestApi.storePinterestCustomerCredentials']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PinterestApi.rawRequestPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -9430,14 +9754,14 @@ export const PinterestApiFactory = function (configuration?: Configuration, base
     const localVarFp = PinterestApiFp(configuration)
     return {
         /**
-         * Convert a Pinterest authorization code into access and refresh tokens. This route requires a customer session token for authentication. Requests will fail with a regular token.
-         * @summary Convert Pinterest auth code
-         * @param {CreatePinterestAuthDto} createPinterestAuthDto 
+         * Store Pinterest credentials for a customer. This requires a customer session token for authentication. Using a regular token will fail.
+         * @summary Store Pinterest credentials for a customer
+         * @param {PinterestCreateCredentialDto} pinterestCreateCredentialDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        convertAuthCode(createPinterestAuthDto: CreatePinterestAuthDto, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.convertAuthCode(createPinterestAuthDto, options).then((request) => request(axios, basePath));
+        createCustomer(pinterestCreateCredentialDto: PinterestCreateCredentialDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.createCustomer(pinterestCreateCredentialDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete all Pinterest credentials for a given customer and its related synced ad accounts data. Calling this method will not delete data on Pinterest itself.
@@ -9446,8 +9770,18 @@ export const PinterestApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deletePinterestCustomerCredentials(customerId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deletePinterestCustomerCredentials(customerId, options).then((request) => request(axios, basePath));
+        deleteCustomerCredentials(customerId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteCustomerCredentials(customerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Convert a Pinterest authorization code into access and refresh tokens. This route requires a customer session token for authentication. Requests will fail with a regular token.
+         * @summary Convert Pinterest auth code
+         * @param {CreatePinterestAuthDto} createPinterestAuthDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccessToken(createPinterestAuthDto: CreatePinterestAuthDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getAccessToken(createPinterestAuthDto, options).then((request) => request(axios, basePath));
         },
         /**
          * This route proxies raw requests to the Pinterest API, allowing for dynamic endpoints and parameters.
@@ -9457,8 +9791,8 @@ export const PinterestApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawRequest(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawRequest(customerId, externalPath, options).then((request) => request(axios, basePath));
+        rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestDelete(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
         /**
          * This route proxies raw requests to the Pinterest API, allowing for dynamic endpoints and parameters.
@@ -9468,8 +9802,8 @@ export const PinterestApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawRequest_1(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawRequest_1(customerId, externalPath, options).then((request) => request(axios, basePath));
+        rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestGet(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
         /**
          * This route proxies raw requests to the Pinterest API, allowing for dynamic endpoints and parameters.
@@ -9479,8 +9813,8 @@ export const PinterestApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawRequest_2(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawRequest_2(customerId, externalPath, options).then((request) => request(axios, basePath));
+        rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestHead(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
         /**
          * This route proxies raw requests to the Pinterest API, allowing for dynamic endpoints and parameters.
@@ -9490,8 +9824,8 @@ export const PinterestApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawRequest_3(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawRequest_3(customerId, externalPath, options).then((request) => request(axios, basePath));
+        rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestOptions(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
         /**
          * This route proxies raw requests to the Pinterest API, allowing for dynamic endpoints and parameters.
@@ -9501,8 +9835,8 @@ export const PinterestApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawRequest_4(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawRequest_4(customerId, externalPath, options).then((request) => request(axios, basePath));
+        rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPatch(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
         /**
          * This route proxies raw requests to the Pinterest API, allowing for dynamic endpoints and parameters.
@@ -9512,8 +9846,8 @@ export const PinterestApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawRequest_5(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawRequest_5(customerId, externalPath, options).then((request) => request(axios, basePath));
+        rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPost(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
         /**
          * This route proxies raw requests to the Pinterest API, allowing for dynamic endpoints and parameters.
@@ -9523,18 +9857,8 @@ export const PinterestApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rawRequest_6(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.rawRequest_6(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Store Pinterest credentials for a customer. This requires a customer session token for authentication. Using a regular token will fail.
-         * @summary Store Pinterest credentials for a customer
-         * @param {PinterestCreateCredentialDto} pinterestCreateCredentialDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        storePinterestCustomerCredentials(pinterestCreateCredentialDto: PinterestCreateCredentialDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.storePinterestCustomerCredentials(pinterestCreateCredentialDto, options).then((request) => request(axios, basePath));
+        rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPut(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -9544,14 +9868,14 @@ export const PinterestApiFactory = function (configuration?: Configuration, base
  */
 export class PinterestApi extends BaseAPI {
     /**
-     * Convert a Pinterest authorization code into access and refresh tokens. This route requires a customer session token for authentication. Requests will fail with a regular token.
-     * @summary Convert Pinterest auth code
-     * @param {CreatePinterestAuthDto} createPinterestAuthDto 
+     * Store Pinterest credentials for a customer. This requires a customer session token for authentication. Using a regular token will fail.
+     * @summary Store Pinterest credentials for a customer
+     * @param {PinterestCreateCredentialDto} pinterestCreateCredentialDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public convertAuthCode(createPinterestAuthDto: CreatePinterestAuthDto, options?: RawAxiosRequestConfig) {
-        return PinterestApiFp(this.configuration).convertAuthCode(createPinterestAuthDto, options).then((request) => request(this.axios, this.basePath));
+    public createCustomer(pinterestCreateCredentialDto: PinterestCreateCredentialDto, options?: RawAxiosRequestConfig) {
+        return PinterestApiFp(this.configuration).createCustomer(pinterestCreateCredentialDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9561,8 +9885,19 @@ export class PinterestApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public deletePinterestCustomerCredentials(customerId: string, options?: RawAxiosRequestConfig) {
-        return PinterestApiFp(this.configuration).deletePinterestCustomerCredentials(customerId, options).then((request) => request(this.axios, this.basePath));
+    public deleteCustomerCredentials(customerId: string, options?: RawAxiosRequestConfig) {
+        return PinterestApiFp(this.configuration).deleteCustomerCredentials(customerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Convert a Pinterest authorization code into access and refresh tokens. This route requires a customer session token for authentication. Requests will fail with a regular token.
+     * @summary Convert Pinterest auth code
+     * @param {CreatePinterestAuthDto} createPinterestAuthDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getAccessToken(createPinterestAuthDto: CreatePinterestAuthDto, options?: RawAxiosRequestConfig) {
+        return PinterestApiFp(this.configuration).getAccessToken(createPinterestAuthDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9573,8 +9908,8 @@ export class PinterestApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public rawRequest(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return PinterestApiFp(this.configuration).rawRequest(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    public rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return PinterestApiFp(this.configuration).rawRequestDelete(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9585,8 +9920,8 @@ export class PinterestApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public rawRequest_1(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return PinterestApiFp(this.configuration).rawRequest_1(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    public rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return PinterestApiFp(this.configuration).rawRequestGet(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9597,8 +9932,8 @@ export class PinterestApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public rawRequest_2(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return PinterestApiFp(this.configuration).rawRequest_2(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    public rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return PinterestApiFp(this.configuration).rawRequestHead(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9609,8 +9944,8 @@ export class PinterestApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public rawRequest_3(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return PinterestApiFp(this.configuration).rawRequest_3(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    public rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return PinterestApiFp(this.configuration).rawRequestOptions(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9621,8 +9956,8 @@ export class PinterestApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public rawRequest_4(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return PinterestApiFp(this.configuration).rawRequest_4(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    public rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return PinterestApiFp(this.configuration).rawRequestPatch(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9633,8 +9968,8 @@ export class PinterestApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public rawRequest_5(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return PinterestApiFp(this.configuration).rawRequest_5(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    public rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return PinterestApiFp(this.configuration).rawRequestPost(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9645,19 +9980,8 @@ export class PinterestApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public rawRequest_6(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return PinterestApiFp(this.configuration).rawRequest_6(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Store Pinterest credentials for a customer. This requires a customer session token for authentication. Using a regular token will fail.
-     * @summary Store Pinterest credentials for a customer
-     * @param {PinterestCreateCredentialDto} pinterestCreateCredentialDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public storePinterestCustomerCredentials(pinterestCreateCredentialDto: PinterestCreateCredentialDto, options?: RawAxiosRequestConfig) {
-        return PinterestApiFp(this.configuration).storePinterestCustomerCredentials(pinterestCreateCredentialDto, options).then((request) => request(this.axios, this.basePath));
+    public rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return PinterestApiFp(this.configuration).rawRequestPut(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -9670,26 +9994,19 @@ export const ReportingApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * 
-         * @param {string} granularity 
-         * @param {string} dimensions 
-         * @param {string} fields 
-         * @param {ReportingControllerGetReportIxk9wfPlatformEnum} platform 
-         * @param {string} [start] Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [end] End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [filters] 
-         * @param {boolean} [callCounter] 
+         * @param {string} start Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+         * @param {string} end End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+         * @param {PlatformName} platform The platform for which to generate the report.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportingControllerGetReportIxk9wf: async (granularity: string, dimensions: string, fields: string, platform: ReportingControllerGetReportIxk9wfPlatformEnum, start?: string, end?: string, filters?: string, callCounter?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'granularity' is not null or undefined
-            assertParamExists('reportingControllerGetReportIxk9wf', 'granularity', granularity)
-            // verify required parameter 'dimensions' is not null or undefined
-            assertParamExists('reportingControllerGetReportIxk9wf', 'dimensions', dimensions)
-            // verify required parameter 'fields' is not null or undefined
-            assertParamExists('reportingControllerGetReportIxk9wf', 'fields', fields)
+        getReport: async (start: string, end: string, platform: PlatformName, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'start' is not null or undefined
+            assertParamExists('getReport', 'start', start)
+            // verify required parameter 'end' is not null or undefined
+            assertParamExists('getReport', 'end', end)
             // verify required parameter 'platform' is not null or undefined
-            assertParamExists('reportingControllerGetReportIxk9wf', 'platform', platform)
+            assertParamExists('getReport', 'platform', platform)
             const localVarPath = `/reporting`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -9712,26 +10029,6 @@ export const ReportingApiAxiosParamCreator = function (configuration?: Configura
 
             if (end !== undefined) {
                 localVarQueryParameter['end'] = end;
-            }
-
-            if (granularity !== undefined) {
-                localVarQueryParameter['granularity'] = granularity;
-            }
-
-            if (dimensions !== undefined) {
-                localVarQueryParameter['dimensions'] = dimensions;
-            }
-
-            if (fields !== undefined) {
-                localVarQueryParameter['fields'] = fields;
-            }
-
-            if (filters !== undefined) {
-                localVarQueryParameter['filters'] = filters;
-            }
-
-            if (callCounter !== undefined) {
-                localVarQueryParameter['callCounter'] = callCounter;
             }
 
             if (platform !== undefined) {
@@ -9760,21 +10057,16 @@ export const ReportingApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {string} granularity 
-         * @param {string} dimensions 
-         * @param {string} fields 
-         * @param {ReportingControllerGetReportIxk9wfPlatformEnum} platform 
-         * @param {string} [start] Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [end] End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [filters] 
-         * @param {boolean} [callCounter] 
+         * @param {string} start Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+         * @param {string} end End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+         * @param {PlatformName} platform The platform for which to generate the report.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reportingControllerGetReportIxk9wf(granularity: string, dimensions: string, fields: string, platform: ReportingControllerGetReportIxk9wfPlatformEnum, start?: string, end?: string, filters?: string, callCounter?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.reportingControllerGetReportIxk9wf(granularity, dimensions, fields, platform, start, end, filters, callCounter, options);
+        async getReport(start: string, end: string, platform: PlatformName, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getReport(start, end, platform, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ReportingApi.reportingControllerGetReportIxk9wf']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ReportingApi.getReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -9788,19 +10080,14 @@ export const ReportingApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
-         * @param {string} granularity 
-         * @param {string} dimensions 
-         * @param {string} fields 
-         * @param {ReportingControllerGetReportIxk9wfPlatformEnum} platform 
-         * @param {string} [start] Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [end] End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-         * @param {string} [filters] 
-         * @param {boolean} [callCounter] 
+         * @param {string} start Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+         * @param {string} end End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+         * @param {PlatformName} platform The platform for which to generate the report.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportingControllerGetReportIxk9wf(granularity: string, dimensions: string, fields: string, platform: ReportingControllerGetReportIxk9wfPlatformEnum, start?: string, end?: string, filters?: string, callCounter?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.reportingControllerGetReportIxk9wf(granularity, dimensions, fields, platform, start, end, filters, callCounter, options).then((request) => request(axios, basePath));
+        getReport(start: string, end: string, platform: PlatformName, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getReport(start, end, platform, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -9811,30 +10098,17 @@ export const ReportingApiFactory = function (configuration?: Configuration, base
 export class ReportingApi extends BaseAPI {
     /**
      * 
-     * @param {string} granularity 
-     * @param {string} dimensions 
-     * @param {string} fields 
-     * @param {ReportingControllerGetReportIxk9wfPlatformEnum} platform 
-     * @param {string} [start] Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-     * @param {string} [end] End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
-     * @param {string} [filters] 
-     * @param {boolean} [callCounter] 
+     * @param {string} start Start date of the report. This is the \&quot;earlier\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+     * @param {string} end End date of the report. This is the \&quot;later\&quot; of the two dates. Example: set start to 2021-01-01 and end to 2021-01-31 to get a report for the month of January 2021.
+     * @param {PlatformName} platform The platform for which to generate the report.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public reportingControllerGetReportIxk9wf(granularity: string, dimensions: string, fields: string, platform: ReportingControllerGetReportIxk9wfPlatformEnum, start?: string, end?: string, filters?: string, callCounter?: boolean, options?: RawAxiosRequestConfig) {
-        return ReportingApiFp(this.configuration).reportingControllerGetReportIxk9wf(granularity, dimensions, fields, platform, start, end, filters, callCounter, options).then((request) => request(this.axios, this.basePath));
+    public getReport(start: string, end: string, platform: PlatformName, options?: RawAxiosRequestConfig) {
+        return ReportingApiFp(this.configuration).getReport(start, end, platform, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
-export const ReportingControllerGetReportIxk9wfPlatformEnum = {
-    ActiveAgent: 'ActiveAgent',
-    Facebook: 'Facebook',
-    GoogleAds: 'GoogleAds',
-    TheTradeDesk: 'TheTradeDesk',
-    Pinterest: 'Pinterest'
-} as const;
-export type ReportingControllerGetReportIxk9wfPlatformEnum = typeof ReportingControllerGetReportIxk9wfPlatformEnum[keyof typeof ReportingControllerGetReportIxk9wfPlatformEnum];
 
 
 /**
@@ -9843,309 +10117,15 @@ export type ReportingControllerGetReportIxk9wfPlatformEnum = typeof ReportingCon
 export const TheTradeDeskApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawRequest', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawRequest', 'externalPath', externalPath)
-            const localVarPath = `/thetradedesk/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest_1: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawRequest_1', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawRequest_1', 'externalPath', externalPath)
-            const localVarPath = `/thetradedesk/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'HEAD', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest_2: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawRequest_2', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawRequest_2', 'externalPath', externalPath)
-            const localVarPath = `/thetradedesk/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest_3: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawRequest_3', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawRequest_3', 'externalPath', externalPath)
-            const localVarPath = `/thetradedesk/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest_4: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawRequest_4', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawRequest_4', 'externalPath', externalPath)
-            const localVarPath = `/thetradedesk/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest_5: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawRequest_5', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawRequest_5', 'externalPath', externalPath)
-            const localVarPath = `/thetradedesk/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest_6: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('rawRequest_6', 'customerId', customerId)
-            // verify required parameter 'externalPath' is not null or undefined
-            assertParamExists('rawRequest_6', 'externalPath', externalPath)
-            const localVarPath = `/thetradedesk/{customerId}/raw/{externalPath}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
-                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'OPTIONS', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Log in a customer to The Trade Desk using their *login* and *password*. This will store their credentials securely for future use.
          * @summary Login to The Trade Desk
          * @param {TheTradeDeskCreateCredentialsDto} theTradeDeskCreateCredentialsDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        storeCustomerCredentials: async (theTradeDeskCreateCredentialsDto: TheTradeDeskCreateCredentialsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        create: async (theTradeDeskCreateCredentialsDto: TheTradeDeskCreateCredentialsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'theTradeDeskCreateCredentialsDto' is not null or undefined
-            assertParamExists('storeCustomerCredentials', 'theTradeDeskCreateCredentialsDto', theTradeDeskCreateCredentialsDto)
+            assertParamExists('create', 'theTradeDeskCreateCredentialsDto', theTradeDeskCreateCredentialsDto)
             const localVarPath = `/thetradedesk/credentials/customer`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -10176,6 +10156,300 @@ export const TheTradeDeskApiAxiosParamCreator = function (configuration?: Config
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestDelete: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestDelete', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestDelete', 'externalPath', externalPath)
+            const localVarPath = `/thetradedesk/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestGet: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestGet', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestGet', 'externalPath', externalPath)
+            const localVarPath = `/thetradedesk/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestHead: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestHead', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestHead', 'externalPath', externalPath)
+            const localVarPath = `/thetradedesk/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'HEAD', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestOptions: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestOptions', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestOptions', 'externalPath', externalPath)
+            const localVarPath = `/thetradedesk/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'OPTIONS', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPatch: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestPatch', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestPatch', 'externalPath', externalPath)
+            const localVarPath = `/thetradedesk/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPost: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestPost', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestPost', 'externalPath', externalPath)
+            const localVarPath = `/thetradedesk/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPut: async (customerId: string, externalPath: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('rawRequestPut', 'customerId', customerId)
+            // verify required parameter 'externalPath' is not null or undefined
+            assertParamExists('rawRequestPut', 'externalPath', externalPath)
+            const localVarPath = `/thetradedesk/{customerId}/raw/{externalPath}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)))
+                .replace(`{${"externalPath"}}`, encodeURIComponent(String(externalPath)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -10186,114 +10460,114 @@ export const TheTradeDeskApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = TheTradeDeskApiAxiosParamCreator(configuration)
     return {
         /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawRequest(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequest(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.rawRequest']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawRequest_1(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequest_1(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.rawRequest_1']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawRequest_2(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequest_2(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.rawRequest_2']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawRequest_3(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequest_3(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.rawRequest_3']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawRequest_4(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequest_4(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.rawRequest_4']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawRequest_5(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequest_5(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.rawRequest_5']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async rawRequest_6(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequest_6(customerId, externalPath, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.rawRequest_6']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Log in a customer to The Trade Desk using their *login* and *password*. This will store their credentials securely for future use.
          * @summary Login to The Trade Desk
          * @param {TheTradeDeskCreateCredentialsDto} theTradeDeskCreateCredentialsDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async storeCustomerCredentials(theTradeDeskCreateCredentialsDto: TheTradeDeskCreateCredentialsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.storeCustomerCredentials(theTradeDeskCreateCredentialsDto, options);
+        async create(theTradeDeskCreateCredentialsDto: TheTradeDeskCreateCredentialsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create(theTradeDeskCreateCredentialsDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.storeCustomerCredentials']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.create']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestDelete(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.rawRequestDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestGet(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.rawRequestGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestHead(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.rawRequestHead']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestOptions(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.rawRequestOptions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPatch(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.rawRequestPatch']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPost(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.rawRequestPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.rawRequestPut(customerId, externalPath, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TheTradeDeskApi.rawRequestPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -10306,91 +10580,91 @@ export const TheTradeDeskApiFactory = function (configuration?: Configuration, b
     const localVarFp = TheTradeDeskApiFp(configuration)
     return {
         /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.rawRequest(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest_1(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.rawRequest_1(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest_2(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.rawRequest_2(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest_3(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.rawRequest_3(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest_4(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.rawRequest_4(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest_5(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.rawRequest_5(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-         * @summary Proxy raw requests to the The Trade Desk API
-         * @param {string} customerId Customer UUID
-         * @param {string} externalPath External API path
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        rawRequest_6(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.rawRequest_6(customerId, externalPath, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Log in a customer to The Trade Desk using their *login* and *password*. This will store their credentials securely for future use.
          * @summary Login to The Trade Desk
          * @param {TheTradeDeskCreateCredentialsDto} theTradeDeskCreateCredentialsDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        storeCustomerCredentials(theTradeDeskCreateCredentialsDto: TheTradeDeskCreateCredentialsDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.storeCustomerCredentials(theTradeDeskCreateCredentialsDto, options).then((request) => request(axios, basePath));
+        create(theTradeDeskCreateCredentialsDto: TheTradeDeskCreateCredentialsDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.create(theTradeDeskCreateCredentialsDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestDelete(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestGet(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestHead(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestOptions(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPatch(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPost(customerId, externalPath, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+         * @summary Proxy raw requests to the The Trade Desk API
+         * @param {string} customerId Customer UUID
+         * @param {string} externalPath External API path
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.rawRequestPut(customerId, externalPath, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -10400,98 +10674,98 @@ export const TheTradeDeskApiFactory = function (configuration?: Configuration, b
  */
 export class TheTradeDeskApi extends BaseAPI {
     /**
-     * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-     * @summary Proxy raw requests to the The Trade Desk API
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath External API path
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawRequest(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return TheTradeDeskApiFp(this.configuration).rawRequest(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-     * @summary Proxy raw requests to the The Trade Desk API
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath External API path
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawRequest_1(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return TheTradeDeskApiFp(this.configuration).rawRequest_1(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-     * @summary Proxy raw requests to the The Trade Desk API
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath External API path
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawRequest_2(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return TheTradeDeskApiFp(this.configuration).rawRequest_2(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-     * @summary Proxy raw requests to the The Trade Desk API
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath External API path
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawRequest_3(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return TheTradeDeskApiFp(this.configuration).rawRequest_3(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-     * @summary Proxy raw requests to the The Trade Desk API
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath External API path
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawRequest_4(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return TheTradeDeskApiFp(this.configuration).rawRequest_4(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-     * @summary Proxy raw requests to the The Trade Desk API
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath External API path
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawRequest_5(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return TheTradeDeskApiFp(this.configuration).rawRequest_5(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
-     * @summary Proxy raw requests to the The Trade Desk API
-     * @param {string} customerId Customer UUID
-     * @param {string} externalPath External API path
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public rawRequest_6(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
-        return TheTradeDeskApiFp(this.configuration).rawRequest_6(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Log in a customer to The Trade Desk using their *login* and *password*. This will store their credentials securely for future use.
      * @summary Login to The Trade Desk
      * @param {TheTradeDeskCreateCredentialsDto} theTradeDeskCreateCredentialsDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public storeCustomerCredentials(theTradeDeskCreateCredentialsDto: TheTradeDeskCreateCredentialsDto, options?: RawAxiosRequestConfig) {
-        return TheTradeDeskApiFp(this.configuration).storeCustomerCredentials(theTradeDeskCreateCredentialsDto, options).then((request) => request(this.axios, this.basePath));
+    public create(theTradeDeskCreateCredentialsDto: TheTradeDeskCreateCredentialsDto, options?: RawAxiosRequestConfig) {
+        return TheTradeDeskApiFp(this.configuration).create(theTradeDeskCreateCredentialsDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+     * @summary Proxy raw requests to the The Trade Desk API
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath External API path
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestDelete(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return TheTradeDeskApiFp(this.configuration).rawRequestDelete(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+     * @summary Proxy raw requests to the The Trade Desk API
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath External API path
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestGet(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return TheTradeDeskApiFp(this.configuration).rawRequestGet(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+     * @summary Proxy raw requests to the The Trade Desk API
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath External API path
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestHead(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return TheTradeDeskApiFp(this.configuration).rawRequestHead(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+     * @summary Proxy raw requests to the The Trade Desk API
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath External API path
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestOptions(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return TheTradeDeskApiFp(this.configuration).rawRequestOptions(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+     * @summary Proxy raw requests to the The Trade Desk API
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath External API path
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestPatch(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return TheTradeDeskApiFp(this.configuration).rawRequestPatch(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+     * @summary Proxy raw requests to the The Trade Desk API
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath External API path
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestPost(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return TheTradeDeskApiFp(this.configuration).rawRequestPost(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * This route proxies raw requests to the The Trade Desk API, allowing for dynamic endpoints and parameters.
+     * @summary Proxy raw requests to the The Trade Desk API
+     * @param {string} customerId Customer UUID
+     * @param {string} externalPath External API path
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public rawRequestPut(customerId: string, externalPath: string, options?: RawAxiosRequestConfig) {
+        return TheTradeDeskApiFp(this.configuration).rawRequestPut(customerId, externalPath, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -10534,6 +10808,9 @@ export class Client {
   /** Instance of GoogleAdsApi */
   googleAds: GoogleAdsApi;
   
+  /** Instance of LinkedInApi */
+  linkedIn: LinkedInApi;
+  
   /** Instance of PinterestApi */
   pinterest: PinterestApi;
   
@@ -10571,6 +10848,8 @@ export class Client {
     this.facebook = new FacebookApi(configuration, BASE_PATH, this.axios);
     
     this.googleAds = new GoogleAdsApi(configuration, BASE_PATH, this.axios);
+    
+    this.linkedIn = new LinkedInApi(configuration, BASE_PATH, this.axios);
     
     this.pinterest = new PinterestApi(configuration, BASE_PATH, this.axios);
     

@@ -126,7 +126,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getAccessToken**
-> object getAccessToken(createAuthDto)
+> getAccessToken(createAuthDto)
 
 Convert a LinkedIn authorization code into access and refresh tokens. This route requires a customer session token for authentication. Requests will fail with a regular token.
 
@@ -161,7 +161,7 @@ const { status, data } = await client.linkedIn.getAccessToken(
 
 ### Return type
 
-**object**
+void (empty response body)
 
 ### Authorization
 
@@ -170,7 +170,7 @@ const { status, data } = await client.linkedIn.getAccessToken(
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Accept**: Not defined
 
 
 ### HTTP response details

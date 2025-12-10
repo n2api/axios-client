@@ -1,6 +1,6 @@
 {
   "name": "@n2api/axios-client",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "OpenAPI client for @n2api/axios-client",
   "author": "OpenAPI-Generator Contributors",
   "repository": {

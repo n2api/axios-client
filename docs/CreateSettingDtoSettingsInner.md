@@ -5,12 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**settingType** | **string** |  | [default to SettingTypeEnum_MaximumDailyImpressions]
-**maximumCpm** | **number** |  | [default to undefined]
-**realtimeBiddingStrategy** | **string** |  | [default to undefined]
-**pacingType** | **string** |  | [default to undefined]
-**dailyBudget** | **number** |  | [default to undefined]
-**maximumDailyImpressions** | **number** |  | [default to undefined]
 
 ## Example
 
@@ -18,12 +12,6 @@ Name | Type | Description | Notes
 import { CreateSettingDtoSettingsInner } from '@n2api/axios-client';
 
 const instance: CreateSettingDtoSettingsInner = {
-    settingType,
-    maximumCpm,
-    realtimeBiddingStrategy,
-    pacingType,
-    dailyBudget,
-    maximumDailyImpressions,
 };
 ```
 
