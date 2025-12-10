@@ -4,17 +4,17 @@ All URIs are relative to *https://api.n2api.io*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**authControllerCreateCompanyTokenK3gngq**](#authcontrollercreatecompanytokenk3gngq) | **POST** /auth/company_token | |
-|[**authControllerDeleteCompanyTokenU6zccl**](#authcontrollerdeletecompanytokenu6zccl) | **DELETE** /auth/company_token | |
-|[**authControllerGetCompanyToken8bpz6u**](#authcontrollergetcompanytoken8bpz6u) | **GET** /auth/company_token | |
-|[**authControllerGetHelloR0h1ua**](#authcontrollergethellor0h1ua) | **GET** /auth/user | |
-|[**authControllerGetSessionTokenRbwd43**](#authcontrollergetsessiontokenrbwd43) | **POST** /auth/session_token | |
-|[**authControllerRefreshHq9r5i**](#authcontrollerrefreshhq9r5i) | **POST** /auth/refresh | |
-|[**authControllerVerifySessionTokenQkbht6**](#authcontrollerverifysessiontokenqkbht6) | **POST** /auth/session_token/verify | |
+|[**createCompanyToken**](#createcompanytoken) | **POST** /auth/company_token | |
+|[**deleteCompanyToken**](#deletecompanytoken) | **DELETE** /auth/company_token | |
+|[**getCompanyToken**](#getcompanytoken) | **GET** /auth/company_token | |
+|[**getHello**](#gethello) | **GET** /auth/user | |
+|[**getSessionToken**](#getsessiontoken) | **POST** /auth/session_token | |
 |[**login**](#login) | **POST** /auth/login | Login|
+|[**refresh**](#refresh) | **POST** /auth/refresh | |
+|[**verifySessionToken**](#verifysessiontoken) | **POST** /auth/session_token/verify | |
 
-# **authControllerCreateCompanyTokenK3gngq**
-> authControllerCreateCompanyTokenK3gngq()
+# **createCompanyToken**
+> createCompanyToken()
 
 
 ### Example
@@ -31,7 +31,7 @@ const configuration = new Configuration({
 const client = new Client(configuration);
 
 
-const { status, data } = await client.authentication.authControllerCreateCompanyTokenK3gngq();
+const { status, data } = await client.authentication.createCompanyToken();
 ```
 
 ### Parameters
@@ -59,8 +59,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authControllerDeleteCompanyTokenU6zccl**
-> authControllerDeleteCompanyTokenU6zccl()
+# **deleteCompanyToken**
+> deleteCompanyToken()
 
 
 ### Example
@@ -77,7 +77,7 @@ const configuration = new Configuration({
 const client = new Client(configuration);
 
 
-const { status, data } = await client.authentication.authControllerDeleteCompanyTokenU6zccl();
+const { status, data } = await client.authentication.deleteCompanyToken();
 ```
 
 ### Parameters
@@ -105,8 +105,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authControllerGetCompanyToken8bpz6u**
-> authControllerGetCompanyToken8bpz6u()
+# **getCompanyToken**
+> getCompanyToken()
 
 
 ### Example
@@ -123,7 +123,7 @@ const configuration = new Configuration({
 const client = new Client(configuration);
 
 
-const { status, data } = await client.authentication.authControllerGetCompanyToken8bpz6u();
+const { status, data } = await client.authentication.getCompanyToken();
 ```
 
 ### Parameters
@@ -151,8 +151,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authControllerGetHelloR0h1ua**
-> object authControllerGetHelloR0h1ua()
+# **getHello**
+> getHello()
 
 
 ### Example
@@ -169,7 +169,7 @@ const configuration = new Configuration({
 const client = new Client(configuration);
 
 
-const { status, data } = await client.authentication.authControllerGetHelloR0h1ua();
+const { status, data } = await client.authentication.getHello();
 ```
 
 ### Parameters
@@ -178,7 +178,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**object**
+void (empty response body)
 
 ### Authorization
 
@@ -187,7 +187,7 @@ This endpoint does not have any parameters.
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: Not defined
 
 
 ### HTTP response details
@@ -197,8 +197,8 @@ This endpoint does not have any parameters.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authControllerGetSessionTokenRbwd43**
-> authControllerGetSessionTokenRbwd43(sessionTokenDto)
+# **getSessionToken**
+> getSessionToken(sessionTokenDto)
 
 
 ### Example
@@ -218,7 +218,7 @@ const client = new Client(configuration);
 
 let sessionTokenDto: SessionTokenDto; // 
 
-const { status, data } = await client.authentication.authControllerGetSessionTokenRbwd43(
+const { status, data } = await client.authentication.getSessionToken(
     sessionTokenDto
 );
 ```
@@ -251,108 +251,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authControllerRefreshHq9r5i**
-> object authControllerRefreshHq9r5i()
-
-
-### Example
-
-```typescript
-import {
-    Client,
-    Configuration
-} from '@n2api/axios-client';
-
-const configuration = new Configuration({
-    accessToken: 'YOUR_ACCESS_TOKEN',
-});
-const client = new Client(configuration);
-
-
-const { status, data } = await client.authentication.authControllerRefreshHq9r5i();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**object**
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**201** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **authControllerVerifySessionTokenQkbht6**
-> object authControllerVerifySessionTokenQkbht6(sessionTokenVerifyDto)
-
-
-### Example
-
-```typescript
-import {
-    Client,
-    Configuration,
-    SessionTokenVerifyDto
-} from '@n2api/axios-client';
-
-const configuration = new Configuration({
-    accessToken: 'YOUR_ACCESS_TOKEN',
-});
-const client = new Client(configuration);
-
-
-let sessionTokenVerifyDto: SessionTokenVerifyDto; // 
-
-const { status, data } = await client.authentication.authControllerVerifySessionTokenQkbht6(
-    sessionTokenVerifyDto
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **sessionTokenVerifyDto** | **SessionTokenVerifyDto**|  | |
-
-
-### Return type
-
-**object**
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**201** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **login**
-> object login(loginDto)
+> login(loginDto)
 
 Login with *username* and *password*. Returns an access token.
 
@@ -387,7 +287,7 @@ const { status, data } = await client.authentication.login(
 
 ### Return type
 
-**object**
+void (empty response body)
 
 ### Authorization
 
@@ -396,7 +296,107 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **refresh**
+> refresh()
+
+
+### Example
+
+```typescript
+import {
+    Client,
+    Configuration
+} from '@n2api/axios-client';
+
+const configuration = new Configuration({
+    accessToken: 'YOUR_ACCESS_TOKEN',
+});
+const client = new Client(configuration);
+
+
+const { status, data } = await client.authentication.refresh();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **verifySessionToken**
+> verifySessionToken(sessionTokenVerifyDto)
+
+
+### Example
+
+```typescript
+import {
+    Client,
+    Configuration,
+    SessionTokenVerifyDto
+} from '@n2api/axios-client';
+
+const configuration = new Configuration({
+    accessToken: 'YOUR_ACCESS_TOKEN',
+});
+const client = new Client(configuration);
+
+
+let sessionTokenVerifyDto: SessionTokenVerifyDto; // 
+
+const { status, data } = await client.authentication.verifySessionToken(
+    sessionTokenVerifyDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **sessionTokenVerifyDto** | **SessionTokenVerifyDto**|  | |
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
 
 
 ### HTTP response details
